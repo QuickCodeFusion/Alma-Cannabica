@@ -6,9 +6,13 @@ import style from './navbar.module.css'
 const NavBar = () => {
     return (
         <div className={style.navbar}>
-            <div >
+            <div>
                 <h1>Alma Cannabica</h1>
+            </div>
+            <div>
                 <SearchBar/>
+            </div>
+            <div className={style.menu}>
                 <Menu/>
             </div>
         </div>

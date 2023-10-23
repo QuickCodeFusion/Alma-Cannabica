@@ -2,6 +2,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
     flex-direction: row;
+    padding: 10px;
+    width: 100vw;
+    height: 5vh;
+    background-color: rgb(122, 123, 120);
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
