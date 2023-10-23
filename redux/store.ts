@@ -9,7 +9,6 @@ export const store = configureStore({
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
             createProductAPI.middleware,
-
 		),
 });
 
