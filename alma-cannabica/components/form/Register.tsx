@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react"
-import SubmitButton from "../button/submitButton"
+import SubmitButton from "@/components/button/submitButton"
 import { registerAndLogin } from "@/utils/authUtils";
 
 const Register = () => {
