@@ -44,3 +44,30 @@ export const registerAndLogin = async (
             alert(error.message)
         })
 }
+
+export const login = async (form: any, setForm: any): Promise<void> => {
+    const { email, password } = form
+    signInWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+            const normalizedUser = { // TODO: Add user to redux state/context
+                uid: user.uid,
+                email: user.email,
+                name: user.displayName,
+                photoUrl: user.photoURL,
+            }
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${user.accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            }).then(() => {
+                setForm({
+                    name: '',
+                    email: '',
+                    photoUrl: '',
+                    password: '',
+                })
+            })
+        })
+}
