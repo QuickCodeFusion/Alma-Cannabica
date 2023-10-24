@@ -12,24 +12,24 @@ import { doc, setDoc } from "firebase/firestore";
  * @return {Promise<void>} A promise that resolves when the user is created successfully.
  */
 export const createUser = async (
-  name: string,
-  email: string,
-  photoUrl: string,
-  addresses: any, // TODO: Add type for addresses
-  uid: string
+	name: string,
+	email: string,
+	photoUrl: string,
+	addresses: any, // TODO: Add type for addresses
+	uid: string
 ): Promise<void> => {
-  if (!name || !email || !uid) {
-    throw new Error("Missing data");
-  }
+	if (!name || !email || !uid) {
+		throw new Error("Missing data");
+	}
 
-  const userRef = doc(db, "users", uid);
+	const userRef = doc(db, "users", uid);
 
-  const userData = {
-    name,
-    email,
-    photoUrl: photoUrl || "",
-    addresses: addresses || [],
-  };
+	const userData = {
+		name,
+		email,
+		photoUrl: photoUrl || "",
+		addresses: addresses || [],
+	};
 
-  await setDoc(userRef, userData);
+	await setDoc(userRef, userData);
 };
