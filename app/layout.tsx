@@ -17,7 +17,7 @@ export default function RootLayout({
 		<html lang="en" className='dark'>
 			<body>
 				<Providers>
-				<Toaster richColors position="top-center" />
+					<Toaster richColors position="top-center" />
 					<NavBar/>
 					{children}
 				</Providers>
