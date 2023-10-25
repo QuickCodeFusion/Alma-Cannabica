@@ -1,51 +1,56 @@
-import { auth } from "@/firebase/config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '@/firebase/config'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
+/**
+ * Registers a new user and logs them in.
+ *
+ * @param {any} form - the form data containing user information
+ * @param {any} setForm - a function to update the form data
+ * @return {Promise<void>} a promise that resolves when the user is registered and logged in
+ */
 export const registerAndLogin = async (
 	form: any,
-	setForm: any,
+	setForm: any
 ): Promise<void> => {
-	const { name, email, photoUrl, password } = form;
+	const { name, email, photoUrl, password } = form
 	try {
-
-		const { user } = await createUserWithEmailAndPassword(auth, email, password);
+		const { user } = await createUserWithEmailAndPassword(auth, email, password)
+		const accessToken = await user.getIdToken(true)
 
 		const normalizedUser = {
 			uid: user.uid,
 			email: user.email,
-			name: user.displayName || name,
-			photoUrl: user.photoURL || photoUrl,
-		};
+			name: user.displayName ?? name,
+			photoUrl: user.photoURL ?? photoUrl
+		}
 
-		await fetch("/api/auth/register", {
-			method: "POST",
+		await fetch('/api/auth/register', {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(normalizedUser),
-		});
+			body: JSON.stringify(normalizedUser)
+		})
 
 		setForm({
-			name: "",
-			email: "",
-			photoUrl: "",
-			password: "",
-		});
+			name: '',
+			email: '',
+			photoUrl: '',
+			password: ''
+		})
 
-
-		await fetch("/api/auth/login", {
-			method: "POST",
+		await fetch('/api/auth/login', {
+			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${user.accessToken}`,
-				"Content-Type": "application/json",
-			},
-		});
-		await signInWithEmailAndPassword(auth, email, password);
-    
+				Authorization: `Bearer ${accessToken}`,
+				'Content-Type': 'application/json'
+			}
+		})
+		await signInWithEmailAndPassword(auth, email, password)
 	} catch (error: any) {
-		alert(error.message);
+		alert(error.message)
 	}
-};
+}
 
 /**
  * Logs in a user with the provided form data.
@@ -55,33 +60,36 @@ export const registerAndLogin = async (
  * @return {Promise<void>} A Promise that resolves when the login is complete.
  */
 export const login = async (form: any, setForm: any): Promise<void> => {
-	const { email, password } = form;
+	const { email, password } = form
 
 	try {
-		const { user } = await signInWithEmailAndPassword(auth, email, password);
+		const { user } = await signInWithEmailAndPassword(auth, email, password)
+		const accessToken = await user.getIdToken(true)
 		const normalizedUser = {
 			uid: user.uid,
 			email: user.email,
 			name: user.displayName,
-			photoUrl: user.photoURL,
-		};
+			photoUrl: user.photoURL
+		}
 
-		await fetch("/api/auth/login", {
-			method: "POST",
+		console.log(normalizedUser, ' TODO: Add type for normalizedUser and add data to context')
+
+		await fetch('/api/auth/login', {
+			method: 'POST',
 			headers: {
-				"Authorization": `Bearer ${user.accessToken}`,
-				"Content-Type": "application/json",
-			},
-		});
+				Authorization: `Bearer ${accessToken}`,
+				'Content-Type': 'application/json'
+			}
+		})
 
 		setForm({
-			name: "",
-			email: "",
-			photoUrl: "",
-			password: "",
-		});
+			name: '',
+			email: '',
+			photoUrl: '',
+			password: ''
+		})
 	} catch (error) {
 		// Handle any errors that occur during login
-		console.error(error);
+		console.error(error)
 	}
-};
+}
