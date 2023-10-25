@@ -35,7 +35,7 @@ export const GET = async (req: NextRequest) => {
         const productsSnapshot = await getDocs(collection(db, "products"));
         const products = productsSnapshot.docs.map((doc) => ({
             ...doc.data(),
-            id: doc.id
+            itemId: doc.id
         }));
 
         return NextResponse.json(products, { status: 200 });

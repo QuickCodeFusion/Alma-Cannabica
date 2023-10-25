@@ -1,20 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/firebase/config";
-import { filters } from "./filters";
+import { type NextRequest, NextResponse } from 'next/server'
+import { filters } from './filters'
 
+export const GET = async (req: NextRequest): Promise<NextResponse> => {
+	try {
+		const name: string = req.nextUrl.searchParams.get('name') ?? ''
+		const minPrice: string = req.nextUrl.searchParams.get('minPrice') ?? ''
+		const maxPrice: string = req.nextUrl.searchParams.get('maxPrice') ?? ''
+		const category: string = req.nextUrl.searchParams.get('category') ?? ''
+		const order: string = req.nextUrl.searchParams.get('order') ?? ''
 
-export const GET = async (req: NextRequest) => {
-    try {
-        const name: string = req.nextUrl.searchParams.get("name") || "";
-        const price: string = req.nextUrl.searchParams.get("price") || '';
-        const category: string = req.nextUrl.searchParams.get("category") || "";
+		const data = await filters(name, minPrice, maxPrice, category, order)
 
-        const data = await filters(name, 0);
-
-        return NextResponse.json(data, { status: 200 });
-
-
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 400 });
-    }
+		return NextResponse.json(data, { status: 200 })
+	} catch (error: any) {
+		return NextResponse.json({ error: error.message }, { status: 400 })
+	}
 }
