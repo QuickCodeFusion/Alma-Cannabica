@@ -1,10 +1,9 @@
-import CreateProduct from "@/components/createProduct/CreateProduct";
+import CreateProduct from '@/components/createProduct/CreateProduct'
 
-const CreateProductPage = () => {
-
-	return(
+const CreateProductPage = (): JSX.Element => {
+	return (
 		<CreateProduct/>
-	);
-};
+	)
+}
 
-export default CreateProductPage;
+export default CreateProductPage
