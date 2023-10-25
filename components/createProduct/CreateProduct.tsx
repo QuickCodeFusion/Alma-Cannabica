@@ -1,6 +1,7 @@
 "use client";
 import SubmitButton from "../button/submitButton";
 import { useCreateProductMutation } from "@/redux/service/productsAPI";
+import { toast } from "sonner";
 import { useState } from "react";
 
 const CreateProduct = () => {
@@ -22,7 +23,7 @@ const CreateProduct = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		createProduct(product)
 			.finally(() => {
-				alert("Has iniciado sesión exitosamente");
+				toast.success('Has iniciado sesión exitosamente')
 			});
 	};
 

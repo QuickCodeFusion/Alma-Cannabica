@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "sonner";
 import { Providers } from "./providers";
 import NavBar from "@/components/navBar/NavBar";
 
@@ -16,6 +17,7 @@ export default function RootLayout({
 		<html lang="en" className='dark'>
 			<body>
 				<Providers>
+				<Toaster richColors position="top-center" />
 					<NavBar/>
 					{children}
 				</Providers>

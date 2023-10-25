@@ -3,6 +3,7 @@
 import { login } from "@/utils/authUtils";
 import { useState } from "react";
 import SubmitButton from "@/components/button/submitButton";
+import { toast } from "sonner";
 
 const Login = () => {
 	const [form, setForm] = useState({
@@ -20,9 +21,6 @@ const Login = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		login(form, setForm)
-			.finally(() => {
-				alert("Has iniciado sesión exitosamente");
-			});
 	};
 
 	return (

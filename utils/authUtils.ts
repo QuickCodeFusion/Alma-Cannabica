@@ -1,4 +1,5 @@
 import { auth } from '@/firebase/config'
+import { toast } from 'sonner'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 /**
@@ -47,8 +48,9 @@ export const registerAndLogin = async (
 			}
 		})
 		await signInWithEmailAndPassword(auth, email, password)
+		toast.success('Registro Correcto')
 	} catch (error: any) {
-		alert(error.message)
+		toast.error('Revise sus datos ingresados')
 	}
 }
 
@@ -88,8 +90,9 @@ export const login = async (form: any, setForm: any): Promise<void> => {
 			photoUrl: '',
 			password: ''
 		})
+		toast.success('Inicio Sesion Correcto')
 	} catch (error) {
 		// Handle any errors that occur during login
-		console.error(error)
+		toast.error('Email o contraseña incorrectos')
 	}
 }
