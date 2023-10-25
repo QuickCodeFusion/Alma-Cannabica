@@ -13,9 +13,10 @@ export const POST = async (req: NextRequest) => {
 		}
 		await addDoc(collection(db, "products"), {
 			name,
+            nameToLowerCase: name.toLowerCase(),
 			description,
 			price,
-			image
+			image,
 		});
 		return NextResponse.json({ message: "Product created" }, { status: 201 });
 	} catch (error : any) {
