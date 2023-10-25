@@ -1,54 +1,38 @@
 module.exports = {
-	"env": {
-		"browser": true,
-		"es2021": true,
-		"node": true
+	env: {
+		browser: true,
+		es2021: true,
+		node: true
 	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:react/recommended",
-		"prettier"
+	extends: [
+		'standard-with-typescript',
+		'plugin:react/recommended'
 	],
-	"overrides": [
+	overrides: [
 		{
-			"env": {
-				"node": true
+			env: {
+				node: true
 			},
-			"files": [
-				".eslintrc.{js,cjs}"
+			files: [
+				'.eslintrc.js'
 			],
-			"parserOptions": {
-				"sourceType": "script"
+			parserOptions: {
+				sourceType: 'script'
 			}
 		}
 	],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": "latest",
-		"sourceType": "module"
+	parserOptions: {
+		ecmaVersion: 'latest',
+		sourceType: 'module'
 	},
-	"plugins": [
-		"@typescript-eslint",
-		"react"
+	plugins: [
+		'react'
 	],
-	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
-		"quotes": [
-			"error",
-			"double"
-		],
-		"semi": [
-			"error",
-			"always"
-		],
-		"react/react-in-jsx-scope": "off",
+	rules: {
+		'react/react-in-jsx-scope': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/strict-boolean-expressions': 'off',
+		'@typescript-eslint/indent': ['error', 'tab'],
+		'no-tabs': 'off'
 	}
-};
+}
