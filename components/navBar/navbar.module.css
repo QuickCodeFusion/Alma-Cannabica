@@ -24,6 +24,13 @@
     width: 20%;
 }
 
+.button{
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 .searchBar{
     position: relative;
     left: 120px;

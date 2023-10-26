@@ -3,23 +3,30 @@ import SearchBar from "./searchBar/SearchBar";
 import Menu from "./menu/Menu";
 import style from "./navbar.module.css";
 import Image from "next/image";
+import { Button } from "@nextui-org/react";
 
 const NavBar = () => {
+
     return (
         <div className={style.navbar}>
             <div>
                 <Image src="/logo.png" alt="Logo" width={55} height={40}></Image>
             </div>
             <div className={style.searchBar}>
-                <SearchBar/>
+                <SearchBar />
             </div>
             <div className={style.buttons}>
-                <button>Productos</button>
+                <button >Productos</button>
                 <button>Informacion</button>
-                <button>Login</button>
-            <div className={style.menu}>
-                <Menu/>
-            </div>
+                <Button size="sm" isIconOnly className="bg-white border">
+                    <Image src="/carrito.png" alt="Perfil" width={20} height={20}></Image>
+                </Button>
+                <Button color="success">
+                    Login
+                </Button>
+                {/* <div className={style.menu}>
+                    <Menu />
+                </div> */}
             </div>
 
         </div>
