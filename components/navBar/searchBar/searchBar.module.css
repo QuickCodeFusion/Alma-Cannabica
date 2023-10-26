@@ -1,0 +1,14 @@
+.input{
+    border-radius: 20px;
+    background-color: gray;
+    width: 120px;
+}
+
+.searchBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+    right: 20px;
+    position: relative;
+}
