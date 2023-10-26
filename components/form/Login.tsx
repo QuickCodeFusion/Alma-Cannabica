@@ -56,4 +56,4 @@ const Login = (): React.JSX.Element => {
 	)
 }
 
-export default Login;
+export default Login
