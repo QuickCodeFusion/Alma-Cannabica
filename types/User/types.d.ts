@@ -1,3 +1,5 @@
+import { type UserRecord } from 'firebase-admin/auth'
+
 export interface Address {
 	id: string
 	name: string
@@ -17,5 +19,14 @@ export interface User {
 }
 
 export interface UsersList {
-	// TODO: Add type for users list
+	users: UserRecord[]
+	nextPageToken?: string
+}
+
+export interface UserAuth {
+	email: string
+	uid: string
+	customClaims: {
+		admin: boolean
+	}
 }

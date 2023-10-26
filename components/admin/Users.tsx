@@ -1,73 +1,77 @@
-import { listUsers } from '@/utils/usersUtils'
+'use client'
 import { type UserRecord } from 'firebase-admin/auth'
-import UsersList from './UsersList'
-const Users = async (): Promise<React.JSX.Element> => {
-	const usersList = await listUsers()
-	const users = usersList.users
+import { Table, TableHeader, TableColumn, TableBody, TableRow, getKeyValue, TableCell } from '@nextui-org/react'
+import { useEffect, useState } from 'react'
+import { useDisableUserMutation, useGetAllAuthUsersQuery, useSetAdminMutation } from '@/redux/service/adminAPI'
+const Users = (): React.JSX.Element => {
+	const { data, isLoading } = useGetAllAuthUsersQuery(null)
 
-	// const [postAdmin] = usePostAdminMutation()
+	const columns = [{ key: 'uid', label: 'UID' }, { key: 'email', label: 'Email' }]
 
-	// const [banUser] = useBanUserMutation()
+	const [users, setUsers] = useState<any[]>()
 
-	const handleGiveAdmin = (userId: string) => {
-		// postAdmin({
-		// 	id: userId,
-		// 	admin: true
-		// })
-		// 	.finally(() => {
-		// 		location.reload()
-		// 	})
+	const [postAdmin] = useSetAdminMutation()
+
+	const [banUser] = useDisableUserMutation()
+
+	useEffect(() => {
+		!isLoading ?? setUsers(data?.users)
+	}, [data])
+
+	const handleGiveAdmin = (userId: string): void => {
+		void postAdmin({
+			id: userId,
+			admin: true
+		})
+			.finally(() => {
+				location.reload()
+			})
 	}
 
-	const handleRemoveAdmin = (userId: string) => {
-		// postAdmin({
-		// 	id: userId,
-		// 	admin: false
-		// })
-		// 	.finally(() => {
-		// 		location.reload()
-		// 	})
+	const handleRemoveAdmin = (userId: string): void => {
+		void postAdmin({
+			id: userId,
+			admin: false
+		})
+			.finally(() => {
+				location.reload()
+			})
 	}
 
-	const handleBan = (userId: string) => {
-		// banUser({
-		// 	id: userId,
-		// 	disabled: true
-		// })
-		// 	.finally(() => {
-		// 		location.reload()
-		// 	})
+	const handleBan = (userId: string): void => {
+		void banUser({
+			id: userId,
+			disabled: true
+		})
+			.finally(() => {
+				location.reload()
+			})
 	}
 
 	const handleUnban = (userId: string): void => {
-		// banUser({
-		// 	id: userId,
-		// 	disabled: false
-		// })
-		// 	.finally(() => {
-		// 		location.reload()
-		// 	})
+		void banUser({
+			id: userId,
+			disabled: false
+		})
+			.finally(() => {
+				location.reload()
+			})
 	}
 
 	return (
 		<div >
-
-			<table className="min-w-[50%] divide-y divide-gray-200">
-				<thead className="bg-gray-950">
-					<tr>
-						<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            UID
-						</th>
-						<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Email
-						</th>
-						<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Role
-						</th>
-					</tr>
-				</thead>
-				<UsersList users={users}/>
-			</table>
+			<Table>
+				<TableHeader columns={columns}>
+					{(column) => <TableColumn key={column?.key}>{column?.label}</TableColumn>}
+				</TableHeader>
+				<TableBody items={users}>
+					{(item) => (
+						<TableRow key={item?.uid}>
+							{(columnKey) => <TableCell>{getKeyValue(item ?? null, columnKey)}</TableCell>}
+						</TableRow>
+					)}
+				</TableBody>
+			</Table>
 		</div>
 	)
 }
