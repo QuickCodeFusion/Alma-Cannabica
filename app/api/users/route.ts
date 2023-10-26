@@ -29,11 +29,12 @@ export const PUT = async (req: NextRequest): Promise<NextResponse> => {
 
 		const { name, email, photoUrl, address, nameAddress } = await req.json()
 
+
 		const userRef = doc(db, 'users', uid)
 		name && (await updateDoc(userRef, { name }))
 		email && (await updateDoc(userRef, { email }))
 		photoUrl && (await updateDoc(userRef, { photoUrl }))
-
+    
 		if (address && nameAddress) {
 			await updateAddress(uid, address, nameAddress)
 		}
