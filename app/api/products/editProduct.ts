@@ -1,13 +1,6 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
-
-type Product = {
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-    itemId: string;
-}
+import { Product } from "@/types/Product/type";
 
 /**
  * Updates the properties of a product in the database.
@@ -16,7 +9,7 @@ type Product = {
  * @return {Promise<void>} A promise that resolves when the update is complete.
  */
 export const editProduct = async  (product: Product) : Promise<void> => {
-    const { name, description, price, image, itemId } = product;
+    const { name, description, price, image, itemId, category} = product;
 
     const productRef = doc(db, "products", itemId);
 
@@ -24,4 +17,5 @@ export const editProduct = async  (product: Product) : Promise<void> => {
     description && (await updateDoc(productRef, { description }));
     price && (await updateDoc(productRef, { price }));
     image && (await updateDoc(productRef, { image }));
+    category && (await updateDoc(productRef, { category }));
 }
