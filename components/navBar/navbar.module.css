@@ -6,7 +6,8 @@
     padding: 10px;
     width: 100vw;
     height: 5vh;
-    background-color: rgb(122, 123, 120);
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 .menu{
     display: flex;
