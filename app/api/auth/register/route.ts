@@ -12,6 +12,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 		} = await req.json()
 
 		await createUser(name, email, uid, photoUrl, adresses);
+		await createUser(name, email, uid, photoUrl, adresses);
 
 		return NextResponse.json({ message: `User ${name} created` }, { status: 201 })
 	} catch (error: any) {
