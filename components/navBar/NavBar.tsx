@@ -1,7 +1,7 @@
-'use client';
+"use client";
 import SearchBar from "./searchBar/SearchBar";
 import Menu from "./menu/Menu";
-import style from './navbar.module.css'
+import style from "./navbar.module.css";
 
 const NavBar = () => {
     return (
@@ -19,4 +19,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default NavBar;

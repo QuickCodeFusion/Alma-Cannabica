@@ -18,4 +18,4 @@ const MenuOpen = () => {
     )
 }
 
-export default MenuOpen
+export default MenuOpen;
