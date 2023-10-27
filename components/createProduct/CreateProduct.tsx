@@ -1,45 +1,47 @@
-"use client";
-import SubmitButton from "../button/submitButton";
-import { useCreateProductMutation } from "@/redux/service/productsAPI";
-import { useState } from "react";
+'use client'
+import SubmitButton from '../button/submitButton'
+import { useCreateProductMutation } from '@/redux/service/productsAPI'
+import { toast } from 'sonner'
+import { useState } from 'react'
 
-const CreateProduct = () => {
+const CreateProduct = (): React.JSX.Element => {
 	const [product, setProduct] = useState({
-		name: "",
-		description: "",
-		price: "",
-		image: "",
-	});
-	const [createProduct] = useCreateProductMutation();
+		name: '',
+		description: '',
+		price: '',
+		image: ''
+	})
+	const [createProduct] = useCreateProductMutation()
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
 		setProduct({
 			...product,
-			[e.target.name]: e.target.value,
-		});
-	};
+			[e.target.name]: e.target.value
+		})
+	}
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
 		createProduct(product)
-			.finally(() => {
-				alert("Has iniciado sesión exitosamente");
-			});
-	};
+			.then(() => {
+				toast.success('Producto creado correctamente')
+			})
+			.catch((error: any) => {
+				toast.error('Error al crear Producto: ' + error)
+			})
+	}
 
-
-    
 	return (
 		<div>
 			<h1>Create Product</h1>
 			<form onSubmit={handleSubmit} method="POST">
-				<input type="text" placeholder="Name" onChange={handleChange}/>
-				<input type="text" placeholder="Description" onChange={handleChange}/>
-				<input type="text" placeholder="Price"  onChange={handleChange}/>
-				<input type="text" placeholder="Image URL" onChange={handleChange}/>
-				<SubmitButton title="Create Product"/>
+				<input type="text" placeholder="Name" onChange={handleChange} />
+				<input type="text" placeholder="Description" onChange={handleChange} />
+				<input type="text" placeholder="Price" onChange={handleChange} />
+				<input type="text" placeholder="Image URL" onChange={handleChange} />
+				<SubmitButton title="Create Product" />
 			</form>
 		</div>
-	);
-};
+	)
+}
 
-export default CreateProduct;
+export default CreateProduct

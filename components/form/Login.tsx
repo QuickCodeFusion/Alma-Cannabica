@@ -1,29 +1,51 @@
-"use client";
+'use client'
+import { login } from '@/utils/authUtils'
+import { useState } from 'react'
+import SubmitButton from '@/components/button/submitButton'
+import { toast } from 'sonner'
 
-import { login } from "@/utils/authUtils";
-import { useState } from "react";
-import SubmitButton from "@/components/button/submitButton";
-
-const Login = () => {
+const Login = (): React.JSX.Element => {
 	const [form, setForm] = useState({
-		email: "",
-		password: "",
-	});
+		email: '',
+		password: ''
+	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
 		setForm({
 			...form,
-			[e.target.name]: e.target.value,
-		});
-	};
+			[e.target.name]: e.target.value
+		})
+	}
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
+		e.preventDefault()
 		login(form, setForm)
-			.finally(() => {
-				alert("Has iniciado sesión exitosamente");
-			});
-	};
+			.then(() => {
+				toast.success('Has iniciado sesión exitosamente')
+			})
+			.catch((error) => {
+				const regex = /\(([^)]+)\)/
+				let authError = error.message
+				authError = authError.match(regex)
+
+				switch (authError[1]) {
+					case 'auth/invalid-email':
+						return toast.error('El Email ingresado no es valido')
+
+					case 'auth/invalid-password':
+						return toast.error('La Contraseña ingresada no es valida')
+
+					case 'auth/user-not-found':
+						return toast.error('No se encontro al usuario')
+
+					case 'auth/user-disabled':
+						return toast.error('Su cuenta fue desabilitada por un administrador')
+
+					default:
+						return toast.error('A ocurrido un error inesperado')
+				}
+			})
+	}
 
 	return (
 		<form method="POST" onSubmit={handleSubmit}>
@@ -31,7 +53,7 @@ const Login = () => {
 			<input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Contraseña" />
 			<SubmitButton title="Login"></SubmitButton>
 		</form>
-	);
-};
+	)
+}
 
-export default Login;
+export default Login

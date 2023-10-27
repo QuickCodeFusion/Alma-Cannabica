@@ -1,4 +1,5 @@
 import { auth } from '@/firebase/config'
+import { toast } from 'sonner'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 /**
@@ -47,8 +48,9 @@ export const registerAndLogin = async (
 			}
 		})
 		await signInWithEmailAndPassword(auth, email, password)
+		toast.success('Registro Correcto')
 	} catch (error: any) {
-		alert(error.message)
+		toast.error('Revise sus datos ingresados')
 	}
 }
 
@@ -62,34 +64,29 @@ export const registerAndLogin = async (
 export const login = async (form: any, setForm: any): Promise<void> => {
 	const { email, password } = form
 
-	try {
-		const { user } = await signInWithEmailAndPassword(auth, email, password)
-		const accessToken = await user.getIdToken(true)
-		const normalizedUser = {
-			uid: user.uid,
-			email: user.email,
-			name: user.displayName,
-			photoUrl: user.photoURL
-		}
-
-		console.log(normalizedUser, ' TODO: Add type for normalizedUser and add data to context')
-
-		await fetch('/api/auth/login', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				'Content-Type': 'application/json'
-			}
-		})
-
-		setForm({
-			name: '',
-			email: '',
-			photoUrl: '',
-			password: ''
-		})
-	} catch (error) {
-		// Handle any errors that occur during login
-		console.error(error)
+	const { user } = await signInWithEmailAndPassword(auth, email, password)
+	const accessToken = await user.getIdToken(true)
+	const normalizedUser = {
+		uid: user.uid,
+		email: user.email,
+		name: user.displayName,
+		photoUrl: user.photoURL
 	}
+
+	console.log(normalizedUser, ' TODO: Add type for normalizedUser and add data to context')
+
+	await fetch('/api/auth/login', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	})
+
+	setForm({
+		name: '',
+		email: '',
+		photoUrl: '',
+		password: ''
+	})
 }

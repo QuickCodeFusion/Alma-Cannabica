@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import SubmitButton from "@/components/button/submitButton";
+import { toast } from "sonner";
 import { registerAndLogin } from "@/utils/authUtils";
 
 const Register = () => {
@@ -19,9 +20,6 @@ const Register = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		registerAndLogin(form, setForm)
-			.finally(() => {
-				alert("Te has registrado e iniciado sesión exitosamente");
-			});
 	};
 	return (
 		<form method="POST" onSubmit={handleSubmit}>
