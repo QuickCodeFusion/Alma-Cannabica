@@ -1,4 +1,5 @@
 import { auth } from '@/firebase/config'
+import { toast } from 'sonner'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 /**
@@ -47,8 +48,9 @@ export const registerAndLogin = async (
 			}
 		})
 		await signInWithEmailAndPassword(auth, email, password)
+		toast.success('Registro Correcto')
 	} catch (error: any) {
-		alert(error.message)
+		toast.error('Revise sus datos ingresados')
 	}
 }
 
