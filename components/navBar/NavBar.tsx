@@ -4,12 +4,15 @@ import Menu from './menu/Menu'
 import style from './navbar.module.css'
 import Image from 'next/image'
 import { Button } from '@nextui-org/react'
+import { useState } from 'react'
 
 const NavBar = () => {
+	const [openCart, setOpenCart] = useState(false)
+
 	return (
 		<div className={style.navbar}>
 			<div>
-				<Image src="/logo.png" alt="Logo" width={55} height={40}></Image>
+				<Image src="/logo.png" alt="Logo" width={70} height={70} className={style.logo}></Image>
 			</div>
 			<div className={style.searchBar}>
 				<SearchBar />
@@ -17,7 +20,7 @@ const NavBar = () => {
 			<div className={style.buttons}>
 				<button >Productos</button>
 				<button>Informacion</button>
-				<Button size="sm" isIconOnly className="bg-white border">
+				<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
 					<Image src="/carrito.png" alt="Perfil" width={20} height={20}></Image>
 				</Button>
 				<Button color="success">
