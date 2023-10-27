@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavBar from "@/components/navBar/NavBar";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
 	title: "Alma Cannabica",
@@ -18,6 +19,7 @@ export default function RootLayout({
 				<Providers>
 					<NavBar/>
 					{children}
+					<Footer/>
 				</Providers>
 			</body>
 		</html>
