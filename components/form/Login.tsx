@@ -23,7 +23,7 @@ const Login = (): React.JSX.Element => {
 				alert('Has iniciado sesión exitosamente')
 			})
 			.catch((error) => {
-				console.error(error)
+				alert('Algo salió mal: ' + error)
 			})
 	}
 
