@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { Providers } from "./providers";
 import NavBar from "@/components/navBar/NavBar";
 import Footer from "@/components/footer/Footer";
+import Cart from "@/components/cart/Cart";
 
 export const metadata: Metadata = {
 	title: "Alma Cannabica",
@@ -20,6 +21,7 @@ export default function RootLayout({
 				<Providers>
 					<Toaster richColors position="top-center" />
 					<NavBar/>
+					<Cart/>
 					{children}
 					<Footer/>
 				</Providers>
