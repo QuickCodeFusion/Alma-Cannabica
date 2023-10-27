@@ -1,29 +1,31 @@
-"use client";
+'use client'
+import { login } from '@/utils/authUtils'
+import { useState } from 'react'
+import SubmitButton from '@/components/button/submitButton'
 
-import { login } from "@/utils/authUtils";
-import { useState } from "react";
-import SubmitButton from "@/components/button/submitButton";
-
-const Login = () => {
+const Login = (): React.JSX.Element => {
 	const [form, setForm] = useState({
-		email: "",
-		password: "",
-	});
+		email: '',
+		password: ''
+	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
 		setForm({
 			...form,
-			[e.target.name]: e.target.value,
-		});
-	};
+			[e.target.name]: e.target.value
+		})
+	}
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
+		e.preventDefault()
 		login(form, setForm)
-			.finally(() => {
-				alert("Has iniciado sesión exitosamente");
-			});
-	};
+			.then(() => {
+				alert('Has iniciado sesión exitosamente')
+			})
+			.catch((error) => {
+				alert('Algo salió mal: ' + error)
+			})
+	}
 
 	return (
 		<form method="POST" onSubmit={handleSubmit}>
@@ -31,7 +33,7 @@ const Login = () => {
 			<input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Contraseña" />
 			<SubmitButton title="Login"></SubmitButton>
 		</form>
-	);
-};
+	)
+}
 
-export default Login;
+export default Login

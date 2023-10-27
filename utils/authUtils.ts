@@ -62,34 +62,29 @@ export const registerAndLogin = async (
 export const login = async (form: any, setForm: any): Promise<void> => {
 	const { email, password } = form
 
-	try {
-		const { user } = await signInWithEmailAndPassword(auth, email, password)
-		const accessToken = await user.getIdToken(true)
-		const normalizedUser = {
-			uid: user.uid,
-			email: user.email,
-			name: user.displayName,
-			photoUrl: user.photoURL
-		}
-
-		console.log(normalizedUser, ' TODO: Add type for normalizedUser and add data to context')
-
-		await fetch('/api/auth/login', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				'Content-Type': 'application/json'
-			}
-		})
-
-		setForm({
-			name: '',
-			email: '',
-			photoUrl: '',
-			password: ''
-		})
-	} catch (error) {
-		// Handle any errors that occur during login
-		console.error(error)
+	const { user } = await signInWithEmailAndPassword(auth, email, password)
+	const accessToken = await user.getIdToken(true)
+	const normalizedUser = {
+		uid: user.uid,
+		email: user.email,
+		name: user.displayName,
+		photoUrl: user.photoURL
 	}
+
+	console.log(normalizedUser, ' TODO: Add type for normalizedUser and add data to context')
+
+	await fetch('/api/auth/login', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	})
+
+	setForm({
+		name: '',
+		email: '',
+		photoUrl: '',
+		password: ''
+	})
 }

@@ -3,8 +3,14 @@ import { cookies, headers } from 'next/headers'
 import { type NextRequest, NextResponse } from 'next/server'
 
 InitApp()
-// Helper function to validate and set the session cookie
-const setSessionCookie = async (idToken: string) => {
+
+/**
+ * Sets a session cookie with the provided ID token.
+ *
+ * @param {string} idToken - The ID token to use for creating the session cookie.
+ * @return {Promise<void>} A promise that resolves when the session cookie is set.
+ */
+const setSessionCookie = async (idToken: string): Promise<void> => {
 	const expiresIn = 60 * 60 * 24 * 5 * 1000 // 5 days
 	const sessionCookie = await auth.createSessionCookie(idToken, {
 		expiresIn
@@ -42,8 +48,10 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 }
 
 // Get user info
-export const GET = async (req: NextRequest) => {
-	const sessionToken = cookies().get('session')?.value || ''
+export const GET = async (req: NextRequest): Promise<NextResponse> => {
+	const sessionToken = cookies().get('session')?.value	??
+	headers().get('Authorization')?.split('Bearer ')[1]	??
+	''
 
 	try {
 		if (!sessionToken) {
