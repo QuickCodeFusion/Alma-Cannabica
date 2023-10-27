@@ -10,7 +10,9 @@ const NavBar = (): React.JSX.Element => {
 	return (
 		<div className={style.navbar}>
 			<div>
-				<Image src="/logo.png" alt="Logo" width={55} height={40}></Image>
+				<Link href={'/'}>
+					<Image src="/logo.png" alt="Logo" width={55} height={40}></Image>
+				</Link>
 			</div>
 			<div className={style.searchBar}>
 				<SearchBar />
