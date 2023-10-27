@@ -1,13 +1,19 @@
-"use client";
+'use client'
+import style from './searchBar.module.css'
+import Image from 'next/image';
 
 const SearchBar = () => {
-    
-	return (
-		<div>
-			<input type="text" onChange={(e) => console.log(e.target.value)}/>
-			<button>Search</button>
-		</div>
-	);
-};
+
+    return (
+        <div className={style.searchBar}>
+            <div>
+                <input type="text" onChange={(e) => console.log(e.target.value)} className={style.input} />
+            </div>
+            <div className={style.button}>
+                <Image src="/buscar.png" alt="Buscar" width={20} height={20}></Image>
+            </div>
+        </div>
+    )
+}
 
 export default SearchBar;

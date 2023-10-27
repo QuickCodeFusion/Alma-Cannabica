@@ -1,16 +1,18 @@
-import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
-import {setupListeners} from "@reduxjs/toolkit/query";
-import { createProductAPI } from "./service/productsAPI";
+import { configureStore } from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/query'
+import { adminAPI } from './service/adminAPI'
+import { productsAPI } from './service/productsAPI'
 
 export const store = configureStore({
 	reducer: {
-		[createProductAPI.reducerPath]: createProductAPI.reducer
+		[adminAPI.reducerPath]: adminAPI.reducer,
+		[productsAPI.reducerPath]: productsAPI.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
-			createProductAPI.middleware,
-		),
-});
+			adminAPI.middleware,
+			productsAPI.middleware
+		)
+})
 
-
-setupListeners(store.dispatch);
+setupListeners(store.dispatch)
