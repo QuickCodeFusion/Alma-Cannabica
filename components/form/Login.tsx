@@ -24,12 +24,9 @@ const Login = (): React.JSX.Element => {
 				toast.success('Has iniciado sesión exitosamente')
 			})
 			.catch((error) => {
-				console.log(error);
-
 				const regex = /\(([^)]+)\)/;
 				let authError = error.message;
 				authError = authError.match(regex)
-				console.log(authError[1]);
 
 				switch (authError[1]) {
 					case "auth/invalid-email":
