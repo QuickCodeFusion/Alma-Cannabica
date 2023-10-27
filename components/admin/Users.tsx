@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 import { useSetAdminMutation, useDisableUserMutation, useGetAllAuthUsersQuery } from '@/redux/service/adminAPI'
 import { type UserRecord } from 'firebase-admin/auth'
 import { Button } from '@nextui-org/react'
@@ -23,11 +24,12 @@ const Users = (): React.JSX.Element => {
 			admin: true
 		})
 			.then(() => {
+				toast.success('Se otorgo Admin')
 				setLoading(false)
 				location.reload()
 			})
 			.catch(error => {
-				alert('Something went wrong: ' + error)
+				toast.error('Something went wrong: ' + error)
 				console.error(error)
 			})
 	}
@@ -39,11 +41,12 @@ const Users = (): React.JSX.Element => {
 			admin: false
 		})
 			.then(() => {
+				toast.success('Se quito Admin')
 				location.reload()
 				setLoading(false)
 			})
 			.catch(error => {
-				alert('Something went wrong: ' + error)
+				toast.error('Something went wrong: ' + error)
 			})
 	}
 
@@ -54,11 +57,12 @@ const Users = (): React.JSX.Element => {
 			disabled: true
 		})
 			.then(() => {
+				toast.success('Usuario desabilitado')
 				setLoading(false)
 				location.reload()
 			})
 			.catch(error => {
-				alert('Something went wrong: ' + error)
+				toast.error('Something went wrong: ' + error)
 			})
 	}
 
@@ -69,11 +73,12 @@ const Users = (): React.JSX.Element => {
 			disabled: false
 		})
 			.then(() => {
+				toast.success('Usuario habilitado')
 				setLoading(false)
 				location.reload()
 			})
 			.catch(error => {
-				alert('Something went wrong: ' + error)
+				toast.error('Something went wrong: ' + error)
 			})
 	}
 
