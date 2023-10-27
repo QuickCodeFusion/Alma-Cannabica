@@ -21,10 +21,32 @@ const Login = (): React.JSX.Element => {
 		e.preventDefault()
 		login(form, setForm)
 			.then(() => {
-				alert('Has iniciado sesión exitosamente')
+				toast.success('Has iniciado sesión exitosamente')
 			})
 			.catch((error) => {
-				alert('Algo salió mal: ' + error)
+				console.log(error);
+
+				const regex = /\(([^)]+)\)/;
+				let authError = error.message;
+				authError = authError.match(regex)
+				console.log(authError[1]);
+
+				switch (authError[1]) {
+					case "auth/invalid-email":
+						return toast.error('El Email ingresado no es valido');
+
+					case "auth/invalid-password":
+						return toast.error('La Contraseña ingresada no es valida');
+
+					case "auth/user-not-found":
+						return toast.error('No se encontro al usuario');
+
+					case "auth/user-disabled":
+						return toast.error('Su cuenta fue desabilitada por un administrador');
+
+					default:
+						return toast.error('A ocurrido un error inesperado');
+				}
 			})
 	}
 
