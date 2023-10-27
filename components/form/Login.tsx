@@ -1,8 +1,8 @@
-"use client";
+'use client'
 import { login } from '@/utils/authUtils'
 import { useState } from 'react'
 import SubmitButton from '@/components/button/submitButton'
-import { toast } from 'sonner';
+import { toast } from 'sonner'
 
 const Login = (): React.JSX.Element => {
 	const [form, setForm] = useState({
@@ -24,25 +24,25 @@ const Login = (): React.JSX.Element => {
 				toast.success('Has iniciado sesión exitosamente')
 			})
 			.catch((error) => {
-				const regex = /\(([^)]+)\)/;
-				let authError = error.message;
+				const regex = /\(([^)]+)\)/
+				let authError = error.message
 				authError = authError.match(regex)
 
 				switch (authError[1]) {
-					case "auth/invalid-email":
-						return toast.error('El Email ingresado no es valido');
+					case 'auth/invalid-email':
+						return toast.error('El Email ingresado no es valido')
 
-					case "auth/invalid-password":
-						return toast.error('La Contraseña ingresada no es valida');
+					case 'auth/invalid-password':
+						return toast.error('La Contraseña ingresada no es valida')
 
-					case "auth/user-not-found":
-						return toast.error('No se encontro al usuario');
+					case 'auth/user-not-found':
+						return toast.error('No se encontro al usuario')
 
-					case "auth/user-disabled":
-						return toast.error('Su cuenta fue desabilitada por un administrador');
+					case 'auth/user-disabled':
+						return toast.error('Su cuenta fue desabilitada por un administrador')
 
 					default:
-						return toast.error('A ocurrido un error inesperado');
+						return toast.error('A ocurrido un error inesperado')
 				}
 			})
 	}
