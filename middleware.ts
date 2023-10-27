@@ -1,28 +1,26 @@
+import { type UserRecord } from 'firebase-admin/auth'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
-import { auth } from './firebase/admin-config'
 
 export const middleware = async (req: NextRequest): Promise<NextResponse> => {
-	// const sessionToken = cookies().get('session')?.value ?? ''
+	const sessionToken = cookies().get('session')?.value ?? ''
 
-	// if (!sessionToken) {
-	// 	return NextResponse.redirect(new URL('/login', req.url))
-	// }
+	if (!sessionToken) {
+		return NextResponse.json({ error: 'User not logged in' }, { status: 401 })
+	}
 
-	// const decodedToken = await auth.verifySessionCookie(sessionToken, true)
+	const user: UserRecord = await fetch(`${req.nextUrl.origin}/api/auth/login`, {
+		headers: {
+			Authorization: `Bearer ${sessionToken}`
+		}
+	}).then(res => res.json())
 
-	// if (!decodedToken) {
-	// 	return NextResponse.redirect(new URL('/login', req.url))
-	// }
-
-	// const user = await auth.getUser(decodedToken.uid)
-
-	// if (!user.customClaims?.admin) {
-	// 	// TODO: Add protection to future admin routes
-	// }
+	if (req.nextUrl.pathname.startsWith('/admin-dashboard') && !user.customClaims?.admin) {
+		return NextResponse.json({ error: `User ${user.email} is not an admin` }, { status: 401 })
+	}
 	return NextResponse.next()
 }
 
 export const config = {
-	matcher: ['/api/users/:path*']
+	matcher: ['/api/users/:path*', '/admin-dashboard/:path*']
 }
