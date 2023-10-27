@@ -1,21 +1,21 @@
 import { Button } from '@nextui-org/react'
 
-const userButton = ({
+const UserButton = ({
 	title,
 	action,
-	isAdmin,
-	isDisabledUser
+	txtColor,
+	btnColor
 }: {
 	title: string
 	action: () => void
-	isAdmin?: boolean
-	isDisabledUser?: boolean
+	txtColor: string
+	btnColor: 'primary' | 'success' | 'warning' | 'danger'
 }): React.JSX.Element => {
 	return (
-		<div>
-			<Button onClick={action} >{title}</Button>
-		</div>
+		<>
+			<Button radius='full' className={`bg-opacity-20 text-${txtColor}-500`} color={btnColor} onClick={action} >{title}</Button>
+		</>
 	)
 }
 
-export default userButton
+export default UserButton
