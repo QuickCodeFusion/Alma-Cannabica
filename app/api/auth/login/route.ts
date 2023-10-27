@@ -43,7 +43,9 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 
 // Get user info
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
-	const sessionToken = cookies().get('session')?.value ?? ''
+	const sessionToken = cookies().get('session')?.value	??
+	headers().get('Authorization')?.split('Bearer ')[1]	??
+	''
 
 	try {
 		if (!sessionToken) {
