@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Button } from '@nextui-org/react'
 import { useState } from 'react'
 import Cart from '../cart/Cart'
+import Link from 'next/link'
 
 const NavBar = (): JSX.Element => {
 	const [openCart, setOpenCart] = useState(false)
@@ -13,7 +14,9 @@ const NavBar = (): JSX.Element => {
 	return (
 		<div className={style.navbar}>
 			<div>
-				<Image src="/logo.png" alt="Logo" width={70} height={70} className={style.logo}></Image>
+				<Link href={'/'}>
+					<Image src="/logo.png" alt="Logo" width={55} height={40}></Image>
+				</Link>
 			</div>
 			<div className={style.searchBar}>
 				<SearchBar />
