@@ -1,11 +1,11 @@
-import Login from "@/components/form/Login";
+import Login from '@/components/form/Login'
 
-const LoginPage = () => {
+const LoginPage = (): React.JSX.Element => {
 	return (
-		<div>
+		<>
 			<Login/>
-		</div>
-	);
-};
+		</>
+	)
+}
 
-export default LoginPage;
+export default LoginPage
