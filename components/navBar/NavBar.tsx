@@ -1,12 +1,13 @@
 'use client'
 import SearchBar from './searchBar/SearchBar'
-import Menu from './menu/Menu'
+// import Menu from './menu/Menu'
 import style from './navbar.module.css'
 import Image from 'next/image'
 import { Button } from '@nextui-org/react'
 import { useState } from 'react'
+import Cart from '../cart/Cart'
 
-const NavBar = () => {
+const NavBar = (): JSX.Element => {
 	const [openCart, setOpenCart] = useState(false)
 
 	return (
@@ -24,11 +25,14 @@ const NavBar = () => {
 					<Image src="/carrito.png" alt="Perfil" width={20} height={20}></Image>
 				</Button>
 				<Button color="success">
-                    Login
+                        Login
 				</Button>
-				{/* <div className={style.menu}>
-                    <Menu />
-                </div> */}
+			</div>
+
+			<div className={openCart ? style.cart : style.pepe}>
+				{
+					<Cart />
+				}
 			</div>
 
 		</div>

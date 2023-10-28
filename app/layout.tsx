@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Toaster } from "sonner";
-import { Providers } from "./providers";
-import NavBar from "@/components/navBar/NavBar";
-import Footer from "@/components/footer/Footer";
+import type { Metadata } from 'next'
+import './globals.css'
+import { Toaster } from 'sonner'
+import { Providers } from './providers'
+import NavBar from '@/components/navBar/NavBar'
+import Footer from '@/components/footer/Footer'
 
 export const metadata: Metadata = {
 	title: 'Alma Cannabica'
