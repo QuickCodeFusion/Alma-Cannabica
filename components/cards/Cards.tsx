@@ -1,28 +1,25 @@
 'use client'
-import { useGetAllProductsQuery } from "@/redux/service/productsAPI"
-import Card from "../card/Card"
+import { useGetAllProductsQuery } from '@/redux/service/productsAPI'
+import Card from '../card/Card'
 
-const Cards = () => {
+const Cards = (): React.JSX.Element => {
+	const { data: products, isLoading } = useGetAllProductsQuery(null)
 
-    const {data : products, isLoading, isError} = useGetAllProductsQuery(null) 
-
-
-    return (
-        <div>
-            {
-                isLoading ?
-                <div>Loading...</div> 
-                :
-                (
-                    products?.map((product) => {
-                        return (
-                            <Card product={product}/>
-                        )
-                    } )
-                )
-            }
-        </div>
-    )
+	return (
+		<div>
+			{
+				isLoading
+					? <div>Loading...</div>
+					:					(
+						products?.map((product) => {
+							return (
+								<Card key={product.itemId} product={product}/>
+							)
+						})
+					)
+			}
+		</div>
+	)
 }
 
 export default Cards
