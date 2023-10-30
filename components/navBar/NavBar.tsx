@@ -7,6 +7,7 @@ import { Button } from '@nextui-org/react'
 import { useState } from 'react'
 import Cart from '../cart/Cart'
 import Link from 'next/link'
+import { useUserSession } from '@/app/userContext'
 
 const NavBar = (): JSX.Element => {
 	const [openCart, setOpenCart] = useState(false)
