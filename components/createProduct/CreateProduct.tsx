@@ -33,12 +33,12 @@ const CreateProduct = (): React.JSX.Element => {
 	return (
 		<div>
 			<h1>Create Product</h1>
-			<form onSubmit={handleSubmit} method="POST">
-				<input type="text" placeholder="Name" onChange={handleChange} />
-				<input type="text" placeholder="Description" onChange={handleChange} />
-				<input type="text" placeholder="Price" onChange={handleChange} />
-				<input type="text" placeholder="Image URL" onChange={handleChange} />
-				<SubmitButton title="Create Product" />
+			<form onSubmit={handleSubmit} method='POST'>
+				<input type='text' placeholder='Name' onChange={handleChange} />
+				<input type='text' placeholder='Description' onChange={handleChange} />
+				<input type='text' placeholder='Price' onChange={handleChange} />
+				<input type='text' placeholder='Image URL' onChange={handleChange} />
+				<SubmitButton title='Create Product' />
 			</form>
 		</div>
 	)
