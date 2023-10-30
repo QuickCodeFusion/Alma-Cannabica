@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
+import { addDoc, collection, getDocs, deleteDoc, doc, query, orderBy, limit } from 'firebase/firestore'
 import { db } from '@/firebase/config'
 import { type NextRequest, NextResponse } from 'next/server'
 import { editProduct } from './editProduct'
@@ -30,7 +30,10 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
 	try {
-		const productsSnapshot = await getDocs(collection(db, 'products'))
+		const productsQuery = query(collection(db, 'products'), orderBy('price'), limit(6))
+
+		const productsSnapshot = await getDocs(productsQuery)
+
 		const products = productsSnapshot.docs.map((doc) => ({
 			...doc.data(),
 			itemId: doc.id

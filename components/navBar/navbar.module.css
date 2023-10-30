@@ -11,6 +11,45 @@
     position:absolute;
 }
 
+/* .buttonsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100vw;
+    
+} */
+
+.cart{
+    position: absolute;
+    right: 0%;
+    top: 55px;
+    transition: 1s;
+    z-index: 1;
+    animation: open .5s;
+}
+
+.pepe{
+    position: absolute;
+    right: -20%;
+    top: 55px;
+    transition: ease .5s;
+    animation: closed .5s;
+    z-index: 1;
+}
+
+@keyframes closed {
+    0% {
+        right: 0%;
+    }
+}
+
+@keyframes open {
+    0% {
+        right: -20%;
+    }
+}
+
 .menu{
     display: flex;
     justify-content: center;
@@ -19,6 +58,7 @@
 
 .buttons{
     display: flex;
+    align-self: end;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;

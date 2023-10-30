@@ -1,46 +1,41 @@
 'use client'
 import SearchBar from './searchBar/SearchBar'
-import Menu from './menu/Menu'
+// import Menu from './menu/Menu'
 import style from './navbar.module.css'
 import Image from 'next/image'
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from '@nextui-org/react'
-import Link from 'next/link'
-import { useUserSession } from '@/app/userContext'
+import { Button } from '@nextui-org/react'
+import { useState } from 'react'
+import Cart from '../cart/Cart'
 
-const NavBar = (): React.JSX.Element => {
-	const { userSession } = useUserSession()
-	const menuItems = [
-		'Productos',
-		'Informacion',
-		userSession ? 'Cerrar sesión' : 'Iniciar sesión'
-	]
+const NavBar = (): JSX.Element => {
+	const [openCart, setOpenCart] = useState(false)
+
 	return (
-		<Navbar>
-			<NavbarContent>
-				<NavbarBrand>
-					<Link href='/'>Alma Cannabica</Link>
-				</NavbarBrand>
-				<NavbarMenu>
-					<NavbarMenuToggle />
-					<NavbarContent>
-						<NavbarItem>
-							<SearchBar />
-						</NavbarItem>
-						<NavbarItem>
-							<Menu items={menuItems} />
-						</NavbarItem>
-					</NavbarContent>
-				</NavbarMenu>
-			</NavbarContent>
-			<NavbarContent>
-				<NavbarItem>
-					<Register />
-				</NavbarItem>
-				<NavbarItem>
-					<Login />
-				</NavbarItem>
-			</NavbarContent>
-		</Navbar>
+		<div className={style.navbar}>
+			<div>
+				<Image src="/logo.png" alt="Logo" width={70} height={70} className={style.logo}></Image>
+			</div>
+			<div className={style.searchBar}>
+				<SearchBar />
+			</div>
+			<div className={style.buttons}>
+				<button >Productos</button>
+				<button>Informacion</button>
+				<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
+					<Image src="/carrito.png" alt="Perfil" width={20} height={20}></Image>
+				</Button>
+				<Button color="success">
+                        Login
+				</Button>
+			</div>
+
+			<div className={openCart ? style.cart : style.pepe}>
+				{
+					<Cart />
+				}
+			</div>
+
+		</div>
 	)
 }
 

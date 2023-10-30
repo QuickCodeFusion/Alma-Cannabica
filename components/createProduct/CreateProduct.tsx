@@ -1,7 +1,8 @@
 'use client'
 import SubmitButton from '../button/submitButton'
 import { useCreateProductMutation } from '@/redux/service/productsAPI'
-import React, { useState } from 'react'
+import { toast } from 'sonner'
+import { useState } from 'react'
 
 const CreateProduct = (): React.JSX.Element => {
 	const [product, setProduct] = useState({
@@ -22,22 +23,22 @@ const CreateProduct = (): React.JSX.Element => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
 		createProduct(product)
 			.then(() => {
-				alert('Product created successfully')
+				toast.success('Producto creado correctamente')
 			})
 			.catch((error: any) => {
-				alert('Something went wrong: ' + error)
+				toast.error('Error al crear Producto: ' + error)
 			})
 	}
 
 	return (
 		<div>
 			<h1>Create Product</h1>
-			<form onSubmit={handleSubmit} method="POST">
-				<input type="text" placeholder="Name" onChange={handleChange}/>
-				<input type="text" placeholder="Description" onChange={handleChange}/>
-				<input type="text" placeholder="Price" onChange={handleChange}/>
-				<input type="text" placeholder="Image URL" onChange={handleChange}/>
-				<SubmitButton title="Create Product"/>
+			<form onSubmit={handleSubmit} method='POST'>
+				<input type='text' placeholder='Name' onChange={handleChange} />
+				<input type='text' placeholder='Description' onChange={handleChange} />
+				<input type='text' placeholder='Price' onChange={handleChange} />
+				<input type='text' placeholder='Image URL' onChange={handleChange} />
+				<SubmitButton title='Create Product' />
 			</form>
 		</div>
 	)

@@ -1,5 +1,5 @@
 import { auth } from '@/firebase/config'
-import { type NormalizedUser } from '@/types/User/types'
+import { toast } from 'sonner'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 /**
@@ -39,6 +39,18 @@ export const registerAndLogin = async (
 		password: ''
 	})
 
+		await fetch('/api/auth/login', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+				'Content-Type': 'application/json'
+			}
+		})
+		await signInWithEmailAndPassword(auth, email, password)
+		toast.success('Registro Correcto')
+	} catch (error: any) {
+		toast.error('Revise sus datos ingresados')
+	}
 	await fetch('/api/auth/login', {
 		method: 'POST',
 		headers: {
