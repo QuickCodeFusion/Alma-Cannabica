@@ -11,7 +11,7 @@ const Cards = (): React.JSX.Element => {
 				isLoading
 					? <div>Loading...</div>
 					:					(
-						products?.map((product) => {
+						products?.map((product: any) => {
 							return (
 								<Card key={product.itemId} product={product}/>
 							)
