@@ -13,32 +13,33 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 export const registerAndLogin = async (
 	form: any,
 	setForm: any
-): Promise<NormalizedUser> => {
+): Promise<NormalizedUser | undefined> => {
 	const { name, email, photoUrl, password } = form
-	const { user } = await createUserWithEmailAndPassword(auth, email, password)
-	const accessToken = await user.getIdToken(true)
+	try {
+		const { user } = await createUserWithEmailAndPassword(auth, email, password)
+		const accessToken = await user.getIdToken(true)
 
-	const normalizedUser: NormalizedUser = {
-		uid: user.uid,
-		email: user.email ?? email,
-		name: user.displayName ?? name,
-		photoUrl: user.photoURL ?? photoUrl
-	}
+		const normalizedUser: NormalizedUser = {
+			uid: user.uid,
+			email: user.email ?? email,
+			name: user.displayName ?? name,
+			photoUrl: user.photoURL ?? photoUrl
+		}
 
-	await fetch('/api/auth/register', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(normalizedUser)
-	})
+		await fetch('/api/auth/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(normalizedUser)
+		})
 
-	setForm({
-		name: '',
-		email: '',
-		photoUrl: '',
-		password: ''
-	})
+		setForm({
+			name: '',
+			email: '',
+			photoUrl: '',
+			password: ''
+		})
 
 		await fetch('/api/auth/login', {
 			method: 'POST',
@@ -49,19 +50,19 @@ export const registerAndLogin = async (
 		})
 		await signInWithEmailAndPassword(auth, email, password)
 		toast.success('Registro Correcto')
+		await fetch('/api/auth/login', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+				'Content-Type': 'application/json'
+			}
+		})
+		await signInWithEmailAndPassword(auth, email, password)
+
+		return normalizedUser
 	} catch (error: any) {
 		toast.error('Revise sus datos ingresados')
 	}
-	await fetch('/api/auth/login', {
-		method: 'POST',
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-			'Content-Type': 'application/json'
-		}
-	})
-	await signInWithEmailAndPassword(auth, email, password)
-
-	return normalizedUser
 }
 
 /**
