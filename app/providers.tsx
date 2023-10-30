@@ -1,19 +1,24 @@
-"use client";
+'use client'
 
-import {NextUIProvider} from "@nextui-org/react";
+import { NextUIProvider } from '@nextui-org/react'
 
 /* Core */
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux'
 
 /* Instruments */
-import { store } from "@/redux/store"; 
+import { store } from '@/redux/store'
 
-export function Providers({children}: { children: React.ReactNode }) {
+/* User context */
+import { ContextProvider } from './userContext'
+
+export function Providers ({ children }: { children: React.ReactNode }): React.JSX.Element {
 	return (
 		<Provider store={store}>
-			<NextUIProvider>
-				{children}
-			</NextUIProvider>
+			<ContextProvider>
+				<NextUIProvider>
+					{children}
+				</NextUIProvider>
+			</ContextProvider>
 		</Provider>
-	);
+	)
 }
