@@ -48,6 +48,9 @@ const Users = (): React.JSX.Element => {
 			.catch(error => {
 				toast.error('Something went wrong: ' + error)
 			})
+			.catch(error => {
+				alert('Something went wrong: ' + error)
+			})
 	}
 
 	const handleBan = (userId: string): any => {
