@@ -10,6 +10,8 @@ const Login = (): React.JSX.Element => {
 		password: ''
 	})
 
+	const [loading, setLoading] = useState(false)
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
 		setForm({
 			...form,
@@ -18,12 +20,15 @@ const Login = (): React.JSX.Element => {
 	}
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
+		setLoading(true)
 		e.preventDefault()
 		login(form, setForm)
 			.then(() => {
+				setLoading(false)
 				toast.success('Has iniciado sesión exitosamente')
 			})
 			.catch((error) => {
+				setLoading(false)
 				const regex = /\(([^)]+)\)/
 				let authError = error.message
 				authError = authError.match(regex)
@@ -48,10 +53,10 @@ const Login = (): React.JSX.Element => {
 	}
 
 	return (
-		<form method="POST" onSubmit={handleSubmit}>
+		<form method="POST" onSubmit={handleSubmit} className='py-10'>
 			<input type="text" name="email" value={form.email} onChange={handleChange} placeholder="Email" />
 			<input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Contraseña" />
-			<SubmitButton title="Login"></SubmitButton>
+			<SubmitButton loading={loading} title="Login"></SubmitButton>
 		</form>
 	)
 }
