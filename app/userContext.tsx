@@ -2,6 +2,7 @@
 import { auth } from '@/firebase/config'
 import { type User, onAuthStateChanged } from 'firebase/auth'
 import { redirect } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { useState, createContext, useContext, useEffect } from 'react'
 
 const Context = createContext({
@@ -12,12 +13,14 @@ const Context = createContext({
 const UserContextProvider = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
 	const [userSession, setUserSession] = useState<any>(undefined)
 
+	const router = useRouter()
+
 	const logOut = (): void => {
 		auth.signOut().then(() => {
 			setUserSession(undefined)
 			void fetch('api/auth/logout')
-		}).then(() => {
-			redirect('/login')
+		}).then(async () => {
+			await router.push('/login')
 		})
 			.catch(error => { alert(`Error inesperado al desconectarse: ${error.message}`) })
 		setUserSession(undefined)

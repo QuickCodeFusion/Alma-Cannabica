@@ -11,6 +11,7 @@ import { useUserSession } from '@/app/userContext'
 
 const NavBar = (): JSX.Element => {
 	const [openCart, setOpenCart] = useState(false)
+	const { userSession, logOut } = useUserSession()
 
 	return (
 		<div className={style.navbar}>
@@ -28,9 +29,13 @@ const NavBar = (): JSX.Element => {
 				<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
 					<Image src="/carrito.png" alt="Perfil" width={20} height={20}></Image>
 				</Button>
-				<Button color="success">
+				{userSession
+					? <Button color='danger' onClick={logOut}>
+					Logout
+					</Button>
+					: <Button color="success">
                         Login
-				</Button>
+					</Button>}
 			</div>
 
 			<div className={openCart ? style.cart : style.pepe}>
