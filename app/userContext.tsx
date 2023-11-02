@@ -1,7 +1,7 @@
 'use client'
 import { auth } from '@/firebase/config'
 import { type User, onAuthStateChanged } from 'firebase/auth'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useState, createContext, useContext, useEffect, type Dispatch } from 'react'
 
 interface UserContextType {
@@ -22,7 +22,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }): React
 			setUserSession(undefined)
 			void fetch('api/auth/logout')
 		}).then(async () => {
-			await router.push('/login')
+			router.push('/login')
 		})
 			.catch(error => { alert(`Error inesperado al desconectarse: ${error.message}`) })
 		setUserSession(undefined)
