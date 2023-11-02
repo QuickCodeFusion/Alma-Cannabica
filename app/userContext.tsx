@@ -12,13 +12,14 @@ const Context = createContext({
 const UserContextProvider = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
 	const [userSession, setUserSession] = useState<any>(undefined)
 
-	const logOut = () => {
+	const logOut = (): void => {
 		auth.signOut().then(() => {
 			setUserSession(undefined)
-			fetch('api/auth/logout')
+			void fetch('api/auth/logout')
 		}).then(() => {
 			redirect('/login')
 		})
+			.catch(error => { alert(`Error inesperado al desconectarse: ${error.message}`) })
 		setUserSession(undefined)
 	}
 
@@ -40,6 +41,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }): React
 	)
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const useUserSession = () => useContext(Context)
 
 export { useUserSession, UserContextProvider }
