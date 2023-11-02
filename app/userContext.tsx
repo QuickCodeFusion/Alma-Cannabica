@@ -1,14 +1,16 @@
 'use client'
 import { auth } from '@/firebase/config'
 import { type User, onAuthStateChanged } from 'firebase/auth'
-import { redirect } from 'next/navigation'
 import { useRouter } from 'next/router'
-import { useState, createContext, useContext, useEffect } from 'react'
+import { useState, createContext, useContext, useEffect, type Dispatch } from 'react'
 
-const Context = createContext({
-	userSession: undefined,
-	logOut: () => {}
-})
+interface UserContextType {
+	userSession: User | undefined
+	logOut: () => void
+	setUserSession: Dispatch<any>
+}
+
+const Context = createContext<UserContextType>({} as any)
 
 const UserContextProvider = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
 	const [userSession, setUserSession] = useState<any>(undefined)
@@ -38,7 +40,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }): React
 		return () => { unsubscribe() }
 	}, [])
 	return (
-		<Context.Provider value={{ userSession, logOut }}>
+		<Context.Provider value={{ userSession, setUserSession, logOut }}>
 			{children}
 		</Context.Provider>
 	)

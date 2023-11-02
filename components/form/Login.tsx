@@ -3,6 +3,7 @@ import { login } from '@/utils/authUtils'
 import { useState } from 'react'
 import SubmitButton from '@/components/button/submitButton'
 import { toast } from 'sonner'
+import { useUserSession } from '@/app/userContext'
 
 const Login = (): React.JSX.Element => {
 	const [form, setForm] = useState({
@@ -10,20 +11,23 @@ const Login = (): React.JSX.Element => {
 		password: ''
 	})
 
+	const { setUserSession } = useUserSession()
+
 	const [loading, setLoading] = useState(false)
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setForm({
 			...form,
 			[e.target.name]: e.target.value
 		})
 	}
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		setLoading(true)
 		e.preventDefault()
 		login(form, setForm)
-			.then(() => {
+			.then((user) => {
+				setUserSession(user)
 				setLoading(false)
 				toast.success('Has iniciado sesión exitosamente')
 			})
