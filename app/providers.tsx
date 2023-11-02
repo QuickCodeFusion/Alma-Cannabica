@@ -9,16 +9,16 @@ import { Provider } from 'react-redux'
 import { store } from '@/redux/store'
 
 /* User context */
-import { ContextProvider } from './userContext'
+import { UserContextProvider } from './userContext'
 
 export function Providers ({ children }: { children: React.ReactNode }): React.JSX.Element {
 	return (
 		<Provider store={store}>
-			<ContextProvider>
+			<UserContextProvider>
 				<NextUIProvider>
 					{children}
 				</NextUIProvider>
-			</ContextProvider>
+			</UserContextProvider>
 		</Provider>
 	)
 }

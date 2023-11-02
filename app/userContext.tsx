@@ -11,16 +11,15 @@ const Context = createContext({
 
 const UserContextProvider = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
 	const [userSession, setUserSession] = useState<any>(undefined)
-    const cookies = useCookies()
 
 	const logOut = () => {
 		auth.signOut().then(() => {
 			setUserSession(undefined)
+			fetch('api/auth/logout')
 		}).then(() => {
 			redirect('/login')
 		})
 		setUserSession(undefined)
-		cookies().delete('session')
 	}
 
 	useEffect(() => {
