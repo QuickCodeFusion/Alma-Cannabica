@@ -13,7 +13,7 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 		headers: {
 			Authorization: `Bearer ${sessionToken}`
 		}
-	}).then(res => res.json())
+	}).then(async res => await res.json())
 
 	if (req.nextUrl.pathname.startsWith('/admin-dashboard') && !user.customClaims?.admin) {
 		return NextResponse.json({ error: `User ${user.email} is not an admin` }, { status: 401 })
