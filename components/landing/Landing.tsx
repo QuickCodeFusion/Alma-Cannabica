@@ -54,7 +54,7 @@ const Landing = () => {
 							prevEl: "swiper-button-prev",
 
 						}}
-						style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+						style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute" }}
 						autoplay={{ delay: 3000 }}
 					>
 						{data?.map((product, index) => (
@@ -67,10 +67,10 @@ const Landing = () => {
 									/>
 
 									<CardFooter className={style.cardFooter}>
-										<b>{product.name}</b>
+										<b className={style.nameProduct}>{product.name}</b>
 										<div className={style.btnCard}>
-											<p className="text-default-500">{product.price}</p>
-											<Button color="default" style={{height:20, width: 20}}variant="ghost">
+											<p className="text-600">{product.price}</p>
+											<Button isIconOnly color="success" variant="bordered" >
 												+
 											</Button>
 										</div>
