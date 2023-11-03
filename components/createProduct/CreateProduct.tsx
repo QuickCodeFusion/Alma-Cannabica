@@ -11,6 +11,7 @@ const CreateProduct = (): React.JSX.Element => {
 		price: '',
 		image: ''
 	})
+	const [loading, setLoading] = useState(false)
 	const [createProduct] = useCreateProductMutation()
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
@@ -21,9 +22,11 @@ const CreateProduct = (): React.JSX.Element => {
 	}
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): any => {
+		setLoading(true)
 		createProduct(product)
 			.then(() => {
 				toast.success('Producto creado correctamente')
+				setLoading(false)
 			})
 			.catch((error: any) => {
 				toast.error('Error al crear Producto: ' + error)
@@ -33,12 +36,12 @@ const CreateProduct = (): React.JSX.Element => {
 	return (
 		<div>
 			<h1>Create Product</h1>
-			<form onSubmit={handleSubmit} method="POST">
-				<input type="text" placeholder="Name" onChange={handleChange} />
-				<input type="text" placeholder="Description" onChange={handleChange} />
-				<input type="text" placeholder="Price" onChange={handleChange} />
-				<input type="text" placeholder="Image URL" onChange={handleChange} />
-				<SubmitButton title="Create Product" />
+			<form onSubmit={handleSubmit} method='POST'>
+				<input type='text' placeholder='Name' onChange={handleChange} />
+				<input type='text' placeholder='Description' onChange={handleChange} />
+				<input type='text' placeholder='Price' onChange={handleChange} />
+				<input type='text' placeholder='Image URL' onChange={handleChange} />
+				<SubmitButton loading={loading} title='Create Product' />
 			</form>
 		</div>
 	)
