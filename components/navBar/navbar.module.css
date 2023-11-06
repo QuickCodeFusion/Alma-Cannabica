@@ -1,16 +1,14 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
+.NavbarNext{
     padding: 10px;
     width: 100vw;
-    height: 5.5vh;
+    height: 8vh;
     background-color: rgb(255, 255, 255);
-    color: black;
-    position:absolute;
 }
-
+.subNavbar{
+    width: 100%;
+    color: black;
+    
+}
 /* .buttonsContainer{
     display: flex;
     align-items: center;
@@ -31,7 +29,7 @@
 
 .pepe{
     position: absolute;
-    right: -20%;
+    right: -30%;
     top: 55px;
     transition: ease .5s;
     animation: closed .5s;
@@ -46,7 +44,7 @@
 
 @keyframes open {
     0% {
-        right: -20%;
+        right: -30%;
     }
 }
 
