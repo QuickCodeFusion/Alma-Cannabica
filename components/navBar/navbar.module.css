@@ -3,11 +3,18 @@
     width: 100vw;
     height: 8vh;
     background-color: rgb(255, 255, 255);
+    position: relative;
 }
 .subNavbar{
     width: 100%;
     color: black;
-    
+
+}
+.containerNavBar{
+    position: absolute;
+    left: -16%;
+    width: 130%;
+    display: flex;
 }
 /* .buttonsContainer{
     display: flex;
@@ -76,4 +83,8 @@
     align-items: center;
     position: relative;
     left:5%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
 }
