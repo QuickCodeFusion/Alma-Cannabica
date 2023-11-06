@@ -17,11 +17,22 @@ export const registerAndLogin = async (
 	const { user } = await createUserWithEmailAndPassword(auth, email, password)
 	const accessToken = await user.getIdToken(true)
 
+	const response = await fetch('/api/auth/login', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	})
+
+	const { userdata } = await response.json()
+
 	const normalizedUser: NormalizedUser = {
 		uid: user.uid,
 		email: user.email ?? email,
 		name: user.displayName ?? name,
-		photoUrl: user.photoURL ?? photoUrl
+		photoUrl: user.photoURL ?? photoUrl,
+		claims: userdata?.customClaims ?? { admin: false }
 	}
 
 	await fetch('/api/auth/register', {
@@ -39,13 +50,6 @@ export const registerAndLogin = async (
 		password: ''
 	})
 
-	await fetch('/api/auth/login', {
-		method: 'POST',
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-			'Content-Type': 'application/json'
-		}
-	})
 	await signInWithEmailAndPassword(auth, email, password)
 
 	return normalizedUser
@@ -79,12 +83,24 @@ export const login = async (form: any, setForm: any): Promise<NormalizedUser> =>
 		password: ''
 	})
 
+	const response = await fetch('/api/auth/login', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	})
+
+	const { userdata } = await response.json()
+
 	const normalizedUser: NormalizedUser = {
 		uid: user.uid,
 		email: user.email ?? '',
 		name: user.displayName ?? '',
-		photoUrl: user.photoURL ?? ''
+		photoUrl: user.photoURL ?? '',
+		claims: userdata?.customClaims ?? { admin: false }
 	}
+	await signInWithEmailAndPassword(auth, email, password)
 
 	return normalizedUser
 }
