@@ -11,7 +11,6 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
 			...doc.data(),
 			id: doc.id
 		}))
-
 		return NextResponse.json(items, { status: 200 })
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 400 })
