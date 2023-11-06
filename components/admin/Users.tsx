@@ -1,13 +1,12 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 import { useSetAdminMutation, useDisableUserMutation, useGetAllAuthUsersQuery } from '@/redux/service/adminAPI'
-
-// You might import your user data or fetch it from an API here
+import UsersTable from './UsersTable'
 
 const Users = (): React.JSX.Element => {
 	const [loading, setLoading] = useState(false)
-	const { data, isLoading, isError, error } = useGetAllAuthUsersQuery(null)
+	const { data, isLoading: usersLoading, isError, error } = useGetAllAuthUsersQuery(null)
 
 	const [postAdmin] = useSetAdminMutation()
 
@@ -84,8 +83,8 @@ const Users = (): React.JSX.Element => {
 
 	return (
 		<div >
-			
-			{isLoading && <div>Loading...</div>}
+			<UsersTable users={data?.users} loading={loading} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin}/>
+			{usersLoading && <div>Loading...</div>}
 			{isError && <div>Ups! Ha habido un error al cargar la página: {JSON.stringify(error?.data)}</div>}
 		</div>
 	)

@@ -2,15 +2,16 @@ import { type UserRecord } from 'firebase-admin/auth'
 import { Button } from '@nextui-org/react'
 import UserButton from '../button/admin/userButton'
 
-const UsersTable =
-(
-	users: UserRecord[],
-	loading: boolean,
-	handleBan: (userUid: string) => void,
-	handleUnban: (userUid: string) => void,
-	handleGiveAdmin: (userUid: string) => void,
-	handleRemoveAdmin: (userUid: string) => void
-): JSX.Element => {
+interface props {
+	users: UserRecord[] | undefined
+	loading: boolean
+	handleBan: (userId: string) => void
+	handleUnban: (userId: string) => void
+	handleGiveAdmin: (userId: string) => void
+	handleRemoveAdmin: (userId: string) => void
+}
+
+const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, handleGiveAdmin, handleRemoveAdmin }): JSX.Element => {
 	return (
 
 		<table className="min-w-full divide-y divide-gray-200">
