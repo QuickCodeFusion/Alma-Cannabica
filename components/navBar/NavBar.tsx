@@ -28,11 +28,11 @@ const NavBar = (): JSX.Element => {
 	return (
 		<div>
 		<Navbar disableAnimation isBordered className={style.NavbarNext}>
-			<NavbarContent className="sm:hidden" justify="start">
+			<NavbarContent className="sm:hidden z-1" justify="start">
 				<NavbarMenuToggle />
 			</NavbarContent>
 
-			<NavbarContent className="sm:hidden pr-3" justify="center">
+			<NavbarContent className="sm:hidden pr-10 mr-8" justify="center">
 				<NavbarBrand>
 					<Image src="/logo.png" width={50} height={50} alt="" />
 				</NavbarBrand>

@@ -88,3 +88,30 @@
     left: 50%;
     transform:translate(-50%,-50%);
 }
+@media screen and (max-width: 1320px) {
+    .containerNavBar{
+        width: 120%;
+        left: -10%;
+    }
+}
+@media screen and (max-width: 1220px) {
+    .containerNavBar{
+        width: 110%;
+        left: -5%;
+    }
+}
+@media screen and (max-width: 1220px) {
+    .containerNavBar{
+        width: 100%;
+        left: 0;
+    }
+    .searchBar{
+        left: 40%;
+    }
+}
+@media screen and (max-width: 700px) {
+    .searchBar{
+        left: 30%;
+    }
+    
+}
