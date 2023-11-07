@@ -89,7 +89,7 @@
     transform:translate(-50%,-50%);
 }
 .menuNavBar{
-    top: 55px;
+    top: 65px;
     background-color: rgba(240, 248, 255, 0.575);
     color: black;
     width: 50%;
@@ -99,13 +99,13 @@
 }
 .notSelectedItem{
     color: black;
-    font-size: 1.5rem
+    font-size: 1.7rem;
 }
 .selected{
     color: rgb(107, 221, 107);
 }
 .selectedItem{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: rgb(107, 221, 107);
 }
 @media screen and (max-width: 1320px) {

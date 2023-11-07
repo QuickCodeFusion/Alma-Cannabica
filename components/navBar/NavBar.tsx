@@ -32,7 +32,7 @@ const NavBar = (): JSX.Element => {
 					<NavbarMenuToggle />
 				</NavbarContent>
 
-				<NavbarContent className="sm:hidden pr-10 mr-8" justify="center">
+				<NavbarContent className="sm:hidden pr-10 mr-5" justify="center">
 					<NavbarBrand>
 						<Link onClick={() => handleMenuItemClick("")} href={'/'}>
 							<Image src="/logo.png" width={50} height={50} alt="" />
@@ -83,7 +83,7 @@ const NavBar = (): JSX.Element => {
 				</div>
 				<NavbarMenu className={style.menuNavBar}>
 					{menuItems.map((item, index) => (
-						<NavbarMenuItem key={`${item}-${index}`}>
+						<NavbarMenuItem key={`${item}-${index}`} className="pt-10">
 							<Link
 								className={selectedMenuItem === item.label ? style.selectedItem : style.notSelectedItem}
 								onClick={() => handleMenuItemClick(item.label)}
