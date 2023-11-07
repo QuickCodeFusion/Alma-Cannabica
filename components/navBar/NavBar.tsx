@@ -20,19 +20,19 @@ const NavBar = (): JSX.Element => {
 		setSelectedMenuItem(select);
 	};
 	const menuItems = [
-		{name:"Inicio", label:"/"},
-		{name:"Productos", label:"products"},
-		{name:"Informacion", label:"info"},
+		{ name: "Inicio", label: "/" },
+		{ name: "Productos", label: "products" },
+		{ name: "Informacion", label: "info" },
 	];
 
 	return (
 		<div>
 			<Navbar disableAnimation isBordered className={style.NavbarNext}>
-				<NavbarContent className="sm:hidden z-10" justify="start">
-					<NavbarMenuToggle />
+				<NavbarContent className="sm:hidden z-10 " justify="start">
+					<NavbarMenuToggle style={{ color: "#18C964" }} />
 				</NavbarContent>
 
-				<NavbarContent className="sm:hidden pr-10 mr-5" justify="center">
+				<NavbarContent className="sm:hidden" justify="center">
 					<NavbarBrand>
 						<Link onClick={() => handleMenuItemClick("")} href={'/'}>
 							<Image src="/logo.png" width={50} height={50} alt="" />
@@ -59,9 +59,16 @@ const NavBar = (): JSX.Element => {
 							</Link>
 						</NavbarItem>
 						<NavbarItem className="hidden sm:flex">
-							<Link onClick={() => handleMenuItemClick("products")} className={selectedMenuItem === "info" ? style.selected : style.notSelected}  href={"#"}>
+							<Link onClick={() => handleMenuItemClick("products")} className={selectedMenuItem === "info" ? style.selected : style.notSelected} href={"#"}>
 								Información
 							</Link>
+						</NavbarItem>
+						<NavbarItem className="sm:hidden pr-10 mr-9">
+
+							<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
+								<Image src="/carrito.png" alt="" width={18} height={18} />
+							</Button>
+
 						</NavbarItem>
 						<NavbarItem className="hidden sm:flex">
 
@@ -70,7 +77,7 @@ const NavBar = (): JSX.Element => {
 							</Button>
 
 						</NavbarItem>
-						<NavbarItem>
+						<NavbarItem className="hidden sm:flex">
 							{userSession
 								? <Button as={Link} href={"#"} variant="flat" color='danger' onClick={logOut}>
 									Logout
@@ -94,6 +101,15 @@ const NavBar = (): JSX.Element => {
 							</Link>
 						</NavbarMenuItem>
 					))}
+					<NavbarMenuItem className="pt-10 " >
+						{userSession
+							? <Button className="w-full" as={Link} href={"#"} variant="flat" color='danger' onClick={logOut}>
+								Logout
+							</Button>
+							: <Button className="w-full" as={Link} color="success" href="#" variant="flat">
+								Login
+							</Button>}
+					</NavbarMenuItem>
 				</NavbarMenu>
 			</Navbar>
 			<div className={openCart ? style.cart : style.pepe}>

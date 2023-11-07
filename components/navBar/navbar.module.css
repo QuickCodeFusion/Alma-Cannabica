@@ -81,8 +81,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    left:5%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -125,13 +123,10 @@
         width: 100%;
         left: 0;
     }
-    .searchBar{
-        left: 40%;
-    }
 }
 @media screen and (max-width: 700px) {
     .searchBar{
-        left: 35%;
+        left: 40%;
     }
     
 }

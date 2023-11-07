@@ -9,7 +9,7 @@ const SearchBar = () => {
             <div>
                 <input type="text" onChange={(e) => console.log(e.target.value)} className={style.input} />
             </div>
-            <div className={style.button}>
+            <div className="hidden sm:flex">
                 <Image src="/buscar.png" alt="Buscar" width={20} height={20}></Image>
             </div>
         </div>
