@@ -5,10 +5,6 @@ import { query, where, collection, getDocs, orderBy } from 'firebase/firestore'
 export const filters = async (name: string, minPrice: string, maxPrice: string, category: string, order: string): Promise<Product[]> => {
 	let productRef = query(collection(db, 'products'))
 
-	if (name === '') {
-		productRef = query(collection(db, 'products'))
-	}
-
 	if (category !== '') {
 		productRef = query(productRef, where('category', '==', category))
 	}

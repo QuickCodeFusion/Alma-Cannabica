@@ -1,12 +1,18 @@
 'use client'
-import { useGetAllProductsQuery } from '@/redux/service/productsAPI'
 import Card from '../card/Card'
+import { useGetFiltersQuery } from '@/redux/service/productsFilterAPI'
 
 const Cards = (): React.JSX.Element => {
-	const { data: products, isLoading } = useGetAllProductsQuery(null)
+	const name = 'pepas'
+	const minPrice = '0'
+	const maxPrice = '100000'
+	const category = 'cremas'
+	const { data: products, isLoading, isError } = useGetFiltersQuery({ name, minPrice, maxPrice, category, order: 'low' })
+	console.log(products)
 
 	return (
 		<div>
+			{isError && <div>Error</div>}
 			{
 				isLoading
 					? <div>Loading...</div>
