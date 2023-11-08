@@ -4,6 +4,7 @@ import { type NormalizedUser } from '@/types/User/types'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 import { useState, createContext, useContext, useEffect, type Dispatch } from 'react'
+import { toast } from 'sonner'
 
 interface UserContextType {
 	userSession: NormalizedUser | undefined | null
@@ -25,16 +26,24 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }): React
 				void fetch('api/auth/logout')
 				router.push('/login')
 			})
-			.catch(error => { alert(`Error inesperado al desconectarse: ${error.message}`) })
+			.catch(error => { toast.error(`Error inesperado al desconectarse: ${error.message}`) })
 	}
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				setUserSession((prevState: NormalizedUser) => ({
-					...prevState,
-					...user
-				}))
+				user?.getIdTokenResult()
+					.then((idTokenResult) => {
+						setUserSession((prevState: NormalizedUser) => ({
+							...prevState,
+							...user,
+							claims: idTokenResult.claims
+						}))
+					})
+					.catch((error) => {
+						toast.error(`Error inesperado al recuperar la sesión: ${error.message}. 
+									Intente recargar la página o contacte a un administrador`)
+					})
 			} else {
 				setUserSession(null)
 			}
