@@ -32,7 +32,7 @@ export const registerAndLogin = async (
 		email: user.email ?? email,
 		name: user.displayName ?? name,
 		photoUrl: user.photoURL ?? photoUrl,
-		claims: userdata?.customClaims ?? { admin: false }
+		claims: { admin: userdata?.admin } ?? { admin: false }
 	}
 
 	await fetch('/api/auth/register', {
@@ -98,7 +98,7 @@ export const login = async (form: any, setForm: any): Promise<NormalizedUser> =>
 		email: user.email ?? '',
 		name: user.displayName ?? '',
 		photoUrl: user.photoURL ?? '',
-		claims: userdata?.customClaims ?? { admin: false }
+		claims: { admin: userdata?.admin } ?? { admin: false }
 	}
 	await signInWithEmailAndPassword(auth, email, password)
 
