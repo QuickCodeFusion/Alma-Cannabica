@@ -6,7 +6,7 @@ import UsersTable from './UsersTable'
 
 const Users = (): React.JSX.Element => {
 	const [loading, setLoading] = useState(false)
-	const { data, isLoading: usersLoading, isError, error } = useGetAllAuthUsersQuery(null)
+	const { data, isLoading: usersLoading, isError } = useGetAllAuthUsersQuery(null)
 
 	const [postAdmin] = useSetAdminMutation()
 
@@ -85,7 +85,7 @@ const Users = (): React.JSX.Element => {
 		<div >
 			<UsersTable users={data?.users} loading={loading} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin}/>
 			{usersLoading && <div>Loading...</div>}
-			{isError && <div>Ups! Ha habido un error al cargar la página: {JSON.stringify(error?.data)}</div>}
+			{isError && <div>Ups! Ha habido un error al cargar la página</div>}
 		</div>
 	)
 }
