@@ -19,14 +19,13 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }): React
 	const router = useRouter()
 
 	const logOut = (): void => {
-		auth.signOut().then(() => {
-			setUserSession(undefined)
-			void fetch('api/auth/logout')
-		}).then(async () => {
-			router.push('/login')
-		})
+		auth.signOut()
+			.then(() => {
+				setUserSession(null)
+				void fetch('api/auth/logout')
+				router.push('/login')
+			})
 			.catch(error => { alert(`Error inesperado al desconectarse: ${error.message}`) })
-		setUserSession(undefined)
 	}
 
 	useEffect(() => {
