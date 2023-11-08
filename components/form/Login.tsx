@@ -32,8 +32,13 @@ const Login = (): React.JSX.Element => {
 			.then((user) => {
 				setUserSession(user)
 				setLoading(false)
-				toast.success('Has iniciado sesión exitosamente, serás redirigido a la página de productos')
-				router.push('/products')
+				if (user?.claims.admin) {
+					toast.success('Has iniciado sesión exitosamente, serás redirigido al panel de administrador')
+					router.push('/admin-dashboard')
+				} else {
+					toast.success('Has iniciado sesión exitosamente, serás redirigido a la página de productos')
+					router.push('/products')
+				}
 			})
 			.catch((error) => {
 				setLoading(false)
