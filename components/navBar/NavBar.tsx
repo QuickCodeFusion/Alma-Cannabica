@@ -60,6 +60,13 @@ const NavBar = (): JSX.Element => {
 								Información
 							</Link>
 						</NavbarItem>
+						{userSession?.claims.admin
+							? <NavbarItem className="hidden sm:flex">
+								<Link onClick={() => { handleMenuItemClick('admin-dashboard') }} className={selectedMenuItem === 'admin-dashboard' ? style.selected : style.notSelected} href={'/admin-dashboard'}>
+								Panel de administrador
+								</Link>
+							</NavbarItem>
+							: null}
 						<NavbarItem className="sm:hidden pr-10 mr-9">
 
 							<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
