@@ -41,7 +41,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 			await setSessionCookie(idToken)
 		}
 
-		return NextResponse.json({ message: 'Logged in' }, { status: 200 })
+		return NextResponse.json({ message: 'Logged in', userdata: decodedToken }, { status: 200 })
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 301 })
 	}

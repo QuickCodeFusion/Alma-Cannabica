@@ -36,4 +36,7 @@ export interface NormalizedUser {
 	email: string
 	name: string
 	photoUrl: string
+	claims: {
+		admin: boolean
+	}
 }

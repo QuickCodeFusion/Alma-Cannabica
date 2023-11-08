@@ -31,7 +31,23 @@ const Register = (): React.JSX.Element => {
 			})
 			.catch((error) => {
 				setLoading(false)
-				alert(`Ocurrió un error inesperado: ${error}`)
+				const regex = /\(([^)]+)\)/
+				let authError = error.message
+				authError = authError.match(regex)
+
+				switch (authError[1]) {
+					case 'auth/invalid-email':
+						return toast.error('El Email ingresado no es válido')
+
+					case 'auth/user-disabled':
+						return toast.error('Su cuenta fue desabilitada por un administrador')
+
+					case 'auth/email-already-in-use':
+						return toast.error('El Email ya se encuentra registrado')
+
+					default:
+						return toast.error(`Ha ocurrido un error inesperado ${authError[1]}`)
+				}
 			})
 	}
 	return (
