@@ -1,5 +1,5 @@
 'use client'
-import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarItem, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarItem, Button } from '@nextui-org/react'
 import SearchBar from './SearchBar/SearchBar'
 import style from './navbar.module.css'
 import Image from 'next/image'
@@ -12,29 +12,27 @@ import { useUserSession } from '@/app/userContext'
 const NavBar = (): JSX.Element => {
 	const [openCart, setOpenCart] = useState(false)
 	const { userSession, logOut } = useUserSession()
-	const [selectedMenuItem, setSelectedMenuItem] = useState("");
-	console.log(selectedMenuItem);
-
+	const [selectedMenuItem, setSelectedMenuItem] = useState('')
 
 	const handleMenuItemClick = (select: string) => {
-		setSelectedMenuItem(select);
-	};
+		setSelectedMenuItem(select)
+	}
 	const menuItems = [
-		{ name: "Inicio", label: "/" },
-		{ name: "Productos", label: "products" },
-		{ name: "Informacion", label: "info" },
-	];
+		{ name: 'Inicio', label: '/' },
+		{ name: 'Productos', label: 'products' },
+		{ name: 'Informacion', label: 'info' }
+	]
 
 	return (
 		<div>
 			<Navbar disableAnimation isBordered className={style.NavbarNext}>
 				<NavbarContent className="sm:hidden z-10 " justify="start">
-					<NavbarMenuToggle style={{ color: "#18C964" }} />
+					<NavbarMenuToggle style={{ color: '#18C964' }} />
 				</NavbarContent>
 
 				<NavbarContent className="sm:hidden" justify="center">
 					<NavbarBrand>
-						<Link onClick={() => handleMenuItemClick("")} href={'/'}>
+						<Link onClick={() => { handleMenuItemClick('') }} href={'/'}>
 							<Image src="/logo.png" width={50} height={50} alt="" />
 						</Link>
 					</NavbarBrand>
@@ -42,10 +40,9 @@ const NavBar = (): JSX.Element => {
 				<div className={style.containerNavBar}>
 					<NavbarContent className="hidden sm:flex gap-4" justify="center">
 						<NavbarBrand>
-							<Link onClick={() => handleMenuItemClick("")} href={'/'}>
+							<Link onClick={() => { handleMenuItemClick('') }} href={'/'}>
 								<Image src="/logo.png" width={50} height={50} alt="" />
 							</Link>
-
 
 						</NavbarBrand>
 					</NavbarContent>
@@ -54,12 +51,12 @@ const NavBar = (): JSX.Element => {
 					</div>
 					<NavbarContent justify="end" >
 						<NavbarItem className="hidden sm:flex">
-							<Link onClick={() => handleMenuItemClick("products")} className={selectedMenuItem === "products" ? style.selected : style.notSelected} href={"/products"}>
+							<Link onClick={() => { handleMenuItemClick('products') }} className={selectedMenuItem === 'products' ? style.selected : style.notSelected} href={'/products'}>
 								Productos
 							</Link>
 						</NavbarItem>
 						<NavbarItem className="hidden sm:flex">
-							<Link onClick={() => handleMenuItemClick("products")} className={selectedMenuItem === "info" ? style.selected : style.notSelected} href={"#"}>
+							<Link onClick={() => { handleMenuItemClick('products') }} className={selectedMenuItem === 'info' ? style.selected : style.notSelected} href={'#'}>
 								Información
 							</Link>
 						</NavbarItem>
@@ -78,13 +75,16 @@ const NavBar = (): JSX.Element => {
 
 						</NavbarItem>
 						<NavbarItem className="hidden sm:flex">
-							{userSession
-								? <Button as={Link} href={"#"} variant="flat" color='danger' onClick={logOut}>
+							{userSession === undefined
+								? <Button isLoading color="success" isDisabled variant="flat"/>
+								: userSession !== null
+									? <Button as={Link} href={'#'} variant="flat" color='danger' onClick={logOut}>
 									Logout
-								</Button>
-								: <Button as={Link} color="success" href="#" variant="flat">
+									</Button>
+									: <Button as={Link} color="success" href={'/login'} variant="flat">
 									Login
-								</Button>}
+									</Button>
+							}
 						</NavbarItem>
 					</NavbarContent>
 				</div>
@@ -93,7 +93,7 @@ const NavBar = (): JSX.Element => {
 						<NavbarMenuItem key={`${item}-${index}`} className="pt-10">
 							<Link
 								className={selectedMenuItem === item.label ? style.selectedItem : style.notSelectedItem}
-								onClick={() => handleMenuItemClick(item.label)}
+								onClick={() => { handleMenuItemClick(item.label) }}
 								href={`/${item.label}`}
 
 							>
@@ -102,13 +102,16 @@ const NavBar = (): JSX.Element => {
 						</NavbarMenuItem>
 					))}
 					<NavbarMenuItem className="pt-10 " >
-						{userSession
-							? <Button className="w-full" as={Link} href={"#"} variant="flat" color='danger' onClick={logOut}>
-								Logout
-							</Button>
-							: <Button className="w-full" as={Link} color="success" href="#" variant="flat">
-								Login
-							</Button>}
+						{userSession === undefined
+							? <Button isLoading color="success" isDisabled variant="flat"/>
+							: userSession !== null
+								? <Button as={Link} href={'#'} variant="flat" color='danger' onClick={logOut}>
+									Logout
+								</Button>
+								: <Button as={Link} color="success" href={'/login'} variant="flat">
+									Login
+								</Button>
+						}
 					</NavbarMenuItem>
 				</NavbarMenu>
 			</Navbar>
@@ -118,7 +121,7 @@ const NavBar = (): JSX.Element => {
 				}
 			</div>
 		</div>
-	);
+	)
 }
 
 export default NavBar
