@@ -1,19 +1,20 @@
 'use client'
 import { useGetAllProductsQuery } from '@/redux/service/productsAPI'
-import Card from '../card/Card'
+import CardAricule from '../card/Card'
+import style from './cards.module.css'
 
 const Cards = (): React.JSX.Element => {
 	const { data: products, isLoading } = useGetAllProductsQuery(null)
 
 	return (
-		<div>
+		<div className={style.containerCards}> 
 			{
 				isLoading
 					? <div>Loading...</div>
 					:					(
 						products?.map((product: any) => {
 							return (
-								<Card key={product.itemId} product={product}/>
+								<CardAricule key={product.itemId} product={product}/>
 							)
 						})
 					)
