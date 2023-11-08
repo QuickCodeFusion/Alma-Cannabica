@@ -4,12 +4,15 @@ import { useState } from 'react'
 import SubmitButton from '@/components/button/submitButton'
 import { toast } from 'sonner'
 import { useUserSession } from '@/app/userContext'
+import { useRouter } from 'next/navigation'
 
 const Login = (): React.JSX.Element => {
 	const [form, setForm] = useState({
 		email: '',
 		password: ''
 	})
+
+	const router = useRouter()
 
 	const { setUserSession } = useUserSession()
 
@@ -29,7 +32,13 @@ const Login = (): React.JSX.Element => {
 			.then((user) => {
 				setUserSession(user)
 				setLoading(false)
-				toast.success('Has iniciado sesión exitosamente')
+				if (user?.claims.admin) {
+					toast.success('Has iniciado sesión exitosamente, serás redirigido al panel de administrador')
+					router.push('/admin-dashboard')
+				} else {
+					toast.success('Has iniciado sesión exitosamente, serás redirigido a la página de productos')
+					router.push('/products')
+				}
 			})
 			.catch((error) => {
 				setLoading(false)
