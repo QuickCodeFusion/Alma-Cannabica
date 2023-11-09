@@ -1,12 +1,16 @@
 .containerLanding{
     background-color: rgb(214, 214, 214);
-    height: 89vh;
+    height: 95vh;
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
 .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, 0.768);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -15,11 +19,70 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
     height:80vh;
     width: 90vw;
     color: green;
     font-size: 20px;
     text-align: center;
-    
+}
+.carouselCard{
+    position: relative;
+    height: 57%;
+    width: 70%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardInfo{
+    border: solid red 1px;
+    height: 200px;
+    width: 200px;
+}
+.containerCard{
+    width:210px;
+    height: 260px;
+    margin: 20px;
+    display: grid;
+    place-items: center;
+}
+.cardCarusel{
+    width: 200px;
+    height: 270px;
+    display: grid;
+    place-items: center;
+    background-color: rgb(252, 250, 223);
+    border-radius: 0;
+}
+.cardImage{
+    width: 100%;
+    padding: 3px 5px 0 5px;
+    border-radius: 0;
+}
+.cardFooter{
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: black;
+    font-size: 0.8rem;
+    position: relative;
+}
+.nameProduct{
+    position: absolute;
+    top: 0;
+    font-size: 0.7rem;
+}
+.btnCard{
+    margin-top: 13px;
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+.btnEdit{
+    padding: 0;
+    height: 10%;
+    width: 10%;
 }

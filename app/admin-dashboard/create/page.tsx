@@ -1,9 +1,9 @@
 import CreateProduct from '@/components/createProduct/CreateProduct'
 
-const CreateProductPage = (): JSX.Element => {
+const createPage = (): React.JSX.Element => {
 	return (
 		<CreateProduct/>
 	)
 }
 
-export default CreateProductPage
+export default createPage

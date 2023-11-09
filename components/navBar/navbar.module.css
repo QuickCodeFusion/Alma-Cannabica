@@ -1,15 +1,21 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
+.NavbarNext{
     padding: 10px;
     width: 100vw;
-    height: 5.5vh;
+    height: 8vh;
     background-color: rgb(255, 255, 255);
-    color: black;
+    position: relative;
 }
+.subNavbar{
+    width: 100%;
+    color: black;
 
+}
+.containerNavBar{
+    position: absolute;
+    left: -16%;
+    width: 130%;
+    display: flex;
+}
 /* .buttonsContainer{
     display: flex;
     align-items: center;
@@ -30,7 +36,7 @@
 
 .pepe{
     position: absolute;
-    right: -20%;
+    right: -30%;
     top: 55px;
     transition: ease .5s;
     animation: closed .5s;
@@ -45,7 +51,7 @@
 
 @keyframes open {
     0% {
-        right: -20%;
+        right: -30%;
     }
 }
 
@@ -75,6 +81,52 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    left: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+}
+.menuNavBar{
+    top: 65px;
+    background-color: rgba(240, 248, 255, 0.575);
+    color: black;
+    width: 50%;
+}
+.notSelected{
+    color: black;
+}
+.notSelectedItem{
+    color: black;
+    font-size: 1.7rem;
+}
+.selected{
+    color: rgb(107, 221, 107);
+}
+.selectedItem{
+    font-size: 1.7rem;
+    color: rgb(107, 221, 107);
+}
+@media screen and (max-width: 1320px) {
+    .containerNavBar{
+        width: 120%;
+        left: -10%;
+    }
+}
+@media screen and (max-width: 1220px) {
+    .containerNavBar{
+        width: 110%;
+        left: -5%;
+    }
+}
+@media screen and (max-width: 1220px) {
+    .containerNavBar{
+        width: 100%;
+        left: 0;
+    }
+}
+@media screen and (max-width: 700px) {
+    .searchBar{
+        left: 45%;
+    }
+    
 }
