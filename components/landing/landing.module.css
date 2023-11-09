@@ -68,14 +68,14 @@
     align-items: center;
     gap: 5px;
     color: black;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
     position: relative;
-    outline: red 1px solid;
 }
 .nameProduct{
     position: absolute;
     top: 0;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
 .btnCard{
     margin-top: 13px;
