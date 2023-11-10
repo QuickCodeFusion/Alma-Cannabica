@@ -42,7 +42,7 @@
 .containerCard{
     width:210px;
     height: 260px;
-    margin: 20px;
+    margin: 10px;
     display: grid;
     place-items: center;
 }
@@ -62,7 +62,7 @@
     outline: red 1px solid;
 }
 .cardFooter{
-    height: 110px;
+    height: 95px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,8 +81,8 @@
     margin-top: 13px;
     width: 100%;
     display: flex;
-    align-items: end;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
 }
 .btnEdit{
     padding: 0;
@@ -91,7 +91,7 @@
 }
 .containerBtn{
     display: flex;
-    flex-direction: column;
-    
-
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 }

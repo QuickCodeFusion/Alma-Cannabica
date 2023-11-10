@@ -1,5 +1,6 @@
 "use client";
 import style from "./landing.module.css";
+import CardAricule from "../card/Card";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -48,34 +49,12 @@ const Landing = () => {
 								modifier: 2.5,
 							}
 						}
-						pagination={{ el: "", clickable: true }}
-						navigation={{
-							nextEl: "swiper-button-next",
-							prevEl: "swiper-button-prev",
-
-						}}
 						style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute" }}
 						autoplay={{ delay: 3000 }}
 					>
-						{data?.map((product, index) => (
-							<SwiperSlide key={index} className={style.containerCard}>
-								<Card className={style.cardCarusel} key={index} isPressable onPress={() => console.log("item pressed")}>
-									<Image
-										style={{ borderRadius: 0 }}
-										className={style.cardImage}
-										src="https://www.southernliving.com/thmb/xGM6Ski6FeYVMXTqO6aLMdBhO40=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-950144624-1-6a35c70e76354f3aa5657878f59dfbe6.jpg"
-									/>
-
-									<CardFooter className={style.cardFooter}>
-										<b className={style.nameProduct}>{product.name}</b>
-										<div className={style.btnCard}>
-											<p className="text-600">{product.price}</p>
-											<Button isIconOnly color="success" variant="bordered" >
-												+
-											</Button>
-										</div>
-									</CardFooter>
-								</Card>
+						{data?.map((product , index) => (
+							<SwiperSlide style={{width:190}} key={index} className={style.containerCard}>
+								<CardAricule key={product.itemId} product={product} />
 							</SwiperSlide>
 						))
 

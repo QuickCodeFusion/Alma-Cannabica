@@ -17,17 +17,17 @@ const CardAricule = ({ product }: { product: CardProduct }): React.JSX.Element =
 				<CardFooter className={style.cardFooter}>
 					<b className={style.nameProduct}>{name}</b>
 					<div className={style.btnCard}>
+						<div className='flex justify-between w-full align-center'>
+						<p className="text-600">{category}</p>
+						<p className="text-600">${price}</p>
+						</div>
 						<div className={style.containerBtn}>
-							<Button isIconOnly color="success" variant="bordered" >
-								+
-							</Button>
-							<Button  className="bg-gradient-to-tr from-green-500 to-blue-500 text-white mt-1">
+							<Button  className="bg-gradient-to-tr from-green-500 to-blue-500 text-white">
 								COMPRAR
 							</Button>
-						</div>
-						<div className='flex-col direction-colum h-20'>
-						<p className="text-600">{category}</p>
-						<p className="text-600 mt-5">${price}</p>
+							<Button isIconOnly color="success" variant="bordered" >
+								<p className='scale-150 font-bold mb-1'>+</p>
+							</Button> 
 						</div>
 					</div>
 				</CardFooter>
