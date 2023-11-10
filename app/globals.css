@@ -15,12 +15,13 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-body{
+
+body {
   overflow-x: hidden;
 }
 
 .container {
-  border: solid 1px blue;
+
   max-width: 5rem;
   padding: 4rem 1rem;
   margin: 0 auto;
@@ -37,4 +38,8 @@ body{
   display: none;
 }
 
-
+@media (max-width: 500px) {
+  .swiper-slide {
+    display: none;
+  }
+}

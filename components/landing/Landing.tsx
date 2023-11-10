@@ -49,7 +49,7 @@ const Landing = () => {
 								modifier: 2.5,
 							}
 						}
-						style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute" }}
+						style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", height: 290, paddingTop:10 }}
 						autoplay={{ delay: 3000 }}
 					>
 						{data?.map((product , index) => (
