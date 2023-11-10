@@ -1,6 +1,7 @@
 "use client";
 import style from "./landing.module.css";
 import CardAricule from "../card/Card";
+import Loading from "@/app/loading";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -34,7 +35,8 @@ const Landing = () => {
 					</Button>
 				</div>
 				<div className={style.carouselCard}>
-					<Swiper
+					{isLoading ? (<Loading/>):
+					(<Swiper
 						effect={"coverflow"}
 						grabCursor={true}
 						centeredSlides={true}
@@ -61,7 +63,8 @@ const Landing = () => {
 						}
 
 
-					</Swiper>
+					</Swiper>)
+					}
 				</div>
 			</div>
 		</div>

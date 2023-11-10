@@ -2,6 +2,7 @@
 import { useGetAllProductsQuery } from '@/redux/service/productsAPI'
 import CardAricule from '../card/Card'
 import style from './cards.module.css'
+import Loading from '@/app/loading'
 
 const Cards = (): React.JSX.Element => {
 	const { data: products, isLoading } = useGetAllProductsQuery(null)
@@ -10,7 +11,7 @@ const Cards = (): React.JSX.Element => {
 		<div className={style.containerCards}> 
 			{
 				isLoading
-					? <div>Loading...</div>
+					? <Loading/>
 					:					(
 						products?.map((product: any) => {
 							return (
