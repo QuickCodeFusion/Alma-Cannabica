@@ -26,7 +26,7 @@ const Filters = (): JSX.Element => {
 
 	return (
 		<div className={style.container}>
-			<div>
+			<div  className={style.subContainer}>
 				<div>
 					<FilterPrice valueState={valueState} onChange={onChange} />
 				</div>

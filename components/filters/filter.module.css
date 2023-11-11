@@ -3,16 +3,23 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(255, 255, 255);
-    height: 60vh;
-    width: 16vw;
+    height: 450px;
+    width: 250px;
     border-radius: 30px;
-    padding: 50px;
+    padding: 30px;
     margin: 20px;
+    
+}
+.subContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
 }
 
 .button{
     display: flex;
     justify-content: center;
     position: relative;
-    top: 100px ;
+    top: 40px ;
 }

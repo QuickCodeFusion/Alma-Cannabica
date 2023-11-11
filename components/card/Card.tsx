@@ -1,13 +1,14 @@
 import { type CardProduct } from '@/types/Product/type'
 import style from '../landing/landing.module.css'
-import { Card, CardFooter, Image, Button } from "@nextui-org/react";
+import { CardFooter, Image, Button } from "@nextui-org/react";
+import { Card as NextUICard } from "@nextui-org/react"
 
-const CardAricule = ({ product }: { product: CardProduct }): React.JSX.Element => {
+const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 	const { name, price, image, category } = product
 
 	return (
 		<div>
-			<Card className={style.cardCarusel} isPressable onPress={() => console.log("item pressed")}>
+			<NextUICard className={style.cardCarusel} isPressable onPress={() => console.log("item pressed")}>
 				<Image
 					style={{ borderRadius: 0 }}
 					className={style.cardImage}
@@ -31,10 +32,10 @@ const CardAricule = ({ product }: { product: CardProduct }): React.JSX.Element =
 						</div>
 					</div>
 				</CardFooter>
-			</Card>
+			</NextUICard>
 
 		</div>
 	)
 }
 
-export default CardAricule
+export default Card;

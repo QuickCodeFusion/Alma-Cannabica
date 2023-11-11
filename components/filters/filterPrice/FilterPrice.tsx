@@ -1,6 +1,7 @@
 'use client';
-import {type ChangeEvent} from 'react';
+import { type ChangeEvent } from 'react';
 import style from './filterPrice.module.css';
+import { Input } from "@nextui-org/react";
 
 type FiltersPriceProps = {
 	valueState: {
@@ -10,29 +11,43 @@ type FiltersPriceProps = {
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const FilterPrice: React.FC<FiltersPriceProps> = ({valueState, onChange}) => (
+const FilterPrice: React.FC<FiltersPriceProps> = ({ valueState, onChange }) => (
 	<div>
-		<p className={style.titlePrice}>Price</p>
+		<p className='font-semibold text-green-500'>Precio</p>
 		<div className={style.priceCont}>
 			<div className={style.divPrice}>
-				<input className={style.price}
-					placeholder='min'
+				<Input
 					type='number'
-					id='minPrice'
-					name='minPrice'
-					value={valueState.minPrice}
+					label='Min'
+					placeholder='0'
+					labelPlacement='outside'
+					variant='underlined'
+					color='success'
+					//value={valueState.minPrice}
 					onChange={onChange}
+					startContent={
+						<div className="pointer-events-none flex items-center">
+							<span className="text-default-400 text-small">$</span>
+						</div>
+					}
 				/>
 			</div>
 			<div className={style.separation}></div>
 			<div className={style.divPrice}>
-				<input className={style.price}
-					placeholder='max'
+				<Input
 					type='number'
-					id='maxPrice'
-					name='maxPrice'
-					value={valueState.maxPrice}
+					label="Max"
+					placeholder='0'
+					labelPlacement='outside'
+					variant='underlined'
+					color='success'
+					//value={valueState.maxPrice}
 					onChange={onChange}
+					startContent={
+						<div className="pointer-events-none flex items-center">
+							<span className="text-default-400 text-small">$</span>
+						</div>
+					}
 				/>
 			</div>
 		</div>

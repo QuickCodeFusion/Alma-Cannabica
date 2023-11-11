@@ -1,6 +1,6 @@
 'use client'
 import { useGetAllProductsQuery } from '@/redux/service/productsAPI'
-import CardAricule from '../card/Card'
+import Card from '../card/Card'
 import style from './cards.module.css'
 import Loading from '@/app/loading'
 
@@ -15,7 +15,7 @@ const Cards = (): React.JSX.Element => {
 					:					(
 						products?.map((product: any) => {
 							return (
-								<CardAricule key={product.itemId} product={product}/>
+								<Card key={product.itemId} product={product}/>
 							)
 						})
 					)
