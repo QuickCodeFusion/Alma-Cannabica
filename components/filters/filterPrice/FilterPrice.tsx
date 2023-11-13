@@ -1,20 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 'use client';
-import { type ChangeEvent } from 'react';
-import style from './filterPrice.module.css';
-import { Input } from "@nextui-org/react";
-=======
-=======
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
-'use client'
-import { type ChangeEvent } from 'react'
 import style from './filterPrice.module.css'
 import { Input } from '@nextui-org/react'
-<<<<<<< HEAD
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
-=======
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
 
 interface FiltersPriceProps {
 	valueState: {
@@ -36,17 +23,9 @@ const FilterPrice: React.FC<FiltersPriceProps> = ({ valueState, onChange }) => (
 					labelPlacement='outside'
 					variant='underlined'
 					color='success'
-<<<<<<< HEAD
-<<<<<<< HEAD
 					//value={valueState.minPrice}
-=======
 					value={valueState.minPrice}
 					name='minPrice'
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
-=======
-					value={valueState.minPrice}
-					name='minPrice'
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
 					onChange={onChange}
 					startContent={
 						<div className="pointer-events-none flex items-center">
@@ -64,17 +43,8 @@ const FilterPrice: React.FC<FiltersPriceProps> = ({ valueState, onChange }) => (
 					labelPlacement='outside'
 					variant='underlined'
 					color='success'
-<<<<<<< HEAD
-<<<<<<< HEAD
 					//value={valueState.maxPrice}
-=======
-					value={valueState.maxPrice}
 					name='maxPrice'
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
-=======
-					value={valueState.maxPrice}
-					name='maxPrice'
->>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
 					onChange={onChange}
 					startContent={
 						<div className="pointer-events-none flex items-center">
