@@ -16,8 +16,7 @@ const Filters = ({ onFilter, onClose }: { onFilter: boolean; onClose: () => void
 
 	})
 
-	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-
+	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
 		const { name, value } = event.target
 		setValueState(prevState => ({
 			...prevState,

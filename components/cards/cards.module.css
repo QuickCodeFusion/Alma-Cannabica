@@ -24,6 +24,7 @@
     justify-content: center;
     gap: 20px;
     overflow-y: auto;
+<<<<<<< HEAD
 }
 .containerCards::-webkit-scrollbar {
     width: 4px;
@@ -34,3 +35,6 @@
     border-radius: 3px;
 }
   
+=======
+}
+>>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
