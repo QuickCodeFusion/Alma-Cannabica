@@ -25,3 +25,11 @@
     gap: 20px;
     overflow-y: auto;
 }
+.containerCards::-webkit-scrollbar {
+    width: 4px;
+}
+
+.containerCards::-webkit-scrollbar-thumb {
+    background-color: #18C964;
+    border-radius: 3px;
+}
