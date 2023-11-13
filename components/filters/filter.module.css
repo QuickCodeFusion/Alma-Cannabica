@@ -9,8 +9,11 @@
     padding: 30px;
     margin: 20px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
     
 }
 .subContainer{
@@ -18,6 +21,9 @@
     flex-direction: column;
     text-align: center;
     gap: 20px;
+<<<<<<< HEAD
+>>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
+=======
 >>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
 }
 
@@ -32,6 +38,7 @@
     display: flex;
     justify-content: center;
     position: relative;
+<<<<<<< HEAD
 <<<<<<< HEAD
     top: 40px;
 }
@@ -66,6 +73,9 @@
         top: 20px;
         right: 20px;
     }
+=======
+    top: 40px ;
+>>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
 =======
     top: 40px ;
 >>>>>>> 1f2e5982b5eccb1f77bc5c422bef7f04111f3047
