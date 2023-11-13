@@ -16,7 +16,7 @@ const Filters = (): JSX.Element => {
 
 	})
 
-	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
 		const { name, value } = event.target
 		setValueState(prevState => ({
 			...prevState,
@@ -26,7 +26,7 @@ const Filters = (): JSX.Element => {
 
 	return (
 		<div className={style.container}>
-			<div  className={style.subContainer}>
+			<div className={style.subContainer}>
 				<div>
 					<FilterPrice valueState={valueState} onChange={onChange} />
 				</div>
