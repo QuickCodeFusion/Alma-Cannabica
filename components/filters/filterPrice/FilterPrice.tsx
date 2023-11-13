@@ -1,5 +1,6 @@
 
 'use client';
+import {type ChangeEvent} from 'react';
 import style from './filterPrice.module.css'
 import { Input } from '@nextui-org/react'
 
