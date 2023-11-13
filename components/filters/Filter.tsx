@@ -6,7 +6,7 @@ import FilterCategories from './filterCategory/FilterCategory'
 import { Button } from '@nextui-org/react'
 import style from './filter.module.css'
 
-const Filters = (): JSX.Element => {
+const Filters = ({ onFilter, onClose }: { onFilter: boolean; onClose: () => void }): JSX.Element => {
 	const [valueState, setValueState] = useState({
 		category: '',
 		order: '',
@@ -25,8 +25,9 @@ const Filters = (): JSX.Element => {
 	}
 
 	return (
-		<div className={style.container}>
-			<div className={style.subContainer}>
+		<div className={onFilter? style.containerII : style.container}>
+			<Button onClick={() => onClose()} isIconOnly size='sm' color='danger' variant='bordered' radius='full' className={style.closeBtnI }>X</Button>
+			<div  className={style.subContainer}>
 				<div>
 					<FilterPrice valueState={valueState} onChange={onChange} />
 				</div>
@@ -37,7 +38,7 @@ const Filters = (): JSX.Element => {
 					<FilterCategories valueState={valueState} onChange={onChange} />
 				</div>
 				<div className={style.button}>
-					<Button color="success">Aplicar</Button>
+					<Button onClick={() => onClose()}  variant="flat" color="success">Aplicar</Button>
 				</div>
 			</div>
 		</div>
