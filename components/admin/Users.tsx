@@ -51,7 +51,7 @@ const Users = (): React.JSX.Element => {
 			disabled: true
 		})
 			.then((response) => {
-				toast.success('Usuario deshabilitado')
+				toast.success('Operación completada con éxito. El nuevo estado se verá reflejado la próxima vez que el usuario inicie sesión')
 				setLoading(false)
 				console.log(response)
 			})
@@ -67,7 +67,7 @@ const Users = (): React.JSX.Element => {
 			disabled: false
 		})
 			.then(() => {
-				toast.success('Usuario habilitado')
+				toast.success('Operación completada con éxito. El nuevo estado se verá reflejado la próxima vez que el usuario inicie sesión')
 				setLoading(false)
 			})
 			.catch(error => {
