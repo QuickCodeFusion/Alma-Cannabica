@@ -22,7 +22,6 @@ const Users = (): React.JSX.Element => {
 			.then(() => {
 				toast.success('Se otorgo Admin')
 				setLoading(false)
-				location.reload()
 			})
 			.catch(error => {
 				toast.error('Something went wrong: ' + error)
@@ -38,14 +37,10 @@ const Users = (): React.JSX.Element => {
 		})
 			.then(() => {
 				toast.success('Se quito Admin')
-				location.reload()
 				setLoading(false)
 			})
 			.catch(error => {
 				toast.error('Something went wrong: ' + error)
-			})
-			.catch(error => {
-				alert('Something went wrong: ' + error)
 			})
 	}
 
@@ -55,10 +50,10 @@ const Users = (): React.JSX.Element => {
 			id: userId,
 			disabled: true
 		})
-			.then(() => {
-				toast.success('Usuario desabilitado')
+			.then((response) => {
+				toast.success('Usuario deshabilitado')
 				setLoading(false)
-				location.reload()
+				console.log(response)
 			})
 			.catch(error => {
 				toast.error('Something went wrong: ' + error)
@@ -74,7 +69,6 @@ const Users = (): React.JSX.Element => {
 			.then(() => {
 				toast.success('Usuario habilitado')
 				setLoading(false)
-				location.reload()
 			})
 			.catch(error => {
 				toast.error('Something went wrong: ' + error)
