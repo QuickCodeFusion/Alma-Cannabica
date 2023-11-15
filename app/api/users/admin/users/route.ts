@@ -7,10 +7,16 @@ export const GET = async (): Promise<NextResponse> => {
 
 	const usersSnapshot = await getDocs(usersCollection)
 
-	const usersList = usersSnapshot.docs.map((doc) => {
+	const usersList = usersSnapshot.docs.map(async (doc) => {
+		const claimsCollection = collection(db, 'users', doc.id, 'claims')
+		const claimsSnapshot = await getDocs(claimsCollection)
+		const claims = claimsSnapshot.docs.map((claim) => {
+			return claim.data()
+		})
 		return {
 			uid: doc.id,
-			...doc.data()
+			...doc.data(),
+			customClaims: { ...claims } ?? {}
 		}
 	})
 
