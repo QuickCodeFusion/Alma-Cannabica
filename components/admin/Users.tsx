@@ -53,7 +53,6 @@ const Users = (): React.JSX.Element => {
 			.then((response) => {
 				toast.success('Operación completada con éxito. El nuevo estado se verá reflejado la próxima vez que el usuario inicie sesión')
 				setLoading(false)
-				console.log(response)
 			})
 			.catch(error => {
 				toast.error('Something went wrong: ' + error)
