@@ -5,7 +5,7 @@ import { type Dispatch } from 'react'
  *
  * @param {Object} product - The product information to validate.
  * @param {string} product.name - The name of the product.
- * @param {File} product.image - The image file of the product.
+ * @param {File | undefined} product.image - The image file of the product.
  * @param {string} product.description - The description of the product.
  * @param {string} product.price - The price of the product.
  * @param {string} product.category - The category of the product.
@@ -20,7 +20,7 @@ export const productValidate = ({
 	category
 }:
 { name: string
-	image: File
+	image: File | undefined
 	description: string
 	price: string
 	category: string
