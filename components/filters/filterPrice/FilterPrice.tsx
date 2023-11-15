@@ -1,6 +1,5 @@
-
-'use client';
-import {type ChangeEvent} from 'react';
+'use client'
+import { type ChangeEvent } from 'react'
 import style from './filterPrice.module.css'
 import { Input } from '@nextui-org/react'
 
@@ -24,7 +23,6 @@ const FilterPrice: React.FC<FiltersPriceProps> = ({ valueState, onChange }) => (
 					labelPlacement='outside'
 					variant='underlined'
 					color='success'
-					//value={valueState.minPrice}
 					value={valueState.minPrice}
 					name='minPrice'
 					onChange={onChange}
@@ -44,7 +42,7 @@ const FilterPrice: React.FC<FiltersPriceProps> = ({ valueState, onChange }) => (
 					labelPlacement='outside'
 					variant='underlined'
 					color='success'
-					//value={valueState.maxPrice}
+					value={valueState.maxPrice}
 					name='maxPrice'
 					onChange={onChange}
 					startContent={

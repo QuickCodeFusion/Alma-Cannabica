@@ -38,7 +38,8 @@ export const registerAndLogin = async (
 	await fetch('/api/auth/register', {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${accessToken}`
 		},
 		body: JSON.stringify(normalizedUser)
 	})
