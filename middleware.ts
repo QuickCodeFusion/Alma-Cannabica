@@ -27,5 +27,5 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 }
 
 export const config = {
-	matcher: ['/api/users/:path*', '/admin-dashboard/:path*', '/login', '/register']
+	matcher: ['/admin-dashboard/:path*', '/login', '/register']
 }
