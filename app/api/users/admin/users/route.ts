@@ -15,8 +15,9 @@ export const GET = async (): Promise<NextResponse> => {
 		})
 		return {
 			uid: doc.id,
-			...doc.data(),
-			customClaims: { ...claims } ?? {}
+			disabled: doc.data().disabled ?? false,
+			customClaims: { ...claims } ?? { admin: false },
+			...doc.data()
 		}
 	})
 
