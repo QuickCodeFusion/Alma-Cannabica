@@ -128,7 +128,7 @@ const NavBar = (): JSX.Element => {
 				}
 			</div>
 		</div>
-	);
+	)
 }
 
 export default NavBar
