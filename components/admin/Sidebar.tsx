@@ -1,5 +1,6 @@
 import { Tabs, Tab } from '@nextui-org/react'
 import Users from './Users'
+import CreateProduct from '@/components/form/CreateProduct'
 const Sidebar = (): React.JSX.Element => {
 	return (
 		<div className="flex w-full flex-col">
@@ -23,7 +24,7 @@ const Sidebar = (): React.JSX.Element => {
 					key='addProduct'
 					title='Añadir producto'
 				>
-			Añadir producto...
+					<CreateProduct/>
 				</Tab>
 				<Tab
 					key='favorites'
