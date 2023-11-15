@@ -1,5 +1,4 @@
 'use client'
-import Users from './Users'
 import Sidebar from './Sidebar'
 import { useUserSession } from '@/app/userContext'
 import { useEffect, useState } from 'react'
@@ -43,7 +42,6 @@ const Dashboard = (): React.JSX.Element => {
 			<div>
 				<h1>Admin Dashboard</h1>
 				<Sidebar/>
-				<Users/>
 			</div>
 		)
 	} else {
