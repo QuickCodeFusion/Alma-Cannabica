@@ -16,3 +16,20 @@
 
     background-color: rgb(255, 255, 255);
 }
+.containerCards{
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    overflow-y: auto;
+}
+.containerCards::-webkit-scrollbar {
+    width: 4px;
+}
+
+.containerCards::-webkit-scrollbar-thumb {
+    background-color: #18C964;
+    border-radius: 3px;
+}

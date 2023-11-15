@@ -1,6 +1,8 @@
 'use client'
 import Card from '../card/Card'
 import { useGetFiltersQuery } from '@/redux/service/productsFilterAPI'
+import style from './cards.module.css'
+import Loading from '@/app/loading'
 
 const Cards = (): React.JSX.Element => {
 	const name = 'pepas'
@@ -11,11 +13,12 @@ const Cards = (): React.JSX.Element => {
 	console.log(products)
 
 	return (
-		<div>
+		<div className={style.containerCards}>
 			{isError && <div>Error</div>}
+
 			{
 				isLoading
-					? <div>Loading...</div>
+					? <Loading/>
 					:					(
 						products?.map((product: any) => {
 							return (

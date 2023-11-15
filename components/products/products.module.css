@@ -4,9 +4,23 @@
     align-items: center;
     background-color: rgb(214, 214, 214);
     color: black;
-    height: 89vh;
+    height: 84vh;
+    padding-top: 15px;
 }
 
 .cards{
     width: 80vw;
+}
+.filterBtn{
+    display: none;
+}
+@media screen and (max-width: 500px){
+    
+    .filterBtn{
+        display: block;
+        position: absolute;
+        top:60px;
+        left: 10px;
+    }
+    
 }
