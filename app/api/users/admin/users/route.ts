@@ -1,24 +1,28 @@
+import { auth } from '@/firebase/admin-config'
 import { db } from '@/firebase/config'
 import { collection, getDocs } from 'firebase/firestore'
 import { NextResponse } from 'next/server'
 
 export const GET = async (): Promise<NextResponse> => {
-	const usersCollection = collection(db, 'users')
+	try {
+		const usersCollection = collection(db, 'users')
 
-	const usersSnapshot = await getDocs(usersCollection)
+		const usersSnapshot = await getDocs(usersCollection)
 
-	const usersList = usersSnapshot.docs.map(async (doc) => {
-		const claimsCollection = collection(db, 'users', doc.id, 'claims')
-		const claimsSnapshot = await getDocs(claimsCollection)
-		const claims = claimsSnapshot.docs.map((claim) => {
-			return claim.data()
-		})
-		return {
-			uid: doc.id,
-			...doc.data(),
-			customClaims: { ...claims } ?? {}
-		}
-	})
+		const usersList = await Promise.all(
+			usersSnapshot.docs.map(async (doc) => {
+				const user = await auth.getUser(doc.id)
+				return {
+					...doc.data(),
+					uid: doc.id,
+					customClaims: user.customClaims,
+					disabled: user.disabled
+				}
+			})
+		)
 
-	return NextResponse.json({ users: usersList }, { status: 200 })
+		return NextResponse.json({ users: usersList }, { status: 200 })
+	} catch (error: any) {
+		return NextResponse.json({ error: error.message }, { status: 400 })
+	}
 }
