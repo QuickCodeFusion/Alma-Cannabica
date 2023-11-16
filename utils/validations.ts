@@ -8,7 +8,7 @@ import { type Dispatch } from 'react'
  * @param {File | undefined} product.image - The image file of the product.
  * @param {string} product.description - The description of the product.
  * @param {string} product.price - The price of the product.
- * @param {string} product.category - The category of the product.
+ * @param {string[]} product.category - The category of the product.
  * @param {Dispatch<boolean>} setIsDisabled - The state setter to update the disabled state.
  * @return {void} No return value.
  */
@@ -23,10 +23,10 @@ export const productValidate = ({
 	image: File | undefined
 	description: string
 	price: string
-	category: string
+	category: string[]
 },
 setIsDisabled: Dispatch<boolean>): void => {
-	if (!name || !image || !description || !price || !category) {
+	if (!name || !image || !description || !price || category.length === 0) {
 		setIsDisabled(true)
 	} else {
 		setIsDisabled(false)
