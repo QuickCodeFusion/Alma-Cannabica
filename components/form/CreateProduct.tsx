@@ -112,15 +112,15 @@ const CreateProduct = (): React.JSX.Element => {
 					value={product.price}
 					onChange={handleChange}/>
 
-				<Input 
-					variant='underlined' 
-					type='file' 
-					isRequired 
-					label='Imagen' 
-					placeholder='Imagen' 
-					name='image' 
+				<Input
+					variant='underlined'
+					type='file'
+					isRequired
+					label='Imagen'
+					placeholder='Imagen'
+					name='image'
 					onChange={handleChange}/>
-				
+
 				<SubmitButton loading={loading} isDisabled={isDisabled} title='Create Product' />
 			</form>
 		</div>
