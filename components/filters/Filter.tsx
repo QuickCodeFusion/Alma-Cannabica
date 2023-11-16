@@ -5,16 +5,18 @@ import FilterSort from './filterSort/FilterSort'
 import FilterCategories from './filterCategory/FilterCategory'
 import { Button } from '@nextui-org/react'
 import style from './filter.module.css'
+import { useSelector } from 'react-redux'
 
 const Filters = ({ onFilter, onClose }: { onFilter: boolean, onClose: () => void }): JSX.Element => {
+	const name = useSelector((state: any) => state.searchBar.value)
 	const [valueState, setValueState] = useState({
 		category: '',
 		order: '',
-		name: '',
+		name,
 		minPrice: '',
 		maxPrice: ''
-
 	})
+	console.log(valueState)
 
 	const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
 		const { name, value } = event.target

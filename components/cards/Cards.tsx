@@ -1,15 +1,11 @@
 'use client'
 import Card from '../card/Card'
-import { useGetFiltersQuery } from '@/redux/service/productsFilterAPI'
 import style from './cards.module.css'
 import Loading from '@/app/loading'
+import { useSelector } from '@/redux/hooks'
 
 const Cards = (): React.JSX.Element => {
-	const name = 'pepas'
-	const minPrice = '0'
-	const maxPrice = '100000'
-	const category = 'cremas'
-	const { data: products, isLoading, isError } = useGetFiltersQuery({ name, minPrice, maxPrice, category, order: 'low' })
+	const { products, isLoading, isError } = useSelector((state: any) => state.products)
 	console.log(products)
 
 	return (
