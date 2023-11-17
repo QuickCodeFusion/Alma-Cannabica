@@ -50,6 +50,7 @@ const CreateProduct = (): React.JSX.Element => {
 	}, [product])
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+		e.preventDefault()
 		setLoading(true)
 		const { name, description, price, image, category } = product
 		if (image === undefined) throw new Error('No se ha subido una imagen')
