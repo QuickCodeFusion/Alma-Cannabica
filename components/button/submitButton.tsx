@@ -1,12 +1,12 @@
 'use client'
 import { Button } from '@nextui-org/react'
 
-const SubmitButton = ({ title, loading }: { title: string, loading: boolean }): React.JSX.Element => {
+const SubmitButton = ({ title, loading, isDisabled }: { title: string, loading: boolean, isDisabled?: boolean }): React.JSX.Element => {
 	return (
 		<div>
 			{!loading
-				? <Button type="submit">{title}</Button>
-				: <Button isLoading type="submit"></Button>}
+				? <Button isDisabled={isDisabled ?? false} type="submit">{title}</Button>
+				: <Button isLoading isDisabled type="submit"></Button>}
 		</div>
 	)
 }
