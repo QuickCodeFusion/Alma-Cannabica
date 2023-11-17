@@ -52,27 +52,29 @@ const CreateProduct = (): React.JSX.Element => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault()
 		setLoading(true)
-		const { name, description, price, image, category } = product
-		if (image === undefined) throw new Error('No se ha subido una imagen')
-		const imageUrl = await uploadFile(image, image.name)
 
-		const normalizedProduct = {
-			name,
-			description,
-			price,
-			image: imageUrl,
-			category
+		try {
+			const { name, description, price, image, category } = product
+			if (image === undefined) {
+				throw new Error('No se ha subido una imagen')
+			}
+			const imageUrl = await uploadFile(image, image.name)
+
+			const normalizedProduct = {
+				name,
+				description,
+				price,
+				image: imageUrl,
+				category
+			}
+
+			await createProduct(normalizedProduct)
+			toast.success('Producto creado correctamente')
+		} catch (error: any) {
+			toast.error('Error al crear Producto: ' + error)
+		} finally {
+			setLoading(false)
 		}
-		createProduct(normalizedProduct)
-			.then(() => {
-				toast.success('Producto creado correctamente')
-			})
-			.catch((error: any) => {
-				toast.error('Error al crear Producto: ' + error)
-			})
-			.finally(() => {
-				setLoading(false)
-			})
 	}
 
 	return (
