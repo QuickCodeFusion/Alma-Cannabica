@@ -19,11 +19,11 @@ export const filters = async (name: string, minPrice: string, maxPrice: string, 
 
 	switch (order) {
 		case 'low':
-			productRef = query(productRef, orderBy('price', 'desc'))
+			productRef = query(productRef, orderBy('price', 'asc'))
 			break
 
 		case 'high':
-			productRef = query(productRef, orderBy('price', 'asc'))
+			productRef = query(productRef, orderBy('price', 'desc'))
 			break
 	}
 

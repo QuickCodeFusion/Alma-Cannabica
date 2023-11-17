@@ -26,10 +26,10 @@ const FilterSort: React.FC<FiltersSortProps> = ({ valueState, onChange }) => (
 				<SelectItem key="" value=''>
 					None
 				</SelectItem>
-				<SelectItem key="lower" value='lower' style={{ width: 160 }}>
+				<SelectItem key="low" value='low' style={{ width: 160 }}>
 					De menor a mayor
 				</SelectItem>
-				<SelectItem key="higher" value='higher' style={{ width: 160 }}>
+				<SelectItem key="high" value='high' style={{ width: 160 }}>
 					De mayor a menor
 				</SelectItem>
 			</Select>
