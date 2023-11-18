@@ -1,12 +1,14 @@
-"use client";
-import { Button } from "@nextui-org/react";
+'use client'
+import { Button } from '@nextui-org/react'
 
-const SubmitButton = ({title}: {title: string}) => {
+const SubmitButton = ({ title, loading, isDisabled }: { title: string, loading: boolean, isDisabled?: boolean }): React.JSX.Element => {
 	return (
 		<div>
-			<Button type="submit">{title}</Button>
+			{!loading
+				? <Button isDisabled={isDisabled ?? false} type="submit">{title}</Button>
+				: <Button isLoading isDisabled type="submit"></Button>}
 		</div>
-	);
-};
+	)
+}
 
-export default SubmitButton;
+export default SubmitButton

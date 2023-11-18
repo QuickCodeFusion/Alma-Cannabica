@@ -8,9 +8,9 @@ export const POST = async (
 	try {
 		const { id } = params
 		const { disabled } = await req.json()
-		await auth.updateUser(id, { disabled })
+		const updatedUser = await auth.updateUser(id, { disabled })
 
-		return NextResponse.json({ message: 'OK' }, { status: 200 })
+		return NextResponse.json({ message: 'OK', user: updatedUser }, { status: 200 })
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 301 })
 	}

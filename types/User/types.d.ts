@@ -30,3 +30,13 @@ export interface UserAuth {
 		admin: boolean
 	}
 }
+
+export interface NormalizedUser {
+	uid: string
+	email: string
+	name: string
+	photoUrl: string
+	claims: {
+		admin: boolean
+	}
+}
