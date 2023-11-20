@@ -30,9 +30,9 @@ const ProductModal = ({
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
-                  Comprar
-                </Button>
+                <Button color="success" className="text-white" onPress={onClose} >
+                Comprar
+              </Button>
               </ModalFooter>
             </>
           )}
