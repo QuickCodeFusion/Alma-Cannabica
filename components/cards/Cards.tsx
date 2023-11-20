@@ -1,14 +1,17 @@
 'use client'
-import { useGetAllProductsQuery } from '@/redux/service/productsAPI'
 import Card from '../card/Card'
 import style from './cards.module.css'
 import Loading from '@/app/loading'
+import { useSelector } from '@/redux/hooks'
 
 const Cards = (): React.JSX.Element => {
-	const { data: products, isLoading } = useGetAllProductsQuery(null)
+	const { products, isLoading, isError } = useSelector((state: any) => state.products)
+	console.log(products)
 
 	return (
-		<div className={style.containerCards}> 
+		<div className={style.containerCards}>
+			{isError && <div>Error</div>}
+
 			{
 				isLoading
 					? <Loading/>

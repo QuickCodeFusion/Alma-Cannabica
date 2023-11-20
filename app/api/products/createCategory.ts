@@ -11,12 +11,8 @@ import { collection, doc, setDoc } from 'firebase/firestore'
 export const createCategory = async (categories: string[]): Promise<void> => {
 	const collectionRef = collection(db, 'category')
 
-	const categoriesPromise = categories.map(async (category: string) => {
-		const docRef = doc(collectionRef, category)
-		await setDoc(docRef, {
-			name: category
-		})
+	const docRef = doc(collectionRef, categories[0])
+	await setDoc(docRef, {
+		name: categories
 	})
-
-	await Promise.all(categoriesPromise)
 }
