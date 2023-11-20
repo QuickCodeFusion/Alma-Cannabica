@@ -25,7 +25,7 @@ const SearchBar = (): React.JSX.Element => {
 
 	const handleSubmit = (): any => {
 		setNameProduct(input)
-		dispatch(search(nameProduct))
+		dispatch(search(input))
 	}
 
 	return (
