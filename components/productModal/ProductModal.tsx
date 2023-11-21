@@ -12,27 +12,25 @@ import Detail from "../detail/Detail";
 const ProductModal = ({
   isOpen,
   onOpenChange,
-  product
+  product,
 }: any): React.JSX.Element => {
-
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-              </ModalHeader>
+              <ModalHeader className="flex flex-col gap-1"></ModalHeader>
               <ModalBody>
                 <Detail product={product} />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                <Button color="success" className="text-white">
+                  COMPRAR
                 </Button>
-                <Button color="success" className="text-white" onPress={onClose} >
-                Comprar
-              </Button>
+                <Button isIconOnly color="success" variant="bordered">
+                  <p className="scale-150 font-bold mb-1">+</p>
+                </Button>
               </ModalFooter>
             </>
           )}

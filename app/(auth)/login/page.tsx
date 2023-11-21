@@ -1,4 +1,4 @@
-import Login from '@/components/form/Login'
+import Login from '@/components/form/login/Login'
 
 const LoginPage = (): React.JSX.Element => {
 	return (

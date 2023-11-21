@@ -1,0 +1,32 @@
+.container {
+  height: 83vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(221, 221, 221);
+  flex-direction: column;
+}
+
+.form {
+  background-color: rgba(255, 255, 255, 0.877);
+  height: 500px;
+  width: 25vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  @media (max-width: 900px) {
+    width: 60vw; /* Puedes ajustar este valor según tus necesidades */
+    height: 40vh;
+  }
+  @media (max-width: 1300px) {
+    width: 60vw; /* Puedes ajustar este valor según tus necesidades */
+  }
+  @media (max-width: 400px) {
+    width: 60vw; /* Puedes ajustar este valor según tus necesidades */
+    height: 50vh;
+  }
+}
