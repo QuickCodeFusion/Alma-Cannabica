@@ -1,13 +1,20 @@
 'use client'
-import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarItem, Button } from '@nextui-org/react'
+import {
+	Navbar,
+	NavbarBrand,
+	NavbarContent,
+	NavbarMenuToggle,
+	NavbarMenuItem,
+	NavbarMenu,
+	NavbarItem,
+	Button
+} from '@nextui-org/react'
 import SearchBar from './SearchBar/SearchBar'
 import style from './navbar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import Cart from '../cart/Cart'
-import Pop
-
 import { useUserSession } from '@/app/userContext'
 
 const NavBar = (): JSX.Element => {
@@ -15,7 +22,7 @@ const NavBar = (): JSX.Element => {
 	const { userSession, logOut } = useUserSession()
 	const [selectedMenuItem, setSelectedMenuItem] = useState('')
 
-	const handleMenuItemClick = (select: string) => {
+	const handleMenuItemClick = (select: string): void => {
 		setSelectedMenuItem(select)
 	}
 	const menuItems = [
@@ -33,18 +40,27 @@ const NavBar = (): JSX.Element => {
 
 				<NavbarContent className="lg:hidden" justify="center">
 					<NavbarBrand>
-						<Link onClick={() => { handleMenuItemClick('') }} href={'/'}>
+						<Link
+							onClick={() => {
+								handleMenuItemClick('')
+							}}
+							href={'/'}
+						>
 							<Image src="/logo.png" width={50} height={50} alt="" />
 						</Link>
 					</NavbarBrand>
 				</NavbarContent>
 				<div className={style.containerNavBar}>
-					<NavbarContent className="hidden lg:flex gap-4" justify="center">
+					<NavbarContent className="hidden lg:flex gap-5" justify="center">
 						<NavbarBrand>
-							<Link onClick={() => { handleMenuItemClick('') }} href={'/'}>
+							<Link
+								onClick={() => {
+									handleMenuItemClick('')
+								}}
+								href={'/'}
+							>
 								<Image src="/logo.png" width={50} height={50} alt="" />
 							</Link>
-
 						</NavbarBrand>
 					</NavbarContent>
 					<NavbarContent className={`z-10 ${style.searchBar}`}>
@@ -78,15 +94,31 @@ const NavBar = (): JSX.Element => {
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
 							{userSession === undefined
-								? <Button isLoading color="success" isDisabled variant="flat"/>
+								? (
+									<Button isLoading color="success" isDisabled variant="flat" />
+								)
 								: userSession !== null
-									? <Button as={Link} href={'#'} variant="flat" color='danger' onClick={logOut}>
-									Logout
-									</Button>
-									: <Button as={Link} color="success" href={'/login'} variant="flat">
-									Login
-									</Button>
-							}
+									? (
+										<Button
+											as={Link}
+											href={'#'}
+											variant="flat"
+											color="danger"
+											onClick={logOut}
+										>
+                  Logout
+										</Button>
+									)
+									: (
+										<Button
+											as={Link}
+											color="success"
+											href={'/login'}
+											variant="flat"
+										>
+                  Login
+										</Button>
+									)}
 						</NavbarItem>
 					</NavbarContent>
 				</div>
@@ -94,34 +126,46 @@ const NavBar = (): JSX.Element => {
 					{menuItems.map((item, index) => (
 						<NavbarMenuItem key={`${item}-${index}`} className="pt-10">
 							<Link
-								className={selectedMenuItem === item.label ? style.selectedItem : style.notSelectedItem}
-								onClick={() => { handleMenuItemClick(item.label) }}
+								className={
+									selectedMenuItem === item.label
+										? style.selectedItem
+										: style.notSelectedItem
+								}
+								onClick={() => {
+									handleMenuItemClick(item.label)
+								}}
 								href={`/${item.label}`}
-
 							>
 								{item.name}
 							</Link>
 						</NavbarMenuItem>
 					))}
-					<NavbarMenuItem className="pt-10 " >
+					<NavbarMenuItem className="pt-10 ">
 						{userSession === undefined
-							? <Button isLoading color="success" isDisabled variant="flat"/>
+							? (
+								<Button isLoading color="success" isDisabled variant="flat" />
+							)
 							: userSession !== null
-								? <Button as={Link} href={'#'} variant="flat" color='danger' onClick={logOut}>
-									Logout
-								</Button>
-								: <Button as={Link} color="success" href={'/login'} variant="flat">
-									Login
-								</Button>
-						}
+								? (
+									<Button
+										as={Link}
+										href={'#'}
+										variant="flat"
+										color="danger"
+										onClick={logOut}
+									>
+                Logout
+									</Button>
+								)
+								: (
+									<Button as={Link} color="success" href={'/login'} variant="flat">
+                Login
+									</Button>
+								)}
 					</NavbarMenuItem>
 				</NavbarMenu>
 			</Navbar>
-			<div className={openCart ? style.cart : style.pepe}>
-				{
-					<Cart />
-				}
-			</div>
+			<div className={openCart ? style.cart : style.pepe}>{<Cart />}</div>
 		</div>
 	)
 }

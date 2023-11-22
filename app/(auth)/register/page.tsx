@@ -1,4 +1,4 @@
-import Register from "@/components/form/Register";
+import Register from "@/components/form/register/Register";
 
 const RegisterPage = () => {
 
