@@ -26,11 +26,11 @@ const NavBar = (): JSX.Element => {
 	return (
 		<div>
 			<Navbar disableAnimation isBordered className={style.NavbarNext}>
-				<NavbarContent className="sm:hidden z-10 " justify="start">
+				<NavbarContent className="lg:hidden z-10 " justify="start">
 					<NavbarMenuToggle style={{ color: '#18C964' }} />
 				</NavbarContent>
 
-				<NavbarContent className="sm:hidden" justify="center">
+				<NavbarContent className="lg:hidden" justify="center">
 					<NavbarBrand>
 						<Link onClick={() => { handleMenuItemClick('') }} href={'/'}>
 							<Image src="/logo.png" width={50} height={50} alt="" />
@@ -38,7 +38,7 @@ const NavBar = (): JSX.Element => {
 					</NavbarBrand>
 				</NavbarContent>
 				<div className={style.containerNavBar}>
-					<NavbarContent className="hidden sm:flex gap-4" justify="center">
+					<NavbarContent className="hidden lg:flex gap-4" justify="center">
 						<NavbarBrand>
 							<Link onClick={() => { handleMenuItemClick('') }} href={'/'}>
 								<Image src="/logo.png" width={50} height={50} alt="" />
@@ -46,42 +46,42 @@ const NavBar = (): JSX.Element => {
 
 						</NavbarBrand>
 					</NavbarContent>
-					<div className={style.searchBar}>
+					<NavbarContent className={`z-10 ${style.searchBar}`}>
 						<SearchBar />
-					</div>
+					</NavbarContent>
 					<NavbarContent justify="end" >
-						<NavbarItem className="hidden sm:flex">
+						<NavbarItem className="hidden lg:flex">
 							<Link onClick={() => { handleMenuItemClick('products') }} className={selectedMenuItem === 'products' ? style.selected : style.notSelected} href={'/products'}>
 								Productos
 							</Link>
 						</NavbarItem>
-						<NavbarItem className="hidden sm:flex">
+						<NavbarItem className="hidden lg:flex">
 							<Link onClick={() => { handleMenuItemClick('products') }} className={selectedMenuItem === 'info' ? style.selected : style.notSelected} href={'#'}>
 								Información
 							</Link>
 						</NavbarItem>
 						{userSession?.claims.admin
-							? <NavbarItem className="hidden sm:flex">
+							? <NavbarItem className="hidden lg:flex">
 								<Link onClick={() => { handleMenuItemClick('admin-dashboard') }} className={selectedMenuItem === 'admin-dashboard' ? style.selected : style.notSelected} href={'/admin-dashboard'}>
 								Panel de administrador
 								</Link>
 							</NavbarItem>
 							: null}
-						<NavbarItem className="sm:hidden pr-10 mr-9">
+						<NavbarItem className="lg:hidden pr-10 mr-9">
 
 							<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
 								<Image src="/carrito.png" alt="" width={18} height={18} />
 							</Button>
 
 						</NavbarItem>
-						<NavbarItem className="hidden sm:flex">
+						<NavbarItem className="hidden lg:flex">
 
 							<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
 								<Image src="/carrito.png" alt="" width={18} height={18} />
 							</Button>
 
 						</NavbarItem>
-						<NavbarItem className="hidden sm:flex">
+						<NavbarItem className="hidden lg:flex">
 							{userSession === undefined
 								? <Button isLoading color="success" isDisabled variant="flat"/>
 								: userSession !== null
