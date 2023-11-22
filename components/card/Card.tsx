@@ -2,7 +2,7 @@ import { type CardProduct } from '@/types/Product/type'
 import style from '../landing/landing.module.css'
 import { CardFooter, Image, Button, useDisclosure, Card as NextUICard } from '@nextui-org/react'
 
-import ProductModal from '../productModal/ProductModal'
+import ProductModal from '../modal/ProductModal'
 import BuyButton from '../button/buyButton'
 
 const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
