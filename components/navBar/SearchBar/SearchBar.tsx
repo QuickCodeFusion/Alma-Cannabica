@@ -33,7 +33,7 @@ const SearchBar = (): React.JSX.Element => {
 			<div>
 				<input type="text" onChange={handleChange} className={style.input} />
 			</div>
-			<div className="hidden sm:flex">
+			<div >
 				<button className={style.button} onClick={handleSubmit}>
 					<Image src="/buscar.png" alt="Buscar" width={20} height={20}></Image>
 				</button>
