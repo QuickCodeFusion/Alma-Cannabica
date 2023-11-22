@@ -1,25 +1,34 @@
 'use client'
-import { Skeleton } from "@nextui-org/react"
-import { Image } from "@nextui-org/react"
-const Detail = ({ product }: { product: any}) => {
-
-    return (
-        <div>
-            <Skeleton
-            isLoaded = {product}
-            >
-                <h1>{product.name}</h1>
-                <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={200}
-                    height={200}
-                />
-                <p>{product.description}</p>
-                <p>{product.price}</p>
-            </Skeleton>
-        </div>
-    )
+import { Skeleton, Image, Card, CardBody } from '@nextui-org/react'
+import Price from '../Price'
+import Categories from '../Categories'
+const Detail = ({ product }: { product: any }): React.JSX.Element => {
+	const { name, price, image, category, description } = product
+	return (
+		<Card >
+			<CardBody className='grid place-items-center gap-4'>
+				<Skeleton isLoaded={name}>
+					<h1>{name}</h1>
+				</Skeleton>
+				<Image
+					src={image}
+					alt={name}
+					width={200}
+					height={200}
+				/>
+				<Skeleton isLoaded={category[0]} className='rounded-md'>
+					<Categories
+						key={category}
+						categories={category}
+					/>
+				</Skeleton>
+				<Skeleton isLoaded={description}>
+					<p>{description}</p>
+				</Skeleton>
+				<Price className='text-2xl' price={price}/>
+			</CardBody>
+		</Card>
+	)
 }
 
 export default Detail
