@@ -8,40 +8,40 @@ import {
 	ModalHeader
 } from '@nextui-org/react'
 import Detail from '../detail/Detail'
+import BuyButton from '../button/buyButton'
 
 const ProductModal = ({
 	isOpen,
 	onOpenChange,
 	product
 }: any): React.JSX.Element => {
+	const sm = window.innerWidth < 768
 	return (
 		<>
 			<Modal
 				classNames={{
-					base: 'text-center overflow-auto',
+					base: 'text-center',
 					body: 'flex flex-col text-center',
-					footer: 'flex justify-center',
+					footer: 'flex justify-around',
 					header: 'flex flex-col gap-1',
-					closeButton: 'bg-green-700 text-white opacity-25'
+					closeButton: 'hidden'
 				}}
 				backdrop='blur'
-				placement='center'
+				placement='top-center'
 				isOpen={isOpen}
-				scrollBehavior='outside'
+				scrollBehavior={sm ? 'normal' : 'normal'}
 				onOpenChange={onOpenChange}
 				size={window.innerWidth < 768 ? 'full' : '5xl'}>
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader></ModalHeader>
 							<ModalBody>
 								<Detail product={product} />
 							</ModalBody>
 							<ModalFooter>
-								<Button color="success" className="text-white">
-                                    COMPRAR
-								</Button>
-								<Button isIconOnly color="success" variant="bordered">
+								<Button onClick={onClose}><p>{sm ? 'Cerrar' : 'Seguir viendo productos'}</p></Button>
+								<BuyButton product={product}/>
+								<Button className='md:mr-30' isIconOnly color="success" variant="bordered">
 									<p className="scale-150 font-bold mb-1">+</p>
 								</Button>
 							</ModalFooter>
