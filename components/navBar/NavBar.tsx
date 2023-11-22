@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import Cart from '../cart/Cart'
+import Pop
 
 import { useUserSession } from '@/app/userContext'
 
@@ -69,16 +70,10 @@ const NavBar = (): JSX.Element => {
 							: null}
 						<NavbarItem className="lg:hidden pr-10 mr-9">
 
-							<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
-								<Image src="/carrito.png" alt="" width={18} height={18} />
-							</Button>
 
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
 
-							<Button size="sm" isIconOnly className="bg-white border" onClick={() => { setOpenCart(!openCart) }}>
-								<Image src="/carrito.png" alt="" width={18} height={18} />
-							</Button>
 
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
