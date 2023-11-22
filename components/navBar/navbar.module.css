@@ -8,7 +8,6 @@
 .subNavbar{
     width: 100%;
     color: black;
-
 }
 .containerNavBar{
     position: absolute;
@@ -101,6 +100,7 @@
 }
 .selected{
     color: rgb(107, 221, 107);
+
 }
 .selectedItem{
     font-size: 1.7rem;
