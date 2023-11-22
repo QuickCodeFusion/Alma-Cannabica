@@ -16,11 +16,24 @@ const ProductModal = ({
 }: any): React.JSX.Element => {
 	return (
 		<>
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+			<Modal
+				classNames={{
+					base: 'text-center overflow-auto',
+					body: 'flex flex-col text-center',
+					footer: 'flex justify-center',
+					header: 'flex flex-col gap-1',
+					closeButton: 'bg-green-700 text-white opacity-25'
+				}}
+				backdrop='blur'
+				placement='center'
+				isOpen={isOpen}
+				scrollBehavior='outside'
+				onOpenChange={onOpenChange}
+				size={window.innerWidth < 768 ? 'full' : '5xl'}>
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader className="flex flex-col gap-1"></ModalHeader>
+							<ModalHeader></ModalHeader>
 							<ModalBody>
 								<Detail product={product} />
 							</ModalBody>
