@@ -2,8 +2,13 @@
     border-radius: 20px;
     background-color: gray;
     width: 120px;
+    transition: 0.5s;
 }
-
+.input:focus{
+    color: white;
+    transform: scale(1.1);
+    padding-left: 5px;
+}
 .searchBar{
     display: flex;
     justify-content: center;
