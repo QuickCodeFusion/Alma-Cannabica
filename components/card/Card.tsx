@@ -3,6 +3,7 @@ import style from '../landing/landing.module.css'
 import { CardFooter, Image, Button, useDisclosure, Card as NextUICard } from '@nextui-org/react'
 
 import ProductModal from '../productModal/ProductModal'
+import BuyButton from '../button/buyButton'
 
 const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -30,9 +31,7 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 							<p className="text-600">${price}</p>
 						</div>
 						<div className={style.containerBtn}>
-							<Button color="success" className="text-white" >
-                COMPRAR
-							</Button>
+							<BuyButton product={product}/>
 							<Button isIconOnly color="success" variant="bordered">
 								<p className="scale-150 font-bold mb-1">+</p>
 							</Button>
