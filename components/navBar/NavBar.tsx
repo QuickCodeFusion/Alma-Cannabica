@@ -32,7 +32,7 @@ const NavBar = (): JSX.Element => {
 
 	return (
 		<div>
-			<Navbar disableAnimation isBordered className={style.NavbarNext} >
+			<Navbar disableAnimation isBordered className={style.NavbarNext}>
 				<NavbarContent className="lg:hidden z-10 " justify="start">
 					<NavbarMenuToggle style={{ color: '#18C964' }} />
 				</NavbarContent>
