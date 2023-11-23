@@ -25,7 +25,6 @@ export const PopoverComponent = () => {
                 showArrow
                 offset={10}
                 placement="bottom"
-                backdrop="blur"
             >
                 <PopoverTrigger>
                     <Button size="sm" isIconOnly className="bg-white border">

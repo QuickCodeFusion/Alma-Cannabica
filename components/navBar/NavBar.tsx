@@ -32,7 +32,7 @@ const NavBar = (): JSX.Element => {
 
 	return (
 		<div>
-			<Navbar disableAnimation isBordered className={style.NavbarNext}>
+			<Navbar disableAnimation isBordered style={{height:30}}>
 				<NavbarContent className="lg:hidden z-10 " justify="start">
 					<NavbarMenuToggle style={{ color: '#18C964' }} />
 				</NavbarContent>
@@ -83,12 +83,12 @@ const NavBar = (): JSX.Element => {
 								</Link>
 							</NavbarItem>
 							: null}
-						<NavbarItem className="lg:hidden z-10 pr-10 mr-9">
+						<div className="lg:hidden z-10 pr-10 mr-9">
 							<PopoverComponent/>
-						</NavbarItem>
-						<NavbarItem className="hidden lg:flex">
+						</div>
+						<div className="hidden lg:flex">
 							<PopoverComponent/>
-						</NavbarItem>
+						</div>
 						<NavbarItem className="hidden lg:flex">
 							{userSession === undefined
 								? (
