@@ -1,3 +1,4 @@
+'use client'
 import { type Dispatch } from 'react'
 
 /**
@@ -12,23 +13,31 @@ import { type Dispatch } from 'react'
  * @param {Dispatch<boolean>} setIsDisabled - The state setter to update the disabled state.
  * @return {void} No return value.
  */
-export const productValidate = ({
-	name,
-	image,
-	description,
-	price,
-	category
-}:
-{ name: string
-	image: File | undefined
-	description: string
-	price: string
-	category: string[]
-},
-setIsDisabled: Dispatch<boolean>): void => {
+export const productValidate = (
+	{
+		name,
+		image,
+		description,
+		price,
+		category
+	}: {
+		name: string
+		image: File | undefined
+		description: string
+		price: string
+		category: string[]
+	},
+	setIsDisabled: Dispatch<boolean>
+): void => {
 	if (!name || !image || !description || !price || category.length === 0) {
 		setIsDisabled(true)
 	} else {
 		setIsDisabled(false)
 	}
+}
+
+export const validateEmail = (value: string): boolean => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i.test(value)
+
+export 	const validatePassword = (value: string): boolean => {
+	return /^(?=.*[a-z]).{3,20}$/.test(value)
 }

@@ -86,10 +86,8 @@ const NavBar = (): JSX.Element => {
 							: null}
 						<NavbarItem className="lg:hidden pr-10 mr-9">
 
-
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
-
 
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
