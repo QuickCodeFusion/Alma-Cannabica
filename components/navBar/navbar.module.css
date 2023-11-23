@@ -11,8 +11,8 @@
 }
 .containerNavBar{
     position: absolute;
-    left: -16%;
-    width: 82vw;
+    left: -33%;
+    width: 165%;
     display: flex;
 }
 /* .buttonsContainer{
@@ -23,37 +23,6 @@
     width: 100vw;
     
 } */
-
-.cart{
-    position: absolute;
-    right: 0%;
-    top: 55px;
-    transition: 1s;
-    z-index: 1;
-    animation: open .5s;
-}
-
-.pepe{
-    position: absolute;
-    right: -30%;
-    top: 55px;
-    transition: ease .5s;
-    animation: closed .5s;
-    z-index: 1;
-}
-
-@keyframes closed {
-    0% {
-        right: 0%;
-    }
-}
-
-@keyframes open {
-    0% {
-        right: -30%;
-    }
-}
-
 .menu{
     display: flex;
     justify-content: center;
@@ -106,7 +75,19 @@
     font-size: 1.7rem;
     color: rgb(107, 221, 107);
 }
-@media screen and (max-width: 1320px) {
+@media screen and (max-width: 1685px) {
+    .containerNavBar{
+        width: 150%;
+        left: -25%;
+    }
+}
+@media screen and (max-width: 1538px) {
+    .containerNavBar{
+        width: 135%;
+        left: -18%;
+    }
+}
+@media screen and (max-width: 1384px) {
     .containerNavBar{
         width: 120%;
         left: -10%;

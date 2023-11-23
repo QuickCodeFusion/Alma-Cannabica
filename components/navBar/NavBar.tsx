@@ -14,11 +14,10 @@ import style from './navbar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import Cart from '../cart/Cart'
 import { useUserSession } from '@/app/userContext'
+import { PopoverComponent } from './Popover/Popover'
 
 const NavBar = (): JSX.Element => {
-	const [openCart, setOpenCart] = useState(false)
 	const { userSession, logOut } = useUserSession()
 	const [selectedMenuItem, setSelectedMenuItem] = useState('')
 
@@ -84,11 +83,11 @@ const NavBar = (): JSX.Element => {
 								</Link>
 							</NavbarItem>
 							: null}
-						<NavbarItem className="lg:hidden pr-10 mr-9">
-
+						<NavbarItem className="lg:hidden z-10 pr-10 mr-9">
+							<PopoverComponent/>
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
-
+							<PopoverComponent/>
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
 							{userSession === undefined
@@ -163,7 +162,6 @@ const NavBar = (): JSX.Element => {
 					</NavbarMenuItem>
 				</NavbarMenu>
 			</Navbar>
-			<div className={openCart ? style.cart : style.pepe}>{<Cart />}</div>
 		</div>
 	)
 }
