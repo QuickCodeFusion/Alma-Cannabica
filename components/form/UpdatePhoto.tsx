@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Button, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Image, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { CameraIcon } from '../icons/CameraIcon'
 
 const UpdatePhoto = ({ isOpen, onClose, onOpenChange }: { isOpen: boolean, onClose: () => void, onOpenChange: () => void }): React.JSX.Element => {
 	const [photo, setPhoto] = useState<File | string>('')
@@ -32,8 +33,25 @@ const UpdatePhoto = ({ isOpen, onClose, onOpenChange }: { isOpen: boolean, onClo
 									<div className="flex justify-center align-center ">
 										{ <Image width={200} height={200} src={preview || defaultUser} alt="Imagen previa" />}
 									</div>
+
+									<Button
+										endContent={<CameraIcon />}
+										className='cursor-pointer z-50'
+										name='image'
+										color='success'
+										onClick={() => document.getElementById('fileInput')?.click()}
+									>
+										<Input
+											id='fileInput'
+											className='hidden'
+											type='file'
+											isRequired
+											name='image'
+											onChange={handleFileChange}/>
+										subir una foto
+									</Button>
+
 									<div className="flex  align-center justify-end">
-										<input type="file" name="file" accept="image/*" onChange={handleFileChange} />
 									</div>
 								</div>
 							</ModalBody>
