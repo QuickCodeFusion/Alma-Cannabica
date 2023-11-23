@@ -37,8 +37,6 @@ const Filters = ({
     });
   }, [name]);
 
-  console.log(valueState);
-
   const onChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {

@@ -15,11 +15,13 @@
     display: none;
 }
 @media screen and (max-width: 500px){
-    
+    .cards{
+        width: 95vw;
+    }
     .filterBtn{
         display: block;
         position: absolute;
-        top:100px;
+        top:80px;
         left: 10px;
     }
     
