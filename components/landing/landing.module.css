@@ -58,6 +58,7 @@
     height: 15vh;
     padding: 3px 5px 0 5px;
     border-radius: 0;
+    z-index: 0;
 }
 .cardFooter{
     height: 95px;
@@ -92,4 +93,19 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
+}
+@media screen and (max-width: 500px){
+    .cardCarusel{
+        width: 90vw;
+        height: 155px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .cardFooter{
+        margin-top: 50px;
+        width: 200px;
+        height: 80%;
+        align-items: center;
+    }
 }
