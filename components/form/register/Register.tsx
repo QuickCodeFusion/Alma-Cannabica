@@ -38,10 +38,16 @@ const Register = (): React.JSX.Element => {
 			return
 		}
 		const photoURL = await uploadFile(file, file.name)
+			.then((url) => {
+				return url
+			})
+			.catch((error) => {
+				toast.error(error.message)
+			})
 
 		setForm({
 			...form,
-			photoUrl: photoURL
+			photoUrl: photoURL || ''
 		})
 
 		setLoading(true)
@@ -87,14 +93,14 @@ const Register = (): React.JSX.Element => {
 
 	return (
 
-		<form method="POST" onSubmit={ (e) => { handleSubmit(e, form.photoUrl) }} className={style.container}>
+		<form method="POST" onSubmit={ (e) => { void handleSubmit(e, form.photoUrl) }} className={style.container}>
 			<div className={style.form}>
 
 				<div className='m-4'>
 					<div onClick={() => { onOpen() }} className='cursor-pointer hover:blur-[2px]'>
 						<Image src={form.photoUrl || defaultUser} alt="user" width={160} height={200} className='rounded-full'></Image>
 
-						<UpdatePhoto isOpen={isOpen} onOpenChange={onOpenChange} onClose={(file) => { onClose(); setForm({ ...form, photoUrl: file instanceof File ? URL.createObjectURL(file) : file }); setFile(file) }}/>
+						<UpdatePhoto isOpen={isOpen} onOpenChange={onOpenChange} onClose={(file) => { onClose(); setForm({ ...form, photoUrl: file instanceof File ? URL.createObjectURL(file) : file }) } } setFile={setFile}/>
 
 					</div>
 				</div>

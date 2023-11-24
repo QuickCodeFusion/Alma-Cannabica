@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Image, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { CameraIcon } from '../icons/CameraIcon'
 
-const UpdatePhoto = ({ isOpen, onClose, onOpenChange }: { isOpen: boolean, onClose: (file: File | string) => void, onOpenChange: () => void }): React.JSX.Element => {
+const UpdatePhoto = ({ isOpen, onClose, onOpenChange, setFile }: { isOpen: boolean, onClose: (file: File | string) => void, onOpenChange: () => void, setFile: (file: File) => void }): React.JSX.Element => {
 	const [photo, setPhoto] = useState<File | string>('')
 	const [preview, setPreview] = useState('')
 
@@ -51,7 +51,8 @@ const UpdatePhoto = ({ isOpen, onClose, onOpenChange }: { isOpen: boolean, onClo
 										name='image'
 										onChange={e => {
 											handleFileChange(e)
-											onClose(e.target.files?.[0] ?? defaultUser, photo)
+											onClose(e.target.files?.[0] ?? defaultUser)
+											photo instanceof File && setFile(photo)
 										}
 										}/>
                                         subir una foto
