@@ -9,25 +9,54 @@ export const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addToCart: (state, action) => {
-			state.cart.push(action.payload)
+		addToCart: (state, { payload }) => {
+			if (state.cart.some(item => item.itemId === payload.itemId)) {
+				state.cart = state.cart.map(item => {
+					if (item.itemId === payload.itemId) {
+						item.quantity = item.quantity + 1
+					}
+					return item
+				})
+			} else {
+				state.cart.push({ ...payload, quantity: 1 })
+			}
 		},
-		removeFromCart: (state, action) => {
-			state.cart = state.cart.filter(item => item.id !== action.payload)
+		removeFromCart: (state, { payload }) => {
+			state.cart = state.cart.filter(item => item.itemId !== payload.itemId)
 		},
 		clearCart: (state) => {
 			state.cart = []
 		},
-		updateQuantity: (state, action) => {
-			state.cart = state.cart.map(item => {
-				if (item.id === action.payload.id) {
-					item.quantity = action.payload.quantity
-				}
-				return item
-			})
+		updateQuantity: (state, { payload }) => {
+			if (payload.action === 'add') {
+				state.cart = state.cart.map(item => {
+					if (item.itemId === payload.itemId) {
+						item.quantity = item.quantity + 1
+					}
+					return item
+				})
+			} else {
+				state.cart = state.cart.filter(item => {
+					if (item.itemId === payload.itemId && item.quantity > 1) {
+						item.quantity = item.quantity - 1
+					} else if (item.itemId === payload.itemId && item.quantity === 1) {
+						console.log('IM REMOVING AAAAAAA')
+						return false
+					}
+					return item
+				})
+			}
 		},
-		loadCart: (state, action) => {
-			state.cart = action.payload
+		loadCart: (state, { payload }) => {
+			state.cart = payload
 		}
 	}
 })
+
+export const {
+	addToCart,
+	removeFromCart,
+	clearCart,
+	updateQuantity,
+	loadCart
+} = cartSlice.actions
