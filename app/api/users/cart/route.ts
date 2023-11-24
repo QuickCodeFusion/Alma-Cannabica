@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
 
 		const items = itemSnapshot.docs.map((doc) => ({
 			...doc.data(),
-			id: doc.id
+			itemId: doc.id
 		}))
 		return NextResponse.json(items, { status: 200 })
 	} catch (error: any) {
