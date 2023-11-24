@@ -43,6 +43,7 @@
     margin: 10px;
     display: grid;
     place-items: center;
+    
 }
 .cardCarusel{
     width: 190px;
@@ -74,7 +75,7 @@
 .nameProduct{
     position: absolute;
     top: 0;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }
 .btnCard{
     margin-top: 13px;
@@ -101,11 +102,24 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        border-radius: 0;
+        margin-top: 0;
+        border-bottom: 1px grey solid;
     }
     .cardFooter{
         margin-top: 50px;
         width: 200px;
-        height: 80%;
+        height: 120%;
         align-items: center;
+    }
+    .datosProduct{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        font-size: 1.1rem;
+    }
+    .containerBtn{
+        transform: scale(0.8);
+        margin-top: 10px;
     }
 }

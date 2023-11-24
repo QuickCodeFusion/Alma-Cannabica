@@ -39,6 +39,7 @@
     .containerCards{
         width: 100%;
         height: 72vh;
+        gap: 0;
     }
     
 }
