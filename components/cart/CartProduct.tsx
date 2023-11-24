@@ -31,7 +31,7 @@ const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantit
 			<Chip onClick={() => { handleQuantityChange(itemId, 'remove') }} color="primary">
 				-
 			</Chip>
-			<Chip>Total: {price * quantity}</Chip>
+			<Chip>Total: {quantity === 0 ? 0 : parseInt(price) * quantity}</Chip>
 		</div>
 	)
 }
