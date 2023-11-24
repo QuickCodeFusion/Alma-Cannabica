@@ -44,10 +44,10 @@ export interface NormalizedUser {
 export interface CartProduct {
 	name: string
 	nameToLowerCase: string
-	price: number
+	price: string
 	quantity: number
 	image: string
 	category: string[]
 	description?: string
-	id: string
+	itemId: string
 }
