@@ -15,9 +15,7 @@ const LoginPage = (): React.JSX.Element => {
 							<Login />
 						</Tab>
 						<Tab key="register" title="Registrarse">
-							<div className={style.form}>
-								<Register />
-							</div>
+							<Register />
 						</Tab>
 					</Tabs>
 
