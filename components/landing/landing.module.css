@@ -103,6 +103,7 @@
         width: 100%;
         align-items: center;
         overflow: hidden;
+        padding-top: 120px;
     }
     .cardCarusel{
         width: 90vw;
@@ -111,7 +112,6 @@
         flex-direction: row;
         justify-content: space-around;
         border-radius: 0;
-        margin-top: 50px;
         border-bottom: 1px grey solid;
     }
     .cardFooter{
