@@ -8,29 +8,42 @@ import { Image, Input, useDisclosure } from '@nextui-org/react'
 import { validateEmail, validatePassword } from '@/utils/validations'
 import style from './register.module.css'
 import UpdatePhoto from '../UpdatePhoto'
+import { uploadFile } from '@/utils/uploadFile'
 
 const Register = (): React.JSX.Element => {
 	const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
 
 	const defaultUser = 'https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default-user-icon-3084929853.jpg?alt=media&token=d78ab167-3602-40dc-b81f-bb3680fa3324'
 	const { setUserSession } = useUserSession()
-	const [changePhoto, setChangePhoto] = useState(false)
 	const [loading, setLoading] = useState(false)
+	const [file, setFile] = useState<File>()
 	const [form, setForm] = useState({
 		name: '',
 		email: '',
 		photoUrl: '',
 		password: ''
 	})
-	const [updateFile, setUpdateFile] = useState<File | string>('')
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setForm({
 			...form,
 			[e.target.name]: e.target.value
 		})
+		console.log(form.photoUrl)
 	}
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, updateFile: File | string): Promise<void> => {
 		e.preventDefault()
+		if (file === undefined) {
+			toast.error('Debe subir una imagen')
+			return
+		}
+		const photoURL = await uploadFile(file, file.name)
+
+		setForm({
+			...form,
+			photoUrl: photoURL
+		})
+
 		setLoading(true)
 		registerAndLogin(form, setForm)
 			.then((user) => {
@@ -71,18 +84,17 @@ const Register = (): React.JSX.Element => {
 
 		return !validatePassword(form.password)
 	}, [form.password])
-	console.log(changePhoto)
 
 	return (
 
-		<form method="POST" onSubmit={handleSubmit} className={style.container}>
+		<form method="POST" onSubmit={ (e) => { handleSubmit(e, form.photoUrl) }} className={style.container}>
 			<div className={style.form}>
 
 				<div className='m-4'>
 					<div onClick={() => { onOpen() }} className='cursor-pointer hover:blur-[2px]'>
 						<Image src={form.photoUrl || defaultUser} alt="user" width={160} height={200} className='rounded-full'></Image>
 
-						<UpdatePhoto isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose}/>
+						<UpdatePhoto isOpen={isOpen} onOpenChange={onOpenChange} onClose={(file) => { onClose(); setForm({ ...form, photoUrl: file instanceof File ? URL.createObjectURL(file) : file }); setFile(file) }}/>
 
 					</div>
 				</div>
