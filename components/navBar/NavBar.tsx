@@ -69,7 +69,7 @@ const NavBar = (): JSX.Element => {
 						</NavbarItem>
 						{userSession?.claims.admin
 							? <NavbarItem className="hidden lg:flex">
-								<Link className={pathname === 'admin-dashboard' ? style.selected : style.notSelected} href={'/admin-dashboard'}>
+								<Link className={pathname === '/admin-dashboard' ? style.selected : style.notSelected} href={'/admin-dashboard'}>
 								Panel de administrador
 								</Link>
 							</NavbarItem>
