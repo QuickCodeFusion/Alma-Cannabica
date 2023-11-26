@@ -1,6 +1,6 @@
 'use client'
 import { type CartProduct } from '@/types/User/types'
-import CartItem from './CartProduct'
+import CartItem from './CartItem'
 import { Divider } from '@nextui-org/react'
 import { useDispatch, useSelector } from '@/redux/hooks'
 import { useEffect } from 'react'
