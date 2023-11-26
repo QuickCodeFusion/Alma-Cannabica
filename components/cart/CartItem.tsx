@@ -1,11 +1,11 @@
 'use client'
 
 import { type CartProduct } from '@/types/User/types'
-import { Chip, Image } from '@nextui-org/react'
+import { Button, Chip, Image } from '@nextui-org/react'
 
 interface props {
 	product: CartProduct
-	handleRemoveProduct?: () => void
+	handleRemoveProduct: (itemId: string) => void
 	handleQuantityChange: (itemId: string, action: 'add' | 'remove') => void
 }
 
@@ -25,6 +25,13 @@ const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantit
 				</div>
 				<p>${price}</p>
 			</div>
+			<Button
+				color='danger'
+				onClick={() => { handleRemoveProduct(itemId) }}
+				size='sm'
+			>
+				X
+			</Button>
 			<Chip onClick={() => { handleQuantityChange(itemId, 'add') }} color="primary">
 				+
 			</Chip>

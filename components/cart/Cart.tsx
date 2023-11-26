@@ -3,7 +3,7 @@ import { type CartProduct } from '@/types/User/types'
 import CartItem from './CartItem'
 import { Divider } from '@nextui-org/react'
 import { useDispatch } from '@/redux/hooks'
-import { updateQuantity } from '@/redux/feature/cartSlice'
+import { removeFromCart, updateQuantity } from '@/redux/feature/cartSlice'
 
 const Cart = (
 	{
@@ -15,6 +15,9 @@ const Cart = (
 	const dispatch = useDispatch()
 	const handleQuantityChange = (itemId: string, action: 'add' | 'remove'): void => {
 		dispatch(updateQuantity({ itemId, action }))
+	}
+	const handleRemoveProduct = (itemId: string): void => {
+		dispatch(removeFromCart({ itemId }))
 	}
 	return (
 		<div className='overflow-y-auto overflow-x-hidden flex flex-col gap-1 max-w-md min-w-full'
@@ -33,6 +36,7 @@ const Cart = (
 						key={product.itemId}
 						product={product}
 						handleQuantityChange={handleQuantityChange}
+						handleRemoveProduct={handleRemoveProduct}
 					/>
 					<Divider/>
 				</>
