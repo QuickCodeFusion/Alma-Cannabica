@@ -11,8 +11,19 @@ export const cartAPI = createApi({
 			query: (userId) => ({
 				url: `/cart?id=${userId}`
 			})
+		}),
+		addToCart: builder.mutation<Promise<void>, { userId: string, itemId: string, value: string }>({
+			query: ({ userId, itemId, value }) => ({
+				url: '/cart/add',
+				method: 'POST',
+				body: {
+					userId,
+					itemId,
+					value
+				}
+			})
 		})
 	})
 })
 
-export const { useGetCartQuery } = cartAPI
+export const { useGetCartQuery, useAddToCartMutation } = cartAPI
