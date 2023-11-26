@@ -9,6 +9,7 @@ import {
 } from '@nextui-org/react'
 import Detail from '../detail/Detail'
 import BuyButton from '../button/buyButton'
+import AddToCartButton from '../button/addToCartButton'
 
 const ProductModal = ({
 	isOpen,
@@ -41,9 +42,7 @@ const ProductModal = ({
 							<ModalFooter>
 								<Button onClick={onClose}><p>{sm ? 'Cerrar' : 'Seguir viendo productos'}</p></Button>
 								<BuyButton product={product}/>
-								<Button className='md:mr-30' isIconOnly color="success" variant="bordered">
-									<p className="scale-150 font-bold mb-1">+</p>
-								</Button>
+								<AddToCartButton product={product}/>
 							</ModalFooter>
 						</>
 					)}
