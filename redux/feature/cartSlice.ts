@@ -40,7 +40,6 @@ export const cartSlice = createSlice({
 					if (item.itemId === payload.itemId && item.quantity > 1) {
 						item.quantity = item.quantity - 1
 					} else if (item.itemId === payload.itemId && item.quantity === 1) {
-						console.log('IM REMOVING AAAAAAA')
 						return false
 					}
 					return item
