@@ -2,17 +2,17 @@
 import { type CartProduct } from '@/types/User/types'
 import CartItem from './CartItem'
 import { Divider } from '@nextui-org/react'
-import { useDispatch, useSelector } from '@/redux/hooks'
-import { useEffect } from 'react'
+import { useDispatch } from '@/redux/hooks'
 import { updateQuantity } from '@/redux/feature/cartSlice'
 
-const Cart = (): JSX.Element => {
+const Cart = (
+	{
+		setItemCount,
+		products
+	}: { setItemCount: React.Dispatch<React.SetStateAction<number>>
+		products: CartProduct[] }
+): JSX.Element => {
 	const dispatch = useDispatch()
-	const products: CartProduct[] = useSelector((state: any) => state.cart.cart)
-	useEffect(() => {
-		console.log(products)
-	}, [products])
-
 	const handleQuantityChange = (itemId: string, action: 'add' | 'remove'): void => {
 		dispatch(updateQuantity({ itemId, action }))
 	}
