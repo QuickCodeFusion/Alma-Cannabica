@@ -2,7 +2,9 @@ import { type CartProduct } from '@/types/User/types'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-	cart: [] as CartProduct[]
+	cart: [] as CartProduct[],
+	isError: false,
+	isLoading: true
 }
 
 export const cartSlice = createSlice({
@@ -46,8 +48,10 @@ export const cartSlice = createSlice({
 				})
 			}
 		},
-		loadCart: (state, { payload }) => {
-			state.cart = payload
+		loadCart: (state, { payload: { products, isLoading, isError } }: { payload: { products: CartProduct[] | undefined, isLoading: boolean, isError: boolean } }) => {
+			state.cart = products instanceof Array ? products : state.cart
+			state.isLoading = isLoading
+			state.isError = isError
 		}
 	}
 })
