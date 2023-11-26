@@ -12,7 +12,6 @@ const AddToCartButton: React.FC<props> = ({ product }): React.JSX.Element => {
 	const dispatch = useDispatch()
 	const handleClick = (): void => {
 		dispatch(addToCart(product))
-		console.log('AÑADI ', product, 'AL CARRITO')
 	}
 
 	return (
