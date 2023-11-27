@@ -15,6 +15,7 @@ interface props {
 
 const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantityChange, isLoading, cartLoading }): React.JSX.Element | null => {
 	const { name, image, quantity, price, itemId } = product
+	const fallbackUrl = 'https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default_product.png?alt=media&token=90b8c614-57ea-44df-b341-36e0f41ffd3f'
 	if (cartLoading) return null
 	return (
 		<div className='flex flex-col gap-4 justify-end'>
@@ -36,9 +37,10 @@ const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantit
 						<Image
 							src={image}
 							alt={name}
+							fallbackSrc={fallbackUrl}
 							width={100}
 							classNames={{
-								wrapper: 'max-h-16 flex',
+								wrapper: 'max-h-16 flex bg-no-repeat',
 								img: 'object-cover'
 							}}
 						/>

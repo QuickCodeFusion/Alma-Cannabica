@@ -8,6 +8,7 @@ import { useUpdateCartMutation, useGetCartQuery } from '@/redux/service/cartAPI'
 import { useEffect, useState } from 'react'
 import { useUserSession } from '@/app/userContext'
 import { toast } from 'sonner'
+import BuyCartButton from '../button/buyCartButton'
 
 const Cart = (
 	{
@@ -47,7 +48,21 @@ const Cart = (
 			})
 	}
 	const handleRemoveProduct = (itemId: string): void => {
+		setIsLoading(true)
 		dispatch(removeFromCart({ itemId }))
+		updateCart({
+			userId: userSession?.uid ?? 'guest',
+			itemId,
+			value: 'remove'
+		})
+			.then(() => toast.success('Se quitó del carrito'))
+			.catch((error: any) => {
+				console.error(error)
+				toast.error('Error al modificar el carrito')
+			})
+			.finally(() => {
+				setIsLoading(false)
+			})
 	}
 	return (
 		<div className='overflow-y-auto overflow-x-hidden flex flex-col gap-1 p-0 justify-center min-w-full'
@@ -85,9 +100,13 @@ const Cart = (
 			</div>
 
 			<Divider/>
-			<h1 className='text-center font-bold text-medium'>
+			<span className='flex justify-between items-center gap-4'>
+				<h1 className='text-center font-bold text-medium'>
 				Subtotal: ${total.toLocaleString()}
-			</h1>
+				</h1>
+				<BuyCartButton products={products}/>
+			</span>
+
 		</div>
 	)
 }
