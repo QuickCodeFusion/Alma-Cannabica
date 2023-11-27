@@ -20,7 +20,10 @@ export const PopoverComponent = (): React.JSX.Element => {
 
 	const removeCart = (userId: string): void => {
 		dispatch(clearCart())
-		clearCartMutate(userId)
+		clearCartMutate({
+			userId,
+			itemId: ''
+		})
 			.then(() => {
 				toast.success('Se vació el carrito')
 			})
