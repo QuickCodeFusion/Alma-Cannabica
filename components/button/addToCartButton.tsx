@@ -2,7 +2,7 @@
 import { useUserSession } from '@/app/userContext'
 import { addToCart } from '@/redux/feature/cartSlice'
 import { useDispatch } from '@/redux/hooks'
-import { useAddToCartMutation } from '@/redux/service/cartAPI'
+import { useUpdateCartMutation } from '@/redux/service/cartAPI'
 import { type CardProduct, type Product } from '@/types/Product/type'
 import { Button, Tooltip } from '@nextui-org/react'
 import { toast } from 'sonner'
@@ -13,7 +13,7 @@ interface props {
 
 const AddToCartButton: React.FC<props> = ({ product }): React.JSX.Element => {
 	const dispatch = useDispatch()
-	const [addToCartMutation] = useAddToCartMutation()
+	const [addToCartMutation] = useUpdateCartMutation()
 	const { userSession } = useUserSession()
 	const handleClick = (): void => {
 		dispatch(addToCart(product))
@@ -25,7 +25,7 @@ const AddToCartButton: React.FC<props> = ({ product }): React.JSX.Element => {
 			.then(() => {
 				toast.success('Agregado al carrito')
 			})
-			.catch((error) => {
+			.catch((error: any) => {
 				console.error(error)
 				toast.error('Error al agregar al carrito')
 			})

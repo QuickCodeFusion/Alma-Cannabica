@@ -4,20 +4,19 @@ import CartItem from './CartItem'
 import { Divider, Spinner } from '@nextui-org/react'
 import { useDispatch } from '@/redux/hooks'
 import { loadCart, removeFromCart, updateQuantity } from '@/redux/feature/cartSlice'
-import { useAddToCartMutation, useGetCartQuery } from '@/redux/service/cartAPI'
+import { useUpdateCartMutation, useGetCartQuery } from '@/redux/service/cartAPI'
 import { useEffect, useState } from 'react'
 import { useUserSession } from '@/app/userContext'
 import { toast } from 'sonner'
 
 const Cart = (
 	{
-		setItemCount,
 		products
-	}: { setItemCount: React.Dispatch<React.SetStateAction<number>>
+	}: {
 		products: CartProduct[] }
 ): JSX.Element => {
 	const dispatch = useDispatch()
-	const [addToCart] = useAddToCartMutation()
+	const [updateCart] = useUpdateCartMutation()
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -27,34 +26,28 @@ const Cart = (
 	const { data, isLoading: cartLoading, isError } = useGetCartQuery(userSession?.uid ?? '')
 
 	useEffect(() => {
-		return () => {
-			data?.length && dispatch(loadCart({ products: data, cartLoading, isError }))
-		}
+		data?.length && dispatch(loadCart({ products: data, cartLoading, isError }))
 	}, [data])
 
 	const handleQuantityChange = (itemId: string, action: 'add' | 'remove'): void => {
 		setIsLoading(true)
 		dispatch(updateQuantity({ itemId, action }))
-		addToCart({
-			userId: userSession?.uid ?? '',
+		updateCart({
+			userId: userSession?.uid ?? 'guest',
 			itemId,
 			value: action
 		})
-			.then(() => toast.success('Agregado al carrito'))
-			.catch((error) => {
+			.then(() => toast.success(`Se ${action === 'add' ? 'agregó al carrito' : 'quitó del carrito'}`))
+			.catch((error: any) => {
 				console.error(error)
-				toast.error('Error al agregar al carrito')
+				toast.error('Error al modificar el carrito')
 			})
 			.finally(() => {
 				setIsLoading(false)
 			})
 	}
 	const handleRemoveProduct = (itemId: string): void => {
-		setIsLoading(true)
 		dispatch(removeFromCart({ itemId }))
-			.finally(() => {
-				setIsLoading(false)
-			})
 	}
 	return (
 		<div className='overflow-y-auto overflow-x-hidden flex flex-col gap-1 p-1.5 justify-center min-w-full'
