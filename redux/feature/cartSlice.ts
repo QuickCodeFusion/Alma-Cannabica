@@ -48,9 +48,9 @@ export const cartSlice = createSlice({
 				})
 			}
 		},
-		loadCart: (state, { payload: { products, isLoading, isError } }: { payload: { products: CartProduct[] | undefined, isLoading: boolean, isError: boolean } }) => {
+		loadCart: (state, { payload: { products, cartLoading, isError } }: { payload: { products: CartProduct[] | undefined, cartLoading: boolean, isError: boolean } }) => {
 			state.cart = products instanceof Array ? products : state.cart
-			state.isLoading = isLoading
+			state.isLoading = cartLoading
 			state.isError = isError
 		}
 	}
