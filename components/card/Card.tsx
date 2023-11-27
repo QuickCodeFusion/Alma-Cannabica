@@ -24,20 +24,20 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 
 				<CardFooter className={style.cardFooter}>
 					<b className={style.nameProduct}>{name}</b>
-					<div className={style.btnCard}>
-						<div className={`flex justify-between w-full align-center ${style.datosProduct}`}>
-							<p className="text-600">{category}</p>
-							<p className="text-600">${price}</p>
-						</div>
+					
+						
 						<div className={style.containerBtn}>
+							<p className="text-600 sm:self-start">${price}</p>
+							<div className='flex gap-2 sm:justify-between'>
 							<BuyButton product={product}/>
 							<Tooltip  content="Añadir al carrito">
 								<Button isIconOnly color="success" variant="bordered">
 									<p className="scale-150 font-bold mb-1 hover:scale-[200%]">+</p>
 								</Button>
 							</Tooltip>
+							</div>
 						</div>
-					</div>
+					
 				</CardFooter>
 			</NextUICard>
 

@@ -68,7 +68,9 @@ const Filters = ({
   };
 
   return (
+    <div className={onFilter ? style.containerBack : ''} >
     <div className={onFilter ? style.containerII : style.container}>
+      
       <Button
         onClick={() => {
           onClose();
@@ -98,6 +100,7 @@ const Filters = ({
           </Button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

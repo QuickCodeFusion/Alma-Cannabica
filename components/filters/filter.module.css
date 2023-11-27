@@ -56,6 +56,13 @@
         border-radius: 30px;
         transition: 4s;
     }
+    .containerBack{
+        position: absolute;
+        height: 85vh;
+        width: 100vw;
+        backdrop-filter: blur(10px);
+        z-index: 5;
+    }
     .closeBtnI{
         display: block;
         position: absolute;
