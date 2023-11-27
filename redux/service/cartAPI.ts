@@ -4,19 +4,19 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const cartAPI = createApi({
 	reducerPath: 'cartAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '/api/users'
+		baseUrl: '/api/users/cart'
 	}),
 	tagTypes: ['Cart'],
 	endpoints: (builder) => ({
 		getCart: builder.query<CartProduct[], string>({
 			query: (userId) => ({
-				url: `/cart?id=${userId}`
+				url: `?id=${userId}`
 			}),
 			providesTags: ['Cart']
 		}),
 		updateCart: builder.mutation<Promise<void>, { userId: string, itemId: string, value: string }>({
 			query: ({ userId, itemId, value }) => ({
-				url: '/cart/update',
+				url: '/update',
 				method: 'PUT',
 				body: {
 					userId,
@@ -25,8 +25,18 @@ export const cartAPI = createApi({
 				}
 			}),
 			invalidatesTags: ['Cart']
+		}),
+		clearCart: builder.mutation<Promise<void>, string>({
+			query: (userId) => ({
+				url: '/delete',
+				method: 'DELETE',
+				body: {
+					userId
+				}
+			}),
+			invalidatesTags: ['Cart']
 		})
 	})
 })
 
-export const { useGetCartQuery, useUpdateCartMutation } = cartAPI
+export const { useGetCartQuery, useUpdateCartMutation, useClearCartMutation } = cartAPI
