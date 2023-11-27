@@ -1,5 +1,5 @@
 import { db } from '@/firebase/config'
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 export const addToCart = async (userId: string, cartItemId: string, value: string): Promise<void> => {
 	const cartDoc = doc(db, 'users', userId, 'cart', cartItemId)
@@ -9,7 +9,8 @@ export const addToCart = async (userId: string, cartItemId: string, value: strin
 		const cartData = cartDocSnapshot.data()
 		const quantity = cartData.quantity ?? 0
 		if (quantity > 0) {
-			await addToCart(userId, cartItemId, value)
+			await updateDoc(cartDoc, { quantity: quantity + 1 })
+			return
 		}
 	}
 

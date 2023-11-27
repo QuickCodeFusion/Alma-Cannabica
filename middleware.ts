@@ -4,9 +4,8 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 	const sessionToken = cookies().get('session')?.value ?? ''
-	const isLoginOrRegister = req.nextUrl.pathname.startsWith('/login') || req.nextUrl.pathname.startsWith('/register')
 
-	if (!sessionToken && !isLoginOrRegister) {
+	if (!sessionToken) {
 		return NextResponse.json({ error: 'User not logged in' }, { status: 401 })
 	}
 
@@ -16,10 +15,6 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 		}
 	}).then(async res => await res.json())
 
-	if (user.providerData && isLoginOrRegister) {
-		return NextResponse.redirect(new URL('/products', req.nextUrl.origin))
-	}
-
 	if (req.nextUrl.pathname.startsWith('/admin-dashboard') && !user.customClaims?.admin) {
 		return NextResponse.json({ error: `User ${user.email} is not an admin` }, { status: 401 })
 	}
@@ -27,5 +22,5 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 }
 
 export const config = {
-	matcher: ['/api/users/:path*', '/admin-dashboard/:path*', '/login', '/register']
+	matcher: ['/api/users/:path*', '/admin-dashboard/:path*']
 }

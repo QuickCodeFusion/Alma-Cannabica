@@ -6,7 +6,6 @@ import { useSelector } from '@/redux/hooks'
 
 const Cards = (): React.JSX.Element => {
 	const { products, isLoading, isError } = useSelector((state: any) => state.products)
-	console.log(products)
 
 	return (
 		<div className={style.containerCards}>

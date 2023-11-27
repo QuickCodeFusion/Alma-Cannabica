@@ -40,3 +40,14 @@ export interface NormalizedUser {
 		admin: boolean
 	}
 }
+
+export interface CartProduct {
+	name: string
+	nameToLowerCase: string
+	price: string
+	quantity: number
+	image: string
+	category: string[]
+	description?: string
+	itemId: string
+}
