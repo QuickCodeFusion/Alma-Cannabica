@@ -12,13 +12,13 @@ export const PopoverComponent = (): React.JSX.Element => {
 		setItemCount(products.reduce((acc: number, product: CartProduct) => acc + product.quantity, 0))
 	}, [products])
 	const content = (
-		<PopoverContent className="w-[240px]">
+		<PopoverContent className="w-auto">
 			{(titleProps) => (
 				<div className="px-1 py-2 w-full">
 					<p className="text-small font-bold text-foreground" {...titleProps}>
                         Carrito de compras
 					</p>
-					<div className="mt-2 flex flex-col gap-2 w-full max-h-96">
+					<div className="flex flex-col gap-1 w-full max-h-96 p-0">
 						<Cart setItemCount={setItemCount} products={products}/>
 					</div>
 				</div>
@@ -27,26 +27,24 @@ export const PopoverComponent = (): React.JSX.Element => {
 	)
 
 	return (
-		<div className="flex flex-wrap gap-4">
-			<Badge
-				color='success'
-				variant='flat'
-				content={itemCount}
+		<Badge
+			color='success'
+			variant='flat'
+			content={itemCount}
+		>
+			<Popover
+				showArrow
+				offset={10}
+				placement="bottom"
+				backdrop="blur"
 			>
-				<Popover
-					showArrow
-					offset={10}
-					placement="bottom"
-					backdrop="blur"
-				>
-					<PopoverTrigger>
-						<Button size="sm" isIconOnly className="bg-white border">
-							<Image src="/carrito.png" alt="" width={18} height={18} />
-						</Button>
-					</PopoverTrigger>
-					{content}
-				</Popover>
-			</Badge>
-		</div>
+				<PopoverTrigger>
+					<Button size="sm" isIconOnly className="bg-white border">
+						<Image src="/carrito.png" alt="" width={18} height={18} />
+					</Button>
+				</PopoverTrigger>
+				{content}
+			</Popover>
+		</Badge>
 	)
 }
