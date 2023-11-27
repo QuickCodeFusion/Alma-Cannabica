@@ -6,24 +6,27 @@ export const cartAPI = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: '/api/users'
 	}),
+	tagTypes: ['Cart'],
 	endpoints: (builder) => ({
 		getCart: builder.query<CartProduct[], string>({
 			query: (userId) => ({
 				url: `/cart?id=${userId}`
-			})
+			}),
+			providesTags: ['Cart']
 		}),
-		addToCart: builder.mutation<Promise<void>, { userId: string, itemId: string, value: string }>({
+		updateCart: builder.mutation<Promise<void>, { userId: string, itemId: string, value: string }>({
 			query: ({ userId, itemId, value }) => ({
-				url: '/cart/add',
-				method: 'POST',
+				url: '/cart/update',
+				method: 'PUT',
 				body: {
 					userId,
 					itemId,
 					value
 				}
-			})
+			}),
+			invalidatesTags: ['Cart']
 		})
 	})
 })
 
-export const { useGetCartQuery, useAddToCartMutation } = cartAPI
+export const { useGetCartQuery, useUpdateCartMutation } = cartAPI
