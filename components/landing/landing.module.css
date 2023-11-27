@@ -112,7 +112,7 @@
         flex-direction: row;
         justify-content: space-around;
         border-radius: 0;
-        border-bottom: 1px grey solid;
+        border-bottom: 2px rgba(78, 78, 78, 0.562) solid;
     }
     .cardFooter{
         margin-top: 50px;
