@@ -5,9 +5,10 @@ interface props {
 	handleQuantityChange: (itemId: string, action: 'add' | 'remove') => void
 	itemId: string
 	isLoading: boolean
+	cartLoading: boolean
 }
 
-const QuantityButton: React.FC<props> = ({ quantity, handleQuantityChange, itemId, isLoading }): React.JSX.Element => {
+const QuantityButton: React.FC<props> = ({ quantity, handleQuantityChange, itemId, isLoading, cartLoading }): React.JSX.Element => {
 	return (
 		<ButtonGroup size='sm'>
 			<Button
@@ -16,15 +17,16 @@ const QuantityButton: React.FC<props> = ({ quantity, handleQuantityChange, itemI
 				onClick={() => { handleQuantityChange(itemId, 'add') }}
 				color="success"
 			>
-				+
+				{isLoading ? null : '+'}
 			</Button>
 			<Button
 				isDisabled
 				isIconOnly
+				isLoading={isLoading}
 				className='cursor-default text-green-950 font-bold text-md'
 				color='success'
 				variant='flat'
-			>x{quantity}</Button>
+			>x{cartLoading ? null : quantity}</Button>
 			<Button
 				isLoading={isLoading}
 				isIconOnly

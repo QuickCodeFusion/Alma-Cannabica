@@ -68,7 +68,7 @@ const Cart = (
 						</p>
 					</div>
 				)}
-			{products instanceof Array && products.map((product) => (
+			{!cartLoading && products instanceof Array && products.map((product) => (
 				<>
 					<Divider/>
 					<CartItem
@@ -77,6 +77,7 @@ const Cart = (
 						handleQuantityChange={handleQuantityChange}
 						handleRemoveProduct={handleRemoveProduct}
 						isLoading={isLoading}
+						cartLoading={cartLoading}
 					/>
 				</>
 			))}

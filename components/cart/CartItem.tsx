@@ -10,10 +10,12 @@ interface props {
 	handleRemoveProduct: (itemId: string) => void
 	handleQuantityChange: (itemId: string, action: 'add' | 'remove') => void
 	isLoading: boolean
+	cartLoading: boolean
 }
 
-const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantityChange, isLoading }): React.JSX.Element => {
+const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantityChange, isLoading, cartLoading }): React.JSX.Element | null => {
 	const { name, image, quantity, price, itemId } = product
+	if (cartLoading) return null
 	return (
 		<div className='flex flex-col gap-4 justify-end'>
 			<div className='flex gap-6 justify-between'>
@@ -45,7 +47,7 @@ const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantit
 			</div>
 			<div className='flex justify-between items-center gap-4 max-w-full'>
 				<Chip className='p-0' variant='bordered' radius='none'>Total: {quantity === 0 ? 0 : parseInt(price) * quantity}</Chip>
-				<QuantityButton isLoading={isLoading} quantity={quantity} handleQuantityChange={handleQuantityChange} itemId={itemId}/>
+				<QuantityButton cartLoading={isLoading} isLoading={isLoading} quantity={quantity} handleQuantityChange={handleQuantityChange} itemId={itemId}/>
 			</div>
 		</div>
 	)
