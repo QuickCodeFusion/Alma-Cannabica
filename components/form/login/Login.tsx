@@ -7,6 +7,7 @@ import { useUserSession } from '@/app/userContext'
 import { useRouter } from 'next/navigation'
 import style from './login.module.css'
 import { Input, Link, Spacer } from '@nextui-org/react'
+import { validateEmail, validatePassword } from '@/utils/validations'
 
 const Login = (): React.JSX.Element => {
 	const [form, setForm] = useState({
@@ -25,10 +26,6 @@ const Login = (): React.JSX.Element => {
 			...form,
 			[e.target.name]: e.target.value
 		})
-	}
-
-	const validatePassword = (value: string): boolean => {
-		return /^(?=.*[a-z]).{3,20}$/.test(value)
 	}
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -85,8 +82,6 @@ const Login = (): React.JSX.Element => {
 				}
 			})
 	}
-
-	const validateEmail = (value: string): boolean => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i.test(value)
 
 	const isInvalid = React.useMemo(() => {
 		if (form.email === '') return false

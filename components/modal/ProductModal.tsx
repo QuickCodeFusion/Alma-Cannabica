@@ -4,8 +4,7 @@ import {
 	Modal,
 	ModalBody,
 	ModalContent,
-	ModalFooter,
-	ModalHeader
+	ModalFooter
 } from '@nextui-org/react'
 import Detail from '../detail/Detail'
 import BuyButton from '../button/buyButton'

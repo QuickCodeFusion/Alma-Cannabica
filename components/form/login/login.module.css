@@ -37,8 +37,8 @@
   @media (max-width: 1300px) {
     width: 60vw; 
   }
-  @media (max-width: 400px) {
+  @media (max-width: 415px) {
     width: 60vw; 
-    height: 50vh;
+    height: 53vh;
   }
 }

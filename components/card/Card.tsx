@@ -27,7 +27,7 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 				<CardFooter className={style.cardFooter}>
 					<b className={style.nameProduct}>{name}</b>
 					<div className={style.btnCard}>
-						<div className="flex justify-between w-full align-center">
+						<div className={`flex justify-between w-full align-center ${style.datosProduct}`}>
 							<p className="text-600">{category}</p>
 							<p className="text-600">${price}</p>
 						</div>
