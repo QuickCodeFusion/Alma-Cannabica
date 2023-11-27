@@ -37,6 +37,10 @@ const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantit
 							src={image}
 							alt={name}
 							width={100}
+							classNames={{
+								wrapper: 'max-h-16 flex',
+								img: 'object-cover'
+							}}
 						/>
 					</Badge>
 				</Tooltip>
@@ -46,7 +50,13 @@ const CartItem: React.FC<props> = ({ product, handleRemoveProduct, handleQuantit
 				</div>
 			</div>
 			<div className='flex justify-between items-center gap-4 max-w-full'>
-				<Chip className='p-0' variant='bordered' radius='none'>Total: {quantity === 0 ? 0 : parseInt(price) * quantity}</Chip>
+				<Chip className='p-0'
+					variant='bordered'
+					radius='none'
+					classNames={{
+						content: 'font-medium'
+					}}
+				>Total: ${quantity === 0 ? 0 : parseInt(price) * quantity}</Chip>
 				<QuantityButton cartLoading={isLoading} isLoading={isLoading} quantity={quantity} handleQuantityChange={handleQuantityChange} itemId={itemId}/>
 			</div>
 		</div>
