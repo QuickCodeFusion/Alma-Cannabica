@@ -15,14 +15,20 @@
     display: none;
 }
 @media screen and (max-width: 500px){
+    .container{
+        flex-direction: column;
+        padding-top: 0;
+        height: 75vh;
+        justify-content:start;
+    }
     .cards{
-        width: 95vw;
+        width: 100vw;
+        height: 95%;
     }
     .filterBtn{
         display: block;
-        position: absolute;
-        top:80px;
-        left: 10px;
+        width: 100vw;
+        border-radius: 0;
     }
     
 }
