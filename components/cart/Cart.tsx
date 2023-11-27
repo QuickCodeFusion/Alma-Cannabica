@@ -4,7 +4,7 @@ import CartItem from './CartItem'
 import { Divider, Spinner } from '@nextui-org/react'
 import { useDispatch } from '@/redux/hooks'
 import { loadCart, removeFromCart, updateQuantity } from '@/redux/feature/cartSlice'
-import { useUpdateCartMutation, useGetCartQuery } from '@/redux/service/cartAPI'
+import { useUpdateCartMutation, useGetCartQuery, useClearCartMutation } from '@/redux/service/cartAPI'
 import { useEffect, useState } from 'react'
 import { useUserSession } from '@/app/userContext'
 import { toast } from 'sonner'
@@ -18,6 +18,7 @@ const Cart = (
 ): JSX.Element => {
 	const dispatch = useDispatch()
 	const [updateCart] = useUpdateCartMutation()
+	const [clearCart] = useClearCartMutation()
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -50,10 +51,9 @@ const Cart = (
 	const handleRemoveProduct = (itemId: string): void => {
 		setIsLoading(true)
 		dispatch(removeFromCart({ itemId }))
-		updateCart({
+		clearCart({
 			userId: userSession?.uid ?? 'guest',
-			itemId,
-			value: 'remove'
+			itemId
 		})
 			.then(() => toast.success('Se quitó del carrito'))
 			.catch((error: any) => {

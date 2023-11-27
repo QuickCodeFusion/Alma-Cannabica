@@ -26,12 +26,13 @@ export const cartAPI = createApi({
 			}),
 			invalidatesTags: ['Cart']
 		}),
-		clearCart: builder.mutation<Promise<void>, string>({
-			query: (userId) => ({
+		clearCart: builder.mutation<Promise<void>, { userId: string, itemId: string }>({
+			query: ({ userId, itemId }) => ({
 				url: '/delete',
 				method: 'DELETE',
 				body: {
-					userId
+					userId,
+					itemId
 				}
 			}),
 			invalidatesTags: ['Cart']
