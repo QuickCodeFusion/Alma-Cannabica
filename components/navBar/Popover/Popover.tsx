@@ -53,7 +53,7 @@ export const PopoverComponent = (): React.JSX.Element => {
 						</Button>
 					</span>
 
-					<div className="flex flex-col gap-1 w-full max-h-[70vh] p-0">
+					<div className="flex flex-col gap-1 w-full max-h-[90vh] md:max-h-[82vh] p-0">
 						<Cart products={products}/>
 					</div>
 					<ConfirmModal
