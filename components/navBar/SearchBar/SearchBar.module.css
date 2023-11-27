@@ -6,10 +6,11 @@
 }
 .input:focus{
     color: white;
-    transform: scale(1.1);
+    width: 150px;
     padding-left: 5px;
 }
 .searchBar{
+    width: 170px;
     display: flex;
     justify-content: center;
     align-items: center;
