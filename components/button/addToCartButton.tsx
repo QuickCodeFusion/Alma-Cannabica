@@ -5,6 +5,7 @@ import { useDispatch } from '@/redux/hooks'
 import { useUpdateCartMutation } from '@/redux/service/cartAPI'
 import { type CardProduct, type Product } from '@/types/Product/type'
 import { Button, Tooltip } from '@nextui-org/react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
 interface props {
@@ -12,10 +13,12 @@ interface props {
 }
 
 const AddToCartButton: React.FC<props> = ({ product }): React.JSX.Element => {
+	const [isLoading, setIsLoading] = useState(false)
 	const dispatch = useDispatch()
 	const [addToCartMutation] = useUpdateCartMutation()
 	const { userSession } = useUserSession()
 	const handleClick = (): void => {
+		setIsLoading(true)
 		dispatch(addToCart(product))
 		addToCartMutation({
 			userId: userSession?.uid ?? '',
@@ -29,6 +32,9 @@ const AddToCartButton: React.FC<props> = ({ product }): React.JSX.Element => {
 				console.error(error)
 				toast.error('Error al agregar al carrito')
 			})
+			.finally(() => {
+				setIsLoading(false)
+			})
 	}
 
 	return (
@@ -40,9 +46,10 @@ const AddToCartButton: React.FC<props> = ({ product }): React.JSX.Element => {
 					color="success"
 					variant="bordered"
 					className='group'
+					isLoading={isLoading}
 				>
 					<p className="text-2xl font-bold group-hover:scale-150 group-hover:text-green-600 group-hover:mb-1 transition duration-500 ease-in-out">
-                    +
+						{isLoading ? null : '+'}
 					</p>
 				</Button>
 			</Tooltip>
