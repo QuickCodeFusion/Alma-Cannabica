@@ -18,8 +18,8 @@ export const PopoverComponent = (): React.JSX.Element => {
 					<p className="text-small font-bold text-foreground" {...titleProps}>
                         Carrito de compras
 					</p>
-					<div className="flex flex-col gap-1 w-full max-h-96 p-0">
-						<Cart setItemCount={setItemCount} products={products}/>
+					<div className="flex flex-col gap-1 w-full max-h-[70vh] p-0">
+						<Cart products={products}/>
 					</div>
 				</div>
 			)}

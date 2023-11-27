@@ -50,7 +50,7 @@ const Cart = (
 		dispatch(removeFromCart({ itemId }))
 	}
 	return (
-		<div className='overflow-y-auto overflow-x-hidden flex flex-col gap-1 p-1.5 justify-center min-w-full'
+		<div className='overflow-y-auto overflow-x-hidden flex flex-col gap-1 p-0 justify-center min-w-full'
 		>
 			{cartLoading
 				? (
@@ -68,23 +68,26 @@ const Cart = (
 						</p>
 					</div>
 				)}
-			{!cartLoading && products instanceof Array && products.map((product) => (
-				<>
-					<Divider/>
-					<CartItem
-						key={product.itemId}
-						product={product}
-						handleQuantityChange={handleQuantityChange}
-						handleRemoveProduct={handleRemoveProduct}
-						isLoading={isLoading}
-						cartLoading={cartLoading}
-					/>
-				</>
-			))}
+			<div className='overflow-y-auto flex flex-col justify-between min-w-full gap-1 p-1.5 shadow-[inset_0_-5px_6px_rgba(0,0,0,0.1)]'>
+				{!cartLoading && products instanceof Array && products.map((product) => (
+					<>
+						<Divider/>
+						<CartItem
+							key={product.itemId}
+							product={product}
+							handleQuantityChange={handleQuantityChange}
+							handleRemoveProduct={handleRemoveProduct}
+							isLoading={isLoading}
+							cartLoading={cartLoading}
+						/>
+					</>
+				))}
+			</div>
+
 			<Divider/>
-			<p className='text-center'>
-				Subtotal: ${total}
-			</p>
+			<h1 className='text-center font-bold text-medium'>
+				Subtotal: ${total.toLocaleString()}
+			</h1>
 		</div>
 	)
 }
