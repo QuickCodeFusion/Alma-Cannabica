@@ -1,8 +1,10 @@
 import { type CardProduct } from '@/types/Product/type'
 import style from '../landing/landing.module.css'
-import { CardFooter, Image, Button, useDisclosure, Card as NextUICard, Tooltip } from '@nextui-org/react'
+import { CardFooter, Image, useDisclosure, Card as NextUICard } from '@nextui-org/react'
+
 import ProductModal from '../modal/ProductModal'
 import BuyButton from '../button/buyButton'
+import AddToCartButton from '../button/addToCartButton'
 
 const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -30,14 +32,9 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 							<p className="text-600 sm:self-start">${price}</p>
 							<div className='flex gap-2 sm:justify-between'>
 							<BuyButton product={product}/>
-							<Tooltip  content="Añadir al carrito">
-								<Button isIconOnly color="success" variant="bordered">
-									<p className="scale-150 font-bold mb-1 hover:scale-[200%]">+</p>
-								</Button>
-							</Tooltip>
-							</div>
+							<AddToCartButton product={product}/>
 						</div>
-					
+					</div>
 				</CardFooter>
 			</NextUICard>
 
