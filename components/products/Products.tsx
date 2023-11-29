@@ -28,14 +28,6 @@ const Products = (): JSX.Element => {
 			</>
 		</div>
 	)
-                </Button>
-                <Filters onFilter={Filter}/>
-            </div>
-            <div className={style.cards}>
-                <Cards />
-            </div>
-        </div>
-    )
 }
 
 export default Products
