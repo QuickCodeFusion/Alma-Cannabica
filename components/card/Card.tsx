@@ -25,7 +25,7 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 				/>
 
 				<CardFooter className={style.cardFooter}>
-					<b className={style.nameProduct}>{name}</b>
+					<span className={style.nameProduct}>{name}</span>
 					
 						
 						<div className={style.containerBtn}>
