@@ -7,6 +7,8 @@ import { carouselAPI } from './service/carouselAPI'
 import { searchBarSlice } from './feature/searchBarSlice'
 import { productSlice } from './feature/productsSlice'
 import { categoriesAPI } from './service/categoriesAPI'
+import { cartSlice } from './feature/cartSlice'
+import { cartAPI } from './service/cartAPI'
 
 export const store = configureStore({
 	reducer: {
@@ -15,8 +17,10 @@ export const store = configureStore({
 		[productsFilterAPI.reducerPath]: productsFilterAPI.reducer,
 		[carouselAPI.reducerPath]: carouselAPI.reducer,
 		[categoriesAPI.reducerPath]: categoriesAPI.reducer,
+		[cartAPI.reducerPath]: cartAPI.reducer,
 		searchBar: searchBarSlice.reducer,
-		products: productSlice.reducer
+		products: productSlice.reducer,
+		cart: cartSlice.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
@@ -24,7 +28,8 @@ export const store = configureStore({
 			productsAPI.middleware,
 			productsFilterAPI.middleware,
 			carouselAPI.middleware,
-			categoriesAPI.middleware
+			categoriesAPI.middleware,
+			cartAPI.middleware
 		)
 })
 

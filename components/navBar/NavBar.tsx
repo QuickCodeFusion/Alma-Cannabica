@@ -13,17 +13,14 @@ import SearchBar from './SearchBar/SearchBar'
 import style from './navbar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 import { useUserSession } from '@/app/userContext'
 import { PopoverComponent } from './Popover/Popover'
+import { usePathname } from 'next/navigation'
 
 const NavBar = (): JSX.Element => {
 	const { userSession, logOut } = useUserSession()
-	const [selectedMenuItem, setSelectedMenuItem] = useState('')
+	const pathname = usePathname()
 
-	const handleMenuItemClick = (select: string): void => {
-		setSelectedMenuItem(select)
-	}
 	const menuItems = [
 		{ name: 'Inicio', label: '/' },
 		{ name: 'Productos', label: 'products' },
@@ -40,9 +37,6 @@ const NavBar = (): JSX.Element => {
 				<NavbarContent className="lg:hidden" justify="center">
 					<NavbarBrand>
 						<Link
-							onClick={() => {
-								handleMenuItemClick('')
-							}}
 							href={'/'}
 						>
 							<Image src="/logo.png" width={50} height={50} alt="" />
@@ -53,9 +47,6 @@ const NavBar = (): JSX.Element => {
 					<NavbarContent className="hidden lg:flex gap-5" justify="center">
 						<NavbarBrand>
 							<Link
-								onClick={() => {
-									handleMenuItemClick('')
-								}}
 								href={'/'}
 							>
 								<Image src="/logo.png" width={50} height={50} alt="" />
@@ -67,18 +58,18 @@ const NavBar = (): JSX.Element => {
 					</NavbarContent>
 					<NavbarContent justify="end" >
 						<NavbarItem className="hidden lg:flex">
-							<Link onClick={() => { handleMenuItemClick('products') }} className={selectedMenuItem === 'products' ? style.selected : style.notSelected} href={'/products'}>
+							<Link className={pathname === '/products' ? style.selected : style.notSelected} href={'/products'}>
 								Productos
 							</Link>
 						</NavbarItem>
 						<NavbarItem className="hidden lg:flex">
-							<Link onClick={() => { handleMenuItemClick('products') }} className={selectedMenuItem === 'info' ? style.selected : style.notSelected} href={'#'}>
+							<Link className={pathname === '/info' ? style.selected : style.notSelected} href={'/info'}>
 								Información
 							</Link>
 						</NavbarItem>
 						{userSession?.claims.admin
 							? <NavbarItem className="hidden lg:flex">
-								<Link onClick={() => { handleMenuItemClick('admin-dashboard') }} className={selectedMenuItem === 'admin-dashboard' ? style.selected : style.notSelected} href={'/admin-dashboard'}>
+								<Link className={pathname === '/admin-dashboard' ? style.selected : style.notSelected} href={'/admin-dashboard'}>
 								Panel de administrador
 								</Link>
 							</NavbarItem>
@@ -121,16 +112,13 @@ const NavBar = (): JSX.Element => {
 				</div>
 				<NavbarMenu className={style.menuNavBar}>
 					{menuItems.map((item, index) => (
-						<NavbarMenuItem key={`${item}-${index}`} className="pt-10">
+						<NavbarMenuItem key={`${item.name}-${index}`} className="pt-10">
 							<Link
 								className={
-									selectedMenuItem === item.label
+									pathname === `/${item.label}`
 										? style.selectedItem
 										: style.notSelectedItem
 								}
-								onClick={() => {
-									handleMenuItemClick(item.label)
-								}}
 								href={`/${item.label}`}
 							>
 								{item.name}

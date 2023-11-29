@@ -1,10 +1,10 @@
 'use client'
-import { type Product } from '@/types/Product/type'
+import { type CardProduct, type Product } from '@/types/Product/type'
 import { Button, useDisclosure } from '@nextui-org/react'
 import BuyModal from '../modal/BuyModal'
 
 interface props {
-	product: Product
+	product: Product | CardProduct
 }
 
 const BuyButton: React.FC<props> = ({ product }): React.JSX.Element => {
@@ -14,6 +14,7 @@ const BuyButton: React.FC<props> = ({ product }): React.JSX.Element => {
 		<>
 			<Button
 				onClick={() => { onOpen() }}
+				color="success"
 				className='text-white bg-green-400 hover:bg-green-500'
 			>
             Comprar

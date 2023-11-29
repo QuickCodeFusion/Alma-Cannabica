@@ -9,22 +9,33 @@ const Products = (): JSX.Element => {
 	const [Filter, setMfiler] = useState(false)
 	const onChange = () => {
 		setMfiler(true)
+        setTimeout(() => {
+            setMfiler(false)
+        }, 100)
 	}
 	return (
-		<div className='flex flex-col md:items-start md:justify-around w-full'>
+		<div className='flex flex-col md:flex-row md:items-start md:justify-around w-full'>
 			<Card classNames={{
 				base: 'md:my-10'
 			}}>
 				<Button onClick={() => { onChange() }} size="sm" className={style.filterBtn} color="primary" variant="flat">
                     Filtros
 				</Button>
-				<Filters onFilter={Filter} onClose={() => { setMfiler(false) }} />
+				<Filters onFilter={Filter}/>
 			</Card>
 			<>
 				<Cards />
 			</>
 		</div>
 	)
+                </Button>
+                <Filters onFilter={Filter}/>
+            </div>
+            <div className={style.cards}>
+                <Cards />
+            </div>
+        </div>
+    )
 }
 
 export default Products
