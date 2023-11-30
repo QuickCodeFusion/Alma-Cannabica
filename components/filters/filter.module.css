@@ -8,9 +8,10 @@
     border-radius: 30px;
     padding: 30px;
     margin: 20px;
-    
+
 }
-.subContainer{
+
+.subContainer {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -30,8 +31,9 @@
     position: relative;
     top: 40px;
 }
-.closeBtnI{
-    display: none;
+
+.noModal {
+    display: none
 }
 
 @media screen and (max-width: 500px) {
@@ -39,14 +41,7 @@
         display: none;
     }
 
-    .containerII {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 5;
-        padding: 20px;
-        margin: 0px;
+    .ModalFilter {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -54,12 +49,16 @@
         height: 450px;
         width: 250px;
         border-radius: 30px;
-        transition: 4s;
+        padding-top: 50px;
+        margin-bottom: 150px;
     }
-    .closeBtnI{
-        display: block;
+
+    .containerBack {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        height: 85vh;
+        width: 100vw;
+        backdrop-filter: blur(10px);
+        z-index: 5;
     }
+
 }

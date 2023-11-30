@@ -3,6 +3,7 @@ import FilterPrice from "./filterPrice/FilterPrice";
 import { type ChangeEvent, useState } from "react";
 import FilterSort from "./filterSort/FilterSort";
 import FilterCategories from "./filterCategory/FilterCategory";
+import { FilterModal } from "./filterModal/FilterModal";
 import { Button } from "@nextui-org/react";
 import style from "./filter.module.css";
 import { useSelector } from "react-redux";
@@ -13,10 +14,8 @@ import { useEffect } from "react";
 
 const Filters = ({
   onFilter,
-  onClose,
 }: {
   onFilter: boolean;
-  onClose: () => void;
 }): JSX.Element => {
   const dispatch = useDispatch();
   const name = useSelector((state: any) => state.searchBar.value);
@@ -59,7 +58,6 @@ const Filters = ({
   });
 
   const handleSubmit = (): void => {
-    onClose();
     if (isError) {
       dispatch(loadProducts({ products: [], isLoading, isError }));
     } else {
@@ -68,20 +66,10 @@ const Filters = ({
   };
 
   return (
-    <div className={onFilter ? style.containerII : style.container}>
-      <Button
-        onClick={() => {
-          onClose();
-        }}
-        isIconOnly
-        size="sm"
-        color="danger"
-        variant="bordered"
-        radius="full"
-        className={style.closeBtnI}
-      >
-        X
-      </Button>
+    
+    <div className={style.container}>
+      <FilterModal onFilter={onFilter}/> 
+      
       <div className={style.subContainer}>
         <div>
           <FilterPrice valueState={valueState} onChange={onChange} />
@@ -99,6 +87,7 @@ const Filters = ({
         </div>
       </div>
     </div>
+    
   );
 };
 export default Filters;
