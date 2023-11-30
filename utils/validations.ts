@@ -22,7 +22,7 @@ export const productValidate = (
 		category
 	}: {
 		name: string
-		image: File | undefined
+		image: File | undefined | string
 		description: string
 		price: string
 		category: string[]
@@ -39,5 +39,5 @@ export const productValidate = (
 export const validateEmail = (value: string): boolean => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i.test(value)
 
 export 	const validatePassword = (value: string): boolean => {
-	return /^(?=.*[a-z]).{3,20}$/.test(value)
+	return /^(?=.*[a-z]).{6,20}$/.test(value)
 }
