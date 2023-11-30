@@ -30,10 +30,10 @@ const SearchBar = (): React.JSX.Element => {
 
 	return (
 		<>
-				<input type="text" onChange={handleChange} className={style.input} />
-				<button className={style.button} onClick={handleSubmit}>
-					<Image src="/buscar.png" alt="Buscar" width={20} height={20}></Image>
-				</button>
+			<input type="text" onChange={handleChange} className={style.input} />
+			<button className={style.button} onClick={handleSubmit}>
+				<Image src="/buscar.png" alt="Buscar" width={20} height={20}></Image>
+			</button>
 		</>
 	)
 }
