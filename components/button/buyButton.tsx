@@ -14,7 +14,6 @@ const BuyButton: React.FC<props> = ({ product }): React.JSX.Element => {
 		<>
 			<Button
 				onClick={() => { onOpen() }}
-				color="success"
 				className='text-white bg-green-400 hover:bg-green-500'
 			>
             Comprar

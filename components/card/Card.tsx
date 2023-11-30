@@ -1,7 +1,6 @@
 import { type CardProduct } from '@/types/Product/type'
 import style from '../landing/landing.module.css'
-import { CardFooter, Image, useDisclosure, Card as NextUICard } from '@nextui-org/react'
-
+import { CardFooter, Image, Button, useDisclosure, Card as NextUICard } from '@nextui-org/react'
 import ProductModal from '../modal/ProductModal'
 import BuyButton from '../button/buyButton'
 import AddToCartButton from '../button/addToCartButton'

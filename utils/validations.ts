@@ -17,27 +17,28 @@ export const productValidate = (
 	{
 		name,
 		image,
-		description,
 		price,
 		category
 	}: {
 		name: string
-		image: File | undefined
-		description: string
+		image: File | undefined | string
 		price: string
 		category: string[]
 	},
 	setIsDisabled: Dispatch<boolean>
 ): void => {
-	if (!name || !image || !description || !price || category.length === 0) {
+	if (!name || !image || !price || category.length === 0) {
 		setIsDisabled(true)
 	} else {
 		setIsDisabled(false)
+	}
+	if (name.length >= 30) {
+		setIsDisabled(true)
 	}
 }
 
 export const validateEmail = (value: string): boolean => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i.test(value)
 
 export 	const validatePassword = (value: string): boolean => {
-	return /^(?=.*[a-z]).{3,20}$/.test(value)
+	return /^(?=.*[a-z]).{6,20}$/.test(value)
 }
