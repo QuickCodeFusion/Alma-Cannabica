@@ -35,6 +35,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 						</ModalBody>
 						<ModalFooter>
 							<Button
+								isExternal
 								showAnchorIcon
 								anchorIcon={<Whatsapp/>}
 								color='success'

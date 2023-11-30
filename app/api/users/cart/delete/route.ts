@@ -4,14 +4,14 @@ import { deleteCart } from './deleteCart'
 
 export const DELETE = async (req: NextRequest): Promise<NextResponse> => {
 	try {
-		const { userId, cartItemId } = await req.json()
+		const { userId, itemId } = await req.json()
 
-		if (!cartItemId) {
+		if (!itemId) {
 			await deleteCart(userId)
 			return NextResponse.json({ message: 'Cart deleted' })
 		}
 
-		await deleteItemCart(userId, cartItemId)
+		await deleteItemCart(userId, itemId)
 
 		return NextResponse.json({ message: 'Item deleted' })
 	} catch (error: any) {

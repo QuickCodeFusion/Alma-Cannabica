@@ -3,8 +3,8 @@ import { addToCart } from './addToCart'
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
-		const { userId, cartItemId, value } = await req.json()
-		await addToCart(userId, cartItemId, value)
+		const { userId, itemId, value } = await req.json()
+		await addToCart(userId, itemId, value)
 		return NextResponse.json(
 			{ message: 'Product added to cart' },
 			{ status: 201 }

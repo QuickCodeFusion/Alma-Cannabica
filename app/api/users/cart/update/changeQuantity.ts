@@ -3,45 +3,45 @@ import {
 	doc,
 	increment,
 	getDoc,
-	deleteDoc
+	deleteDoc,
+	setDoc
 } from 'firebase/firestore'
 import { db } from '@/firebase/config'
-import { type DocumentData } from 'firebase-admin/firestore'
 
 export const changeQuantity = async (
 	userId: string,
 	cartItemId: string,
-	value: string
+	action: string
 ): Promise<void> => {
-	const docRef = doc(db, 'users', userId, 'cart', cartItemId)
+	const cartItemRef = doc(db, 'users', userId, 'cart', cartItemId)
 	const productRef = doc(db, 'products', cartItemId)
-	const productStock = (await getDoc(productRef)).get('stock')
+	const productSnapshot = await getDoc(productRef)
 
-	if (productStock === 0) {
+	const stock = productSnapshot.get('stock')
+
+	if (stock === 0) {
 		throw new Error('Out of stock')
 	}
 
-	const productDoc = await getDoc(docRef)
+	const cartItemSnapshot = await getDoc(cartItemRef)
+	const quantity = cartItemSnapshot.data()?.quantity ?? 0
 
-	if (productDoc.exists()) {
-		const productData: DocumentData | undefined = productDoc.data()
+	if (!cartItemSnapshot.exists()) {
+		await setDoc(cartItemRef, {
+			...productSnapshot.data(),
+			quantity: 1
+		})
+		return
+	}
 
-		if (productData) {
-			if (value === 'add') {
-				await updateDoc(docRef, {
-					quantity: increment(1)
-				})
-			} else {
-				if (productData.quantity === 1) {
-					await deleteDoc(docRef)
-				}
+	if (action === 'add' && quantity > 0) {
+		await updateDoc(cartItemRef, { quantity: increment(1) })
+		return
+	}
 
-				if (productData.quantity > 1) {
-					await updateDoc(docRef, {
-						quantity: increment(-1)
-					})
-				}
-			}
-		}
+	if (action === 'remove' && quantity > 1) {
+		await updateDoc(cartItemRef, { quantity: increment(-1) })
+	} else {
+		await deleteDoc(cartItemRef)
 	}
 }

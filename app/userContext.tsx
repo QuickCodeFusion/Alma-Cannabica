@@ -1,5 +1,7 @@
 'use client'
 import { auth } from '@/firebase/config'
+import { clearCart } from '@/redux/feature/cartSlice'
+import { useDispatch } from '@/redux/hooks'
 import { type NormalizedUser } from '@/types/User/types'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
@@ -19,7 +21,10 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }): React
 
 	const router = useRouter()
 
+	const dispatch = useDispatch()
+
 	const logOut = (): void => {
+		dispatch(clearCart())
 		auth.signOut()
 			.then(() => {
 				setUserSession(null)
