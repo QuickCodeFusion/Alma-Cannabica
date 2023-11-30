@@ -44,7 +44,7 @@
     display: grid;
     place-items: center;
 }
-.cardCarusel{
+/* .cardCarusel{
     width: 190px;
     height: 250px;
     display: grid;
@@ -59,8 +59,8 @@
     padding: 3px 5px 0 5px;
     border-radius: 0;
     z-index: 0;
-}
-.cardFooter{
+} */
+/* .cardFooter{
     height: 95px;
     display: flex;
     flex-direction: column;
@@ -70,30 +70,30 @@
     font-size: 1rem;
     font-weight: 600;
     position: relative;
-}
-.nameProduct{
+} */
+/* .nameProduct{
     position: absolute;
     top: 0;
     font-size: 1.2rem;
-}
-.btnCard{
+} */
+/* .btnCard{
     margin-top: 13px;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
+} */
 .btnEdit{
     padding: 0;
     height: 10%;
     width: 10%;
 }
-.containerBtn{
+/* .containerBtn{
     display: flex;
     width: 100%;
     flex-direction: column;
     margin-top: 15px;
-}
+} */
 @media screen and (max-width: 500px){
     .containerCard{
         margin: 0;
@@ -105,7 +105,7 @@
         overflow: hidden;
         padding-top: 120px;
     }
-    .cardCarusel{
+/*     .cardCarusel{
         width: 99vw;
         height: 155px;
         display: flex;
@@ -113,18 +113,18 @@
         justify-content: space-around;
         border-radius: 0;
         border-bottom: 2px rgba(78, 78, 78, 0.562) solid;
-    }
-    .cardFooter{
+    } */
+/*     .cardFooter{
         width: 200px;
         height: 80%;   
-    }
+    } */
     .datosProduct{
         display: flex;
         flex-direction: column;
         align-items: start;
         font-size: 1.1rem;
     }
-    .containerBtn{
+/*     .containerBtn{
         display: flex;
         width: 130%;
         flex-direction: row-reverse;
@@ -132,5 +132,5 @@
         transform: scale(0.8);
         gap: 20px;
         margin-top: 70px;
-    }
+    } */
 }
