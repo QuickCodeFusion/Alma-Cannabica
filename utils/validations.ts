@@ -17,22 +17,23 @@ export const productValidate = (
 	{
 		name,
 		image,
-		description,
 		price,
 		category
 	}: {
 		name: string
 		image: File | undefined | string
-		description: string
 		price: string
 		category: string[]
 	},
 	setIsDisabled: Dispatch<boolean>
 ): void => {
-	if (!name || !image || !description || !price || category.length === 0) {
+	if (!name || !image || !price || category.length === 0) {
 		setIsDisabled(true)
 	} else {
 		setIsDisabled(false)
+	}
+	if (name.length >= 30) {
+		setIsDisabled(true)
 	}
 }
 
