@@ -55,9 +55,7 @@ const NavBar = (): JSX.Element => {
 			<Navbar maxWidth='full' disableAnimation isBordered classNames={{
 				item: [
 					'data-[active=true]:text-green-400',
-					'data-[active=true]:font-medium',
-					'flex',
-					'w-full'
+					'data-[active=true]:font-medium'
 				],
 				brand: 'min-w-[50px]',
 				menuItem: [
@@ -75,18 +73,19 @@ const NavBar = (): JSX.Element => {
 						</Link>
 					</NavbarBrand>
 				</NavbarContent>
-				<NavbarContent justify='center'>
-					<NavbarContent className='sm:ml-10 gap-0' justify='center'>
-						<SearchBar />
-					</NavbarContent>
+				<NavbarContent className='gap-0' justify='center'>
+					<SearchBar />
 				</NavbarContent>
 				<NavbarContent justify="end">
-					{menuItems.map((item, index) => (
-						<NavbarItem className="hidden lg:flex" key={index} isActive={pathname === item.label} as={Link} href={item.label}>
-							{item.name}
-						</NavbarItem>
-					))}
-						<PopoverComponent/>
+					{menuItems.map((item, index) => {
+						if (item.name === 'Inicio') return null
+						return (
+							<NavbarItem className="hidden lg:flex" key={index} isActive={pathname === item.label} as={Link} href={item.label}>
+								{item.name}
+							</NavbarItem>
+						)
+					})}
+					<PopoverComponent/>
 					<NavbarItem className="hidden sm:flex ">
 						{userSession === undefined
 							? (
