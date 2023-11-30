@@ -19,13 +19,14 @@ const CategorySelect: React.FC<props> = ({
 	setCategoryInput
 }) => {
 	return (
-		<div className='flex gap-2 items-center'>
+		<div className='sm:flex gap-2 items-center'>
 			<Select
 				variant='underlined'
 				isRequired
 				label='Seleccione la categoría'
 				placeholder='Ingrese la categoría producto'
 				name='category'
+				className='md:w-1/2 '
 				selectedKeys={product.category}
 				onChange={(e) => { setProduct({ ...product, category: [...product.category, e.target.value] }) }}>
 				{categories.map((category) => (
@@ -39,6 +40,7 @@ const CategorySelect: React.FC<props> = ({
 			{product.category.map((category) => (
 				<>
 					<Button
+						className='mt-3'
 						onClick={() => {
 							setProduct({
 								...product,
@@ -53,35 +55,38 @@ const CategorySelect: React.FC<props> = ({
 					<Spacer/>
 				</>
 			))}
-			<Input
-				variant='underlined'
-				isClearable
-				label='Nueva categoría'
-				placeholder='Ingrese la categoría producto'
-				name='category'
-				value={categoryInput}
-				onKeyDown={(e) => {
-					if (e.key === 'Enter') {
+			<div className='flex items-center'>
+
+				<Input
+					variant='underlined'
+					isClearable
+					label='Nueva categoría'
+					placeholder='Ingrese la categoría producto'
+					name='category'
+					value={categoryInput}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							setCategory([
+								...categories,
+								categoryInput
+							])
+							setCategoryInput('')
+						}
+					}}
+					onValueChange={setCategoryInput}/>
+				<Button
+					onClick={() => {
 						setCategory([
 							...categories,
 							categoryInput
 						])
 						setCategoryInput('')
-					}
-				}}
-				onValueChange={setCategoryInput}/>
-			<Button
-				onClick={() => {
-					setCategory([
-						...categories,
-						categoryInput
-					])
-					setCategoryInput('')
-				}}
-				color='success'
-				variant='flat'>
-						Añadir
-			</Button>
+					}}
+					color='success'
+					variant='flat'>
+							Añadir
+				</Button>
+			</div>
 		</div>
 	)
 }
