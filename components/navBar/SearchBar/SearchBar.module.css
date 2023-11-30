@@ -1,12 +1,12 @@
 .input{
     border-radius: 20px;
     background-color: gray;
-    width: 120px;
+    width: 50%;
     transition: 0.5s;
 }
 .input:focus{
     color: white;
-    width: 150px;
+    width: 100%;
     padding-left: 5px;
 }
 .searchBar{
