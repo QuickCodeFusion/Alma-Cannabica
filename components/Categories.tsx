@@ -17,6 +17,7 @@ const Categories: React.FC<props> = ({ categories }): React.JSX.Element => {
 							<Chip
 								key={category}
 								variant='dot'
+								size='sm'
 								startContent={<Tag />}
 							>
 
