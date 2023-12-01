@@ -1,6 +1,5 @@
 'use client'
 import Card from '../card/Card'
-import style from './cards.module.css'
 import Loading from '@/app/loading'
 import { useSelector } from '@/redux/hooks'
 
@@ -8,7 +7,7 @@ const Cards = (): React.JSX.Element => {
 	const { products, isLoading, isError } = useSelector((state: any) => state.products)
 
 	return (
-		<div className='md:grid md:grid-cols-3 md:grid-rows-3 md:gap-10 md:my-10'>
+		<div className='flex flex-col md:grid md:grid-cols-3 md:grid-rows-3 md:w-2/3 md:gap-y-5 md:justify-items-center md:my-10'>
 			{isError && <div>Error</div>}
 
 			{
