@@ -33,7 +33,7 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 					<Categories categories={category}/>
 					<span className='flex w-full justify-between md:flex-col md:gap-0.5 md:justify-center'>
 						<Price price={price} className="text-600 self-end md:self-center"/>
-						<div className='flex gap-2 justify-between md:justify-center md:gap-'>
+						<div className='flex gap-2 justify-around'>
 							<BuyButton product={product}/>
 							<AddToCartButton product={product}/>
 						</div>
