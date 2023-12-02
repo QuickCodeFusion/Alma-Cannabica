@@ -23,8 +23,7 @@ export const cartAPI = createApi({
 					itemId,
 					value
 				}
-			}),
-			invalidatesTags: ['Cart']
+			})
 		}),
 		clearCart: builder.mutation<Promise<void>, { userId: string, itemId: string }>({
 			query: ({ userId, itemId }) => ({
