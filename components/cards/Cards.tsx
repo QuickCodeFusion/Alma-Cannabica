@@ -1,6 +1,5 @@
 'use client'
 import Card from '../card/Card'
-import style from './cards.module.css'
 import Loading from '@/app/loading'
 import { useSelector } from '@/redux/hooks'
 

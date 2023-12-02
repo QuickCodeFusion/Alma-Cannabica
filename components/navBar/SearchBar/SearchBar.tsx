@@ -1,5 +1,4 @@
 'use client'
-import style from './SearchBar.module.css'
 import Image from 'next/image'
 import { search } from '@/redux/feature/searchBarSlice'
 import { useDispatch } from '@/redux/hooks'
