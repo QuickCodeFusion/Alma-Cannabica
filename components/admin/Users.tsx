@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { useSetAdminMutation, useDisableUserMutation, useGetAllAuthUsersQuery } from '@/redux/service/adminAPI'
 import UsersTable from './UsersTable'
+import UsersData from './UsersData'
 
 const Users = (): React.JSX.Element => {
 	const [loading, setLoading] = useState(false)
@@ -73,7 +74,6 @@ const Users = (): React.JSX.Element => {
 				toast.error('Something went wrong: ' + error)
 			})
 	}
-
 	return (
 		<div >
 			<UsersTable users={data?.users} loading={loading} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin}/>
@@ -82,5 +82,4 @@ const Users = (): React.JSX.Element => {
 		</div>
 	)
 }
-
 export default Users
