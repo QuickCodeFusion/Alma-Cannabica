@@ -3,7 +3,8 @@ import { type UserRecord } from 'firebase-admin/auth'
 import { Button } from '@nextui-org/react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, ChipProps, getKeyValue } from "@nextui-org/react";
 import UserButton from '../button/admin/userButton'
-import Loading from '@/app/loading';
+import Loading from '@/app/loading'
+import disable from '@/public/disable.svg'
 
 interface props {
 	users: UserRecord[] | undefined
@@ -26,17 +27,19 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 		{ name: "NOMBRE", uid: "name" },
 		{ name: "ROL", uid: "rols" },
 		{ name: "ACCION", uid: "actions" },
-		{ name: "AGREGAR", uid: "temp" },
+		
 	];
 	const renderCell = React.useCallback((user: any) => {
 		const cells = [];
 
 		if (user.name !== "") {
 			cells.push(() => (
+				
 				<User
 					avatarProps={{ radius: "lg", src: user.photoUrl }}
 					description={user.email}
 					name={user.name}
+					
 				>
 					{user.name}
 				</User>
@@ -52,37 +55,35 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 		if (user.email !== "") {
 			cells.push(() => (
 				<div className="relative flex items-center gap-2">
-					<Tooltip content="Tooltip 3" color="success" offset={-7}>
+					<Tooltip content='temporal'>
+					{
+						loading
+							? <Button radius='full' isLoading>Cargando</Button>
+							: (
+								user.disabled
+									? <UserButton icon='enable'  txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} />
+									: <UserButton icon='disable'  txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} />
+							)
+					}
+					</Tooltip >
+					<Tooltip content='temporal'>
 						{
 							loading
 								? <Button radius='full' isLoading>Cargando</Button>
 								: (
-									user.disabled
-										? <UserButton title='Habilitar' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} />
-										: <UserButton title='Deshabilitar' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} />
+									user.customClaims?.admin
+										?  <UserButton icon='remove'  txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} />
+										:  <UserButton icon='grant'  txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} />
 								)
 						}
-					</Tooltip>
+					</Tooltip>	
+					
+
 				</div>
+
 			));
 		}
-		if (true) {
-			cells.push(() => (
-				<div className="relative flex items-center gap-2">
-					<Tooltip content="Details">
-					{
-								loading
-									? <Button radius='full' isLoading>Cargando</Button>
-									:										(
-										user.customClaims?.admin
-											? <UserButton title='Quitar Admin' txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }}/>
-											: <UserButton title='Otorgar Admin' txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }}/>
-									)
-							}
-					</Tooltip>
-				</div>
-			));
-		}
+
 
 		return cells;
 	}, []);
@@ -91,7 +92,7 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 		<Table aria-label="Example table with custom cells">
 			<TableHeader columns={columns}>
 				{(column) => (
-					<TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+					<TableColumn key={column.uid} align="center">
 						{column.name}
 					</TableColumn>
 				)}
@@ -103,7 +104,7 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 						return (
 							<TableRow key={item.uid}>
 								{cells.map((cell, index) => (
-									<TableCell key={index}>{cell()}</TableCell>
+									<TableCell  key={index}>{cell()}</TableCell>
 								))}
 							</TableRow>
 						);
@@ -114,17 +115,15 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 				<TableBody>
 					<TableRow>
 						<TableCell>
-							<Loading />
+							
 						</TableCell>
 						<TableCell>
 							<Loading />
 						</TableCell>
 						<TableCell>
-							<Loading />
+							
 						</TableCell>
-						<TableCell>
-							<Loading />
-						</TableCell>
+						
 					</TableRow>
 				</TableBody>
 			)}
