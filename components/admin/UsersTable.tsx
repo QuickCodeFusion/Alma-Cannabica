@@ -1,10 +1,10 @@
 import React from 'react'
 import { type UserRecord } from 'firebase-admin/auth'
 import { Button } from '@nextui-org/react'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, ChipProps, getKeyValue } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, ChipProps} from "@nextui-org/react";
 import UserButton from '../button/admin/userButton'
 import Loading from '@/app/loading'
-import disable from '@/public/disable.svg'
+import { ModalAction } from './ModalAction/ModalAction';
 
 interface props {
 	users: UserRecord[] | undefined
@@ -17,12 +17,10 @@ interface props {
 const statusColorMap: Record<string, ChipProps["color"]> = {
 	active: "success",
 	paused: "danger",
-	vacation: "warning",
 };
 
 const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, handleGiveAdmin, handleRemoveAdmin }): JSX.Element => {
-
-	console.log(users);
+	
 	const columns = [
 		{ name: "NOMBRE", uid: "name" },
 		{ name: "ROL", uid: "rols" },
@@ -54,7 +52,8 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 
 		if (user.email !== "") {
 			cells.push(() => (
-				<div className="relative flex items-center gap-2">
+				< >
+					<div className="sm:relative sm:flex sm:items-center sm:gap-2 hidden">
 					<Tooltip content='temporal'>
 					{
 						loading
@@ -76,10 +75,11 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 										:  <UserButton icon='grant'  txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} />
 								)
 						}
-					</Tooltip>	
 					
-
-				</div>
+					</Tooltip>	
+					</div>
+					<ModalAction user={user} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin}/>
+				</>
 
 			));
 		}
@@ -89,6 +89,7 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 	}, []);
 
 	return (
+		<>
 		<Table aria-label="Example table with custom cells">
 			<TableHeader columns={columns}>
 				{(column) => (
@@ -129,6 +130,7 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 			)}
 
 		</Table>
+		</>
 	);
 }
 
