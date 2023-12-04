@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { useSetAdminMutation, useDisableUserMutation, useGetAllAuthUsersQuery } from '@/redux/service/adminAPI'
 import UsersTable from './UsersTable'
-import UsersData from './UsersData'
 
 const Users = (): React.JSX.Element => {
 	const [loading, setLoading] = useState(false)
