@@ -31,7 +31,6 @@ const UserButton = ({
 			iconComponent = <Grant />;
 			break;
 		default:
-			// Manejo para un caso por defecto o un caso no reconocido
 			break;
 	}
 	return (
