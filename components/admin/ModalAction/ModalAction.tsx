@@ -1,6 +1,6 @@
 import React from "react";
 import { Config } from "@/components/button/admin/IconBtn";
-import UserButton from "@/components/button/admin/userButton";
+import UserButtonModal from "@/components/button/admin/userButtonModal";
 import style from './ModalAction.module.css';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, RadioGroup, Radio } from "@nextui-org/react";
 
@@ -32,16 +32,16 @@ export const ModalAction: React.FC<props> = ({ user, handleBan, handleUnban, han
                                     <p>Habilitar o Deshabilitar usuario</p>
                                     {
                                     user.disabled
-                                    ? <UserButton onClose={()=>{onClose}} icon='enable' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} />
-                                    : <UserButton onClose={()=>{onClose}} icon='disable' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} />
+                                    ? <UserButtonModal onClose={onClose} icon='enable' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} />
+                                    : <UserButtonModal onClose={onClose} icon='disable' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} />
                                     }
                                 </div>
                                 <div className={style.modalBody}>
                                     <p>Agregar o quitar Admin</p>
                                 {
 									user.customClaims?.admin
-										?  <UserButton onClose={()=>{onClose}} icon='remove'  txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} />
-										:  <UserButton onClose={()=>{onClose}} icon='grant'  txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} />
+										?  <UserButtonModal onClose={onClose} icon='remove'  txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} />
+										:  <UserButtonModal onClose={onClose} icon='grant'  txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} />
                                 }
                                 </div>
 

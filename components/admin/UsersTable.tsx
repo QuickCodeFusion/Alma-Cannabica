@@ -55,8 +55,8 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 									? <Button radius='full' isLoading>Cargando</Button>
 									: (
 										user.disabled
-											? <UserButton onClose={() => { }} icon='enable' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} />
-											: <UserButton onClose={() => { }} icon='disable' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} />
+											? <UserButton  icon='enable' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} />
+											: <UserButton icon='disable' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} />
 									)
 							}
 						</Tooltip >
@@ -66,8 +66,8 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 									? <Button radius='full' isLoading>Cargando</Button>
 									: (
 										user.customClaims?.admin
-											? <UserButton onClose={() => { }} icon='remove' txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} />
-											: <UserButton onClose={() => { }} icon='grant' txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} />
+											? <UserButton  icon='remove' txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} />
+											: <UserButton icon='grant' txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} />
 									)
 							}
 
