@@ -25,7 +25,7 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 	const renderCell = React.useCallback((user: any) => {
 		const cells = [];
 
-		if (user.name !== "") {
+		if (true) {
 			cells.push(() => (
 
 				<User
@@ -45,7 +45,7 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 			))
 		}
 
-		if (user.email !== "") {
+		if (true) {
 			cells.push(() => (
 				< >
 					<div className="sm:relative sm:flex sm:items-center sm:gap-2 hidden">
