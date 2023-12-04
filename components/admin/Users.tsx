@@ -73,7 +73,6 @@ const Users = (): React.JSX.Element => {
 				toast.error('Something went wrong: ' + error)
 			})
 	}
-
 	return (
 		<div >
 			<UsersTable users={data?.users} loading={loading} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin}/>
@@ -82,5 +81,4 @@ const Users = (): React.JSX.Element => {
 		</div>
 	)
 }
-
 export default Users

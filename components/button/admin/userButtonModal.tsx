@@ -2,13 +2,15 @@ import { Button } from '@nextui-org/react'
 import { Disable, Enable, Remove, Grant } from './IconBtn'
 
 
-const UserButton = ({
+const UserButtonModal = ({
 	action,
+	onClose,
 	txtColor,
 	btnColor,
 	icon,
 }: {
 	action: () => void
+	onClose: () => void
 	txtColor: string
 	btnColor: 'primary' | 'success' | 'warning' | 'danger'
 	icon: string
@@ -33,9 +35,9 @@ const UserButton = ({
 	}
 	return (
 		<>
-			<Button size="sm" radius='full' className={`bg-opacity-20 text-${txtColor}-500`} variant="bordered" color={btnColor} onClick={action} >{iconComponent}</Button>
+			<Button size="sm" radius='full' className={`bg-opacity-20 text-${txtColor}-500`} variant="bordered" color={btnColor} onClick={() => {action(); onClose();}}  >{iconComponent}</Button>
 		</>
 	)
 }
 
-export default UserButton
+export default UserButtonModal
