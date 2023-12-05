@@ -12,7 +12,6 @@ const Users = (): React.JSX.Element => {
 
 	const [disableUser] = useDisableUserMutation()
 
-	console.log(data)
 	const handleGiveAdmin = (userId: string): any => {
 		setLoading(true)
 		postAdmin({
