@@ -3,7 +3,7 @@ import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
 import { ModalProductEdit } from "../ModalAction/ModalProducEdit";
 import { useSelector } from '@/redux/hooks'
-
+import { Product } from "@/types/Product/type";
 
 const AdmProducts = ():React.JSX.Element => {
 	const { products, isLoading, isError } = useSelector((state: any) => state.products)
@@ -64,10 +64,10 @@ const AdmProducts = ():React.JSX.Element => {
 				</TableHeader>
 				{products ? (
 					<TableBody items={products}>
-						{(item) => {
+						{(item:Product) => {
 							const cells = renderCell(item);
 							return (
-								<TableRow key={item.itemId}>
+								<TableRow key={item.name}>
 									{cells.map((cell, index) => (
 										<TableCell key={index}>{cell()}</TableCell>
 									))}
