@@ -37,7 +37,7 @@ const Sidebar = (): React.JSX.Element => {
 					key='products'
 					title='Administrar productos'
 				>
-					<AdmProducts></AdmProducts>
+					<AdmProducts/>
 				</Tab>
 			</Tabs>
 		</div>
