@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import { Skeleton } from '@nextui-org/react'
 import Arrow from '../icons/Arrow'
+import { type LazyLoadTypes } from 'react-slick'
 
 interface props {
 	products: Product[]
@@ -15,7 +16,7 @@ const LandingCarousel: React.FC<props> = ({ products, isLoading }): React.JSX.El
 	const [slide, setSlide] = useState(0)
 	const options = {
 		centerMode: true,
-		lazyLoad: true,
+		lazyLoad: 'ondemand' as LazyLoadTypes,
 		draggable: true,
 		dots: true,
 		adaptiveHeight: true,
