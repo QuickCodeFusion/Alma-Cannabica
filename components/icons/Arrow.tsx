@@ -1,11 +1,7 @@
 const Arrow = ({ className, onClick, style, direction }: any): React.JSX.Element => {
 	return (
 		<div
-			className={
-				direction === 'right'
-					? 'absolute top-1/2 right-0 z-10 -translate-y-1/2 cursor-pointer'
-					: 'absolute top-1/2 left-0 z-10 -translate-y-1/2 cursor-pointer'
-			}
+			className={className}
 			style={{
 				...style
 			}}
