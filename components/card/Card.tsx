@@ -1,10 +1,15 @@
 import { type CardProduct } from '@/types/Product/type'
 import { CardFooter, Image, useDisclosure, Card as NextUICard } from '@nextui-org/react'
-import ProductModal from '../modal/ProductModal'
+import dynamic from 'next/dynamic'
 import BuyButton from '../button/buyButton'
 import AddToCartButton from '../button/addToCartButton'
 import Price from '../Price'
 import Categories from '../Categories'
+import NextImage from 'next/image'
+
+const ProductModal = dynamic(async () => await import('../modal/ProductModal'), {
+	ssr: false
+})
 
 const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -24,7 +29,10 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 						wrapper: 'w-1/4 bg-no-repeat h-[80%] shadow-sm md:w-full flex items-center justify-center md:h-40 md:pt-2 md:rounded-lg'
 					}}
 					src={image}
+					width={100}
+					height={100}
 					alt={name}
+					as={NextImage}
 					fallbackSrc='https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default_product.png?alt=media&token=90b8c614-57ea-44df-b341-36e0f41ffd3f'
 				/>
 

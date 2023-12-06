@@ -72,7 +72,6 @@ export const FilterModal: React.FC<props> = ({ isOpen, onClose, setValueState, v
 								<FilterSort valueState={valueState} onChange={onChange} />
 							</div>
 							<div className='font-semibold text-green-500'>
-                                Filtrar por categoría
 								<FilterCategories valueState={valueState} onChange={onChange} />
 							</div>
 							<div className=''>
