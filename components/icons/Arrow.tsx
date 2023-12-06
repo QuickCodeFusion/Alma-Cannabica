@@ -13,9 +13,9 @@ const Arrow = ({ className, onClick, style, direction }: any): React.JSX.Element
 						xmlns='http://www.w3.org/2000/svg'
 						fill='none'
 						viewBox='0 0 24 24'
-						strokeWidth={1.5}
+						strokeWidth={2.5}
 						stroke='currentColor'
-						className='h-6 w-6'
+						className='h-10 w-10 text-green-500 active:scale-110'
 					>
 						<path
 							strokeLinecap='round'
@@ -29,9 +29,9 @@ const Arrow = ({ className, onClick, style, direction }: any): React.JSX.Element
 						xmlns='http://www.w3.org/2000/svg'
 						fill='none'
 						viewBox='0 0 24 24'
-						strokeWidth={1.5}
+						strokeWidth={2.5}
 						stroke='currentColor'
-						className='h-6 w-6'
+						className='h-10 w-10 text-green-500 font-bold active:scale-110'
 					>
 						<path
 							strokeLinecap='round'
