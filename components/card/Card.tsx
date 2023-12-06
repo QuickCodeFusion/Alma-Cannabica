@@ -49,11 +49,13 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 				</CardFooter>
 			</NextUICard>
 
-			<ProductModal
-				isOpen={isOpen}
-				onOpenChange={onOpenChange}
-				product={product}
-			/>
+			{(isOpen) && (
+				<ProductModal
+					isOpen={isOpen}
+					onOpenChange={onOpenChange}
+					product={product}
+				/>
+			)}
 		</>
 	)
 }
