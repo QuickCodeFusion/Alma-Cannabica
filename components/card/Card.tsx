@@ -6,7 +6,7 @@ import AddToCartButton from '../button/addToCartButton'
 import Price from '../Price'
 import Categories from '../Categories'
 
-const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
+const Card = ({ product, classNames }: { product: CardProduct, classNames?: string | string[] }): React.JSX.Element => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
 	const { name, price, image, category } = product
@@ -14,7 +14,17 @@ const Card = ({ product }: { product: CardProduct }): React.JSX.Element => {
 	return (
 		<>
 			<NextUICard
-				className='bg-white w-screen h-40 flex flex-row justify-between items-center rounded-none border-y-1 border-y-black/30 shadow-inner md:flex-col md:w-3/4 md:h-fit md:gap-0 md:border md:border-gray-300/30 md:shadow-large md:rounded-lg md:justify-center'
+				className={`
+				${classNames instanceof Array ? classNames.join(' ') : classNames}
+				bg-white w-screen h-40
+				flex flex-row justify-between items-center
+				rounded-none border-y-1 border-y-black/30
+				shadow-inner
+				md:flex-col md:justify-center md:gap-0
+				md:w-3/4 md:h-fit
+				md:border md:border-gray-300/30
+				md:shadow-large
+				md:rounded-lg`}
 				isPressable
 				onPress={() => { onOpen() }}
 			>
