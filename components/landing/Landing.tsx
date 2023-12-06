@@ -18,8 +18,8 @@ const Landing = (): React.JSX.Element => {
 	const randomFrase = frases[randomIndex]
 
 	return (
-		<div className='flex justify-center items-center my-12 w-full'>
-			<Card className='w-2/3 p-10 text-green-600 font-medium text-2xl text-center shadow-2xl border drop-shadow-2xl gap-8'>
+		<div className='flex justify-center items-center my-12 w-screen'>
+			<Card className='w-full md:w-2/3 p-10 text-green-600 font-medium text-2xl text-center shadow-2xl border drop-shadow-2xl gap-8'>
 				<div className='flex flex-col items-center gap-4'>
 					<h1 className='text-5xl font-semibold my-6'>¿Sabias que...?</h1>
 					<p className='text-center'>

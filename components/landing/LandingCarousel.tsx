@@ -4,6 +4,7 @@ import Card from '../card/Card'
 import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import { Skeleton } from '@nextui-org/react'
+import Arrow from '../icons/Arrow'
 
 interface props {
 	products: Product[]
@@ -12,28 +13,46 @@ interface props {
 
 const LandingCarousel: React.FC<props> = ({ products, isLoading }): React.JSX.Element => {
 	const [slide, setSlide] = useState(0)
-	const [size, setSize] = useState(0)
-	useEffect(() => {
-		if (window) {
-			setSize(window.innerWidth)
-		}
-	}, [])
 	const options = {
 		centerMode: true,
 		lazyLoad: true,
 		draggable: true,
 		dots: true,
+		adaptiveHeight: true,
 		infinite: true,
-		speed: 500,
-		slidesToShow: size < 768 ? 1 : 3,
-		slidesToScroll: 3,
-		autoplay: false,
-		autoplaySpeed: 2000,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 3000,
 		pauseOnHover: true,
-		className: '[&_div]:w-[110%] [&_.slick-track]:py-2',
+		centerPadding: '35px',
+		className: ' ',
+		nextArrow: <Arrow className='text-green-500' direction='right' />,
+		prevArrow: <Arrow className='text-green-500' direction='left' />,
 		beforeChange: (current: number, next: number) => {
 			setSlide(next)
-		}
+		},
+		responsive: [
+			{
+				breakpoint: 648,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					centerMode: false,
+					centerPadding: '15px'
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					dots: false,
+					centerPadding: '5px',
+					centerMode: false
+				}
+			}
+		]
 	}
 	return (
 		<div className='w-full'>
@@ -46,7 +65,7 @@ const LandingCarousel: React.FC<props> = ({ products, isLoading }): React.JSX.El
 						<Slider {...options}>
 							{products?.map((product, index) => (
 								<Card
-									classNames={slide === index ? 'scale-105' : 'scale-50 '}
+									classNames={slide === index ? 'scale-100' : 'scale-50'}
 									key={product.itemId}
 									product={product}
 								/>
