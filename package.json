@@ -24,7 +24,6 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "sonner": "^1.0.3",
-    "swiper": "^11.0.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
