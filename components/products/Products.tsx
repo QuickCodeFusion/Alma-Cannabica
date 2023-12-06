@@ -9,12 +9,12 @@ const Products = (): JSX.Element => {
 	const [Filter, setMfiler] = useState(false)
 	const onChange = () => {
 		setMfiler(true)
-        setTimeout(() => {
-            setMfiler(false)
-        }, 100)
+		setTimeout(() => {
+			setMfiler(false)
+		}, 100)
 	}
 	return (
-		<div className='flex flex-col md:flex-row md:items-start md:justify-around w-full'>
+		<div className='flex flex-col md:flex-row md:items-start md:justify-center md:gap-[15%] w-full'>
 			<Card classNames={{
 				base: 'md:my-10'
 			}}>
