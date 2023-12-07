@@ -6,6 +6,7 @@ import { type Product } from '@/types/Product/type'
 import { useEffect, useState } from 'react'
 import { getPreferenceUrlSingle } from '@/utils/checkoutUtils'
 import { toast } from 'sonner'
+import { MercadoPagoIcon } from '../icons/MercadoPago'
 
 interface props {
 	product: Product
@@ -54,7 +55,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 							<Button
 								isExternal
 								showAnchorIcon
-								anchorIcon={<Whatsapp/>}
+								anchorIcon={<MercadoPagoIcon/>}
 								color='success'
 								as={Link}
 								href={preferenceUrl}
