@@ -1,93 +1,54 @@
-"use client";
-import FilterPrice from "./filterPrice/FilterPrice";
-import { type ChangeEvent, useState } from "react";
-import FilterSort from "./filterSort/FilterSort";
-import FilterCategories from "./filterCategory/FilterCategory";
-import { FilterModal } from "./filterModal/FilterModal";
-import { Button } from "@nextui-org/react";
-import style from "./filter.module.css";
-import { useSelector } from "react-redux";
-import { useGetFiltersQuery } from "@/redux/service/productsFilterAPI";
-import { loadProducts } from "@/redux/feature/productsSlice";
-import { useDispatch } from "@/redux/hooks";
-import { useEffect } from "react";
+'use client'
+import FilterPrice from './filterPrice/FilterPrice'
+import { type ChangeEvent } from 'react'
+import FilterSort from './filterSort/FilterSort'
+import FilterCategories from './filterCategory/FilterCategory'
+import { FilterModal } from './filterModal/FilterModal'
+import { Button } from '@nextui-org/react'
 
-const Filters = ({
-  onFilter,
-}: {
-  onFilter: boolean;
+interface props {
+	isOpen: boolean
+	onClose: () => void
+	setValueState: React.Dispatch<React.SetStateAction<{
+		category: string
+		order: string
+		name: string
+		minPrice: string
+		maxPrice: string
+	}
+	>>
+	valueState: {
+		category: string
+		order: string
+		name: string
+		minPrice: string
+		maxPrice: string
+	}
+	handleSubmit: () => void
+	onChange: (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
+}
+
+const Filters: React.FC<props> = ({
+	isOpen,
+	onClose,
+	setValueState,
+	valueState,
+	handleSubmit,
+	onChange
 }): JSX.Element => {
-  const dispatch = useDispatch();
-  const name = useSelector((state: any) => state.searchBar.value);
-  const [valueState, setValueState] = useState({
-    category: "",
-    order: "",
-    name: name,
-    minPrice: "",
-    maxPrice: "",
-  });
+	return (
 
-  useEffect(() => {
-    setValueState((prevState) => {
-      return {
-        ...prevState,
-        name: name,
-      };
-    });
-  }, [name]);
+		<div className='flex flex-col gap-4 text-center justify-center h-fit p-8 py-14'>
+			<FilterModal isOpen={isOpen} onClose={onClose} setValueState={setValueState} valueState={valueState} />
 
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void => {
-    const { name, value } = event.target;
-    setValueState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useGetFiltersQuery({
-    name: valueState.name,
-    minPrice: valueState.minPrice,
-    maxPrice: valueState.maxPrice,
-    category: valueState.category,
-    order: valueState.order,
-  });
-
-  const handleSubmit = (): void => {
-    if (isError) {
-      dispatch(loadProducts({ products: [], isLoading, isError }));
-    } else {
-      dispatch(loadProducts({ products, isLoading, isError }));
-    }
-  };
-
-  return (
-    
-    <div className={style.container}>
-      <FilterModal onFilter={onFilter}/> 
-      
-      <div className={style.subContainer}>
-        <div>
-          <FilterPrice valueState={valueState} onChange={onChange} />
-        </div>
-        <div>
-          <FilterSort valueState={valueState} onChange={onChange} />
-        </div>
-        <div>
-          <FilterCategories valueState={valueState} onChange={onChange} />
-        </div>
-        <div className={style.button}>
-          <Button onClick={handleSubmit} variant="flat" color="success">
+			<FilterPrice valueState={valueState} onChange={onChange} />
+			<FilterSort valueState={valueState} onChange={onChange} />
+			<FilterCategories valueState={valueState} onChange={onChange} />
+			<Button className='w-1/2 self-center' onClick={handleSubmit} variant="flat" color="success">
             Aplicar
-          </Button>
-        </div>
-      </div>
-    </div>
-    
-  );
-};
-export default Filters;
+			</Button>
+		</div>
+
+	)
+}
+export default Filters
