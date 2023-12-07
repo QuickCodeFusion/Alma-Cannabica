@@ -19,6 +19,7 @@ const Card = ({ product, classNames }: { product: CardProduct, classNames?: stri
 	return (
 		<>
 			<NextUICard
+				as='div'
 				className={`
 				${classNames instanceof Array ? classNames.join(' ') : classNames}
 				bg-white w-screen h-40
