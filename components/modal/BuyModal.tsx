@@ -1,7 +1,6 @@
 'use client'
 import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import Detail from '../detail/Detail'
-import Whatsapp from '../icons/Whatsapp'
 import { type Product } from '@/types/Product/type'
 import { useEffect, useState } from 'react'
 import { getPreferenceUrlSingle } from '@/utils/checkoutUtils'
