@@ -23,6 +23,8 @@ const NavBar = (): JSX.Element => {
 	const { userSession, logOut } = useUserSession()
 	const pathname = usePathname()
 
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
+
 	const [menuItems, setMenuItems] = useState([
 		{
 			name: 'Inicio',
@@ -40,28 +42,39 @@ const NavBar = (): JSX.Element => {
 
 	useEffect(() => {
 		if (userSession?.claims.admin) {
-			setMenuItems((prev) => [
-				...prev,
-				{
-					name: 'Panel de administrador',
-					label: '/admin-dashboard'
+			setMenuItems((prev) => {
+				if (prev[3]?.name !== 'Panel de administrador') {
+					return [
+						...prev,
+						{
+							name: 'Panel de administrador',
+							label: '/admin-dashboard'
+						}
+					]
 				}
-			])
+				return prev
+			})
 		}
 	}, [userSession?.uid])
 
 	return (
 		<>
-			<Navbar maxWidth='full' disableAnimation isBordered classNames={{
-				item: [
-					'data-[active=true]:text-green-400',
-					'data-[active=true]:font-medium'
-				],
-				brand: 'min-w-[50px]',
-				menuItem: [
-					'data-[active=true]:text-green-400'
-				]
-			}}>
+			<Navbar
+				maxWidth='full'
+				disableAnimation
+				isBordered
+				isMenuOpen={isMenuOpen}
+				onMenuOpenChange={setIsMenuOpen}
+				classNames={{
+					item: [
+						'data-[active=true]:text-green-400',
+						'data-[active=true]:font-medium'
+					],
+					brand: 'min-w-[50px]',
+					menuItem: [
+						'data-[active=true]:text-green-400'
+					]
+				}}>
 
 				<NavbarContent justify="start">
 					<NavbarContent className="lg:hidden z-10" justify="start">
@@ -126,6 +139,11 @@ const NavBar = (): JSX.Element => {
 										: style.notSelectedItem
 								}
 								href={`${item.label}`}
+								onClick={() => {
+									setTimeout(() => {
+										setIsMenuOpen(false)
+									}, 500)
+								}}
 							>
 								{item.name}
 							</Link>
