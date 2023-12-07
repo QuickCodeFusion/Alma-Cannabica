@@ -1,8 +1,10 @@
 'use client'
+import { Wallet, initMercadoPago } from '@mercadopago/sdk-react'
 import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import Detail from '../detail/Detail'
 import Whatsapp from '../icons/Whatsapp'
 import { type Product } from '@/types/Product/type'
+import { useEffect, useState } from 'react'
 
 interface props {
 	product: Product
@@ -11,6 +13,37 @@ interface props {
 }
 
 const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX.Element => {
+	const [preferenceId, setPreferenceId] = useState<string>('')
+	const getPreferenceId = async () => {
+		const checkoutProduct = {
+			products: [
+				{
+					...product,
+					quantity: 1
+				}
+			]
+		}
+		const { URL } = await fetch('/api/checkout', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(checkoutProduct)
+		})
+			.then(async (res) => await res.json())
+		return URL
+	}
+	useEffect(() => {
+		initMercadoPago('TEST-cb8c2c43-27a1-4a28-9aad-98feea3912f2')
+		getPreferenceId()
+			.then((URL) => {
+				setPreferenceId(URL)
+				console.log(URL, 'ESTE ES EL PREF')
+			})
+			.catch((error) => {
+				console.log(error, 'ESTE ES EL ERROR AAAAAAAAAAAAAAA')
+			})
+	}, [])
 	return (
 		<Modal
 			classNames={{
@@ -35,14 +68,13 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 						</ModalBody>
 						<ModalFooter>
 							<Button
+								color='primary'
+								href={preferenceId}
 								isExternal
-								showAnchorIcon
-								anchorIcon={<Whatsapp/>}
-								color='success'
 								as={Link}
-								href={'https://youtu.be/dQw4w9WgXcQ'}
-								className='text-white'
-							>Consultar disponibilidad</Button>
+							>
+								Comprar con Mercado Pago
+							</Button>
 							<Button
 								onClick={onClose}
 							>

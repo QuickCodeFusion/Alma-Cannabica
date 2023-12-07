@@ -18,7 +18,7 @@ const Checkout: React.FC<props> = ({
 	}
 }): JSX.Element => {
 	return (
-		<div>
+		<div className="flex flex-col items-center justify-center p-8 border h-fit min-h-[30vh] m-12 rounded shadow-green-500/50 shadow-lg gap-6">
 			<h1 className='text-3xl font-bold'>¡Gracias por tu compra!</h1>
 			<p className='text-xl'>Tu pago ha sido {status === 'approved' ? 'aprobado' : 'rechazado'}</p>
 			<p className='text-md'>Tu ID de pago es: {payment_id}</p>
