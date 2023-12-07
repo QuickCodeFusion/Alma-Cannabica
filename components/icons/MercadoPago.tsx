@@ -5,8 +5,8 @@ export const MercadoPagoIcon = (): JSX.Element => {
 		<Image
 			src="/mercado-pago.png"
 			alt="mercado-pago"
-			width={40}
-			height={40}
+			width={150}
+			height={150}
 		/>
 	)
 }

@@ -58,8 +58,8 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 								color='success'
 								as={Link}
 								href={preferenceUrl}
-								className='text-white'
-							>Consultar disponibilidad</Button>
+								className='text-white text-lg'
+							>Comprar</Button>
 							<Button
 								onClick={onClose}
 							>
