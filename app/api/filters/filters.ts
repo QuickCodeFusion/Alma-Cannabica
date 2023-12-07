@@ -1,9 +1,11 @@
 import { db } from '@/firebase/config'
 import { type Product } from '@/types/Product/type'
-import { query, where, collection, getDocs, orderBy } from 'firebase/firestore'
+import { query, where, collection, getDocs, orderBy, limit, startAfter } from 'firebase/firestore'
 
 export const filters = async (name: string, minPrice: string, maxPrice: string, category: string, order: string): Promise<Product[]> => {
-	let productRef = query(collection(db, 'products'))
+	let productRef = query(collection(db, 'products'), limit(6))
+
+
 
 	if (category !== '') {
 		productRef = query(productRef, where('category', '==', category))
@@ -32,6 +34,17 @@ export const filters = async (name: string, minPrice: string, maxPrice: string, 
 		...(doc.data() as Product),
 		itemId: doc.id
 	}))
+	const lastProduct = products[products.length - 1]
+	const firstProduct = products[0]
+
+	switch (startProduct) {
+		case 'first':
+			productRef = query(productRef, startAfter(firstProduct.itemId), limit(6))
+			break
+		case 'last':
+			productRef = query(productRef, startAfter(lastProduct.itemId), limit(6))
+			break
+	}
 
 	if (name !== '') {
 		const data = products?.filter((product) => product.name.toLowerCase().includes(name.toLowerCase()))

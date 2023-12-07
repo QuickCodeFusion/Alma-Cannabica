@@ -4,6 +4,7 @@ import Filters from '../filters/Filter'
 import style from './products.module.css'
 import { useState } from 'react'
 import { Button, ButtonGroup, Card } from '@nextui-org/react'
+import Pagination from '../pagination/Pagination'
 
 const Products = (): JSX.Element => {
 	const [Filter, setMfiler] = useState(false)
@@ -26,6 +27,8 @@ const Products = (): JSX.Element => {
 			<>
 				<Cards />
 			</>
+			<Pagination/>
+
 		</div>
 	)
 }
