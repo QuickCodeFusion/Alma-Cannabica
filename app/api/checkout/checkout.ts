@@ -3,7 +3,7 @@ import MercadoPagoConfig, { Preference } from 'mercadopago'
 import { type PreferenceProduct } from './route'
 import { type Items } from 'mercadopago/dist/clients/commonTypes'
 
-export const createPreference = async (products: PreferenceProduct[], URL: string): Promise<string | undefined> => {
+export const createPreference = async (products: PreferenceProduct[], URL: string): Promise<{ preference_id: string | null, URL: string | null, payer: any }> => {
 	const client = new MercadoPagoConfig({
 		accessToken: process.env.MP_ACCESS_TOKEN ?? ''
 	})
@@ -22,12 +22,16 @@ export const createPreference = async (products: PreferenceProduct[], URL: strin
 		body: {
 			items: preferenceProducts,
 			back_urls: {
-				success: `${URL}/success`,
-				failure: `${URL}/failure`,
-				pending: `${URL}/pending`
+				success: `${URL}/checkout`,
+				failure: `${URL}/checkout`,
+				pending: `${URL}/checkout`
 			}
 		}
 	})
 
-	return response.init_point
+	return {
+		preference_id: response.id ?? null,
+		URL: response.init_point ?? null,
+		payer: response.payer ?? null
+	}
 }
