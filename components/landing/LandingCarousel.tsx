@@ -26,8 +26,8 @@ const LandingCarousel: React.FC<props> = ({ products, isLoading }): React.JSX.El
 		autoplay: true,
 		autoplaySpeed: 3000,
 		pauseOnHover: true,
-		centerPadding: '35px',
-		className: ' ',
+		centerPadding: '0px',
+		className: 'px-0.5 ',
 		nextArrow: <Arrow className='text-green-500' direction='right' />,
 		prevArrow: <Arrow className='text-green-500' direction='left' />,
 		beforeChange: (current: number, next: number) => {
