@@ -9,7 +9,7 @@ interface props {
 
 const Categories: React.FC<props> = ({ categories }): React.JSX.Element => {
 	return (
-		<div className='flex'>
+		<div className='flex flex-wrap gap-0 p-0'>
 			{categories instanceof Array
 				? (
 					categories.map((category) => (
