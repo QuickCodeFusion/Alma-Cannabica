@@ -1,32 +1,26 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import MercadoPagoConfig, { Preference } from 'mercadopago'
+import { type PreferenceProduct } from './route'
+import { type Items } from 'mercadopago/dist/clients/commonTypes'
 
-interface Checkout {
-	id: string
-	quantity: number
-	title: string
-	unit_price: number
-	picture_url: string
-}
-
-export const createPreference = async ({ id, quantity, title, unit_price, picture_url }: Checkout, URL: string): Promise<any> => {
+export const createPreference = async (products: PreferenceProduct[], URL: string): Promise<string | undefined> => {
 	const client = new MercadoPagoConfig({
-		accessToken: process.env.MP_ACCESS_TOKEN ?? 'TEST-7392225776209713-120709-869de9ee1277e414f8c442b5276a2d9b-227708791'
+		accessToken: process.env.MP_ACCESS_TOKEN ?? ''
 	})
 
 	const preference = new Preference(client)
 
+	const preferenceProducts: Items[] = products.map((product) => ({
+		id: product.itemId,
+		quantity: parseInt(product.quantity),
+		title: product.name,
+		unit_price: parseInt(product.price),
+		picture_url: product.image
+	}))
+
 	const response = await preference.create({
 		body: {
-			items: [
-				{
-					id,
-					quantity,
-					title,
-					unit_price,
-					picture_url
-				}
-			],
+			items: preferenceProducts,
 			back_urls: {
 				success: `${URL}/success`,
 				failure: `${URL}/failure`,
@@ -35,5 +29,5 @@ export const createPreference = async ({ id, quantity, title, unit_price, pictur
 		}
 	})
 
-	return response
+	return response.init_point
 }

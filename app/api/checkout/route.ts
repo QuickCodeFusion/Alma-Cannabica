@@ -6,14 +6,9 @@ export type PreferenceProduct = CartProduct & {
 }
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
-	const { product }: { product: PreferenceProduct } = await req.json()
+	const { products }: { products: PreferenceProduct[] } = await req.json()
 	const URL = req.nextUrl.origin
-	const response = await createPreference({
-		id: product.itemId,
-		quantity: parseInt(product.quantity),
-		title: product.name,
-		unit_price: parseInt(product.price),
-		picture_url: product.image
-	}, URL)
-	return NextResponse.json({ message: 'OK', response }, { status: 200 })
+	const response = await createPreference(products, URL)
+	if (!response) return NextResponse.json({ message: `Error: ${response}` }, { status: 400 })
+	return NextResponse.json({ message: 'OK', URL: response }, { status: 200 })
 }
