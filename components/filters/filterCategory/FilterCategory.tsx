@@ -1,6 +1,5 @@
 'use client'
 import { type ChangeEvent } from 'react'
-import style from './filterCategories.module.css'
 import { Select, SelectItem } from '@nextui-org/react'
 import { useGetCategoriesQuery } from '@/redux/service/categoriesAPI'
 
@@ -15,7 +14,8 @@ const FilterCategories: React.FC<FiltersCategoriesProps> = ({ valueState, onChan
 	const { data: categories, isLoading } = useGetCategoriesQuery({})
 
 	return (
-		<div className={style.catCont}>
+		<div>
+			<p className='text-lg font-semibold text-green-500'>Filtrar por Categoría</p>
 			<Select
 				size='sm'
 				label='Categorias'

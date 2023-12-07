@@ -2,6 +2,8 @@ import { Tabs, Tab } from '@nextui-org/react'
 import Users from './Users'
 import CreateProduct from '@/components/form/CreateProduct'
 import AdmProducts from './admProducts/AdmProducts'
+import Loading from '@/app/loading'
+import { Suspense } from 'react'
 const Sidebar = (): React.JSX.Element => {
 	return (
 		<div className="flex w-full flex-col">
@@ -19,7 +21,9 @@ const Sidebar = (): React.JSX.Element => {
 					key="users"
 					title='Usuarios'
 				>
-					<Users/>
+					<Suspense fallback={<Loading/>}>
+						<Users/>
+					</Suspense>
 				</Tab>
 				<Tab
 					key='addProduct'

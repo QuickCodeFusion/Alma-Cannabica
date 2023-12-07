@@ -7,7 +7,10 @@ export const GET = async (): Promise<NextResponse> => {
 		const productsRef = collection(db, 'cardCarrousel')
 		const productsSnapshot = await getDocs(productsRef)
 		const products = productsSnapshot.docs.map((doc) => (
-			doc.data()
+			{
+				itemId: doc.id,
+				...doc.data()
+			}
 		))
 		return NextResponse.json(products, { status: 200 })
 	} catch (error: any) {
