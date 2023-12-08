@@ -32,12 +32,6 @@ const Sidebar = (): React.JSX.Element => {
 					<CreateProduct/>
 				</Tab>
 				<Tab
-					key='favorites'
-					title='Administrar favoritos'
-				>
-			Administrar favoritos...
-				</Tab>
-				<Tab
 					key='products'
 					title='Administrar productos'
 				>

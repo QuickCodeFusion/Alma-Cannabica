@@ -34,7 +34,7 @@ const UserButton = ({
 	}
 	return (
 		<>
-			<Button isLoading={loading} size="sm" radius='full' className={`bg-opacity-20 text-${txtColor}-500`} variant="bordered" color={btnColor} onClick={action} >{iconComponent}</Button>
+			<Button isLoading={loading} size="sm" radius='full' className={``}  color={btnColor} onClick={action} >{iconComponent}</Button>
 		</>
 	)
 }

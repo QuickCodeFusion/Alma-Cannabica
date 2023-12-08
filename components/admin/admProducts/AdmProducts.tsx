@@ -7,7 +7,7 @@ import { Product } from "@/types/Product/type";
 
 const AdmProducts = ():React.JSX.Element => {
 	const { products, isLoading, isError } = useSelector((state: any) => state.products)
-	console.log(products);
+	
 	const columns = [
 		{ name: "PRODUCTOS", uid: "name" },
 		{ name: "CATEGORIA", uid: "rols" },
