@@ -1,12 +1,21 @@
 'use client'
 import { Card, Button } from '@nextui-org/react'
 import { useGetCarouselQuery } from '@/redux/service/carouselAPI'
+import { setCarousel } from '@/redux/feature/carouselSlice'
+import { useEffect } from 'react'
+import { useDispatch } from '@/redux/hooks'
 import Link from 'next/link'
 import React from 'react'
 import LandingCarousel from './LandingCarousel'
 
 const Landing = (): React.JSX.Element => {
+	const dispatch = useDispatch()
 	const { data, isLoading } = useGetCarouselQuery(null)
+	useEffect(() => {
+		console.log(data);
+		
+		if (data) dispatch(setCarousel({data}))
+	}, [data])
 
 	const frases = [
 		`La marihuana medicinal se puede utilizar para: Aliviar el dolor. \n

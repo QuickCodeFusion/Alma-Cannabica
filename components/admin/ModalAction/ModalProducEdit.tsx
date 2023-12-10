@@ -6,7 +6,7 @@ import style from './ModalAction.module.css';
 import { Product } from "@/types/Product/type";
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Tooltip } from "@nextui-org/react";
 
-export const ModalProductEdit = ({product}:{product:Product}): JSX.Element => {
+export const ModalProductEdit = ({ product, limit, exist }: { product: Product, limit: boolean, exist: boolean }): JSX.Element => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
@@ -25,22 +25,22 @@ export const ModalProductEdit = ({product}:{product:Product}): JSX.Element => {
                             <ModalBody >
                                 <div className="flex flex-col gap-2 text-center">
                                     <h4 className="text-green-600 font-semibold">Eliminar del carrusel</h4>
-                                    <Tooltip color="danger" content="Eliminar">
-                                        <Button   color="danger"> <Remove/> </Button>
-                                    </Tooltip>
+
+                                    <Button color="danger" isDisabled={!exist}> <Remove /> </Button>
+
                                 </div>
                                 <div className="flex flex-col gap-2 text-center">
                                     <h4 className="text-green-600 font-semibold">Agregar Carrusel</h4>
-                                    <Tooltip color="success" content="Agregar">
-                                        <Button  color="success"> <Grant/> </Button>
-                                    </Tooltip>
+
+                                    <Button color="success" isDisabled={exist || limit}> <Grant /> </Button>
+
                                 </div>
                                 <div className="flex flex-col gap-2 text-center">
                                     <h4 className="text-green-600 font-semibold">Editar Producto</h4>
-                                    <ModalEdit product={product} preOnClose={onClose}/>
+                                    <ModalEdit product={product} preOnClose={onClose} />
                                 </div>
 
-                                
+
                             </ModalBody>
 
                         </>

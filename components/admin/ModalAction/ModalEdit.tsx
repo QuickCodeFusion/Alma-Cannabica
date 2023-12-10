@@ -3,21 +3,21 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { EditIcon } from "@/components/button/admin/IconBtn";
 import EditProduct from "@/components/form/EditProduct";
 import { Product } from "@/types/Product/type";
-export const ModalEdit = ({preOnClose, product}:{preOnClose:()=>void, product:Product}) => {
+export const ModalEdit = ({ preOnClose, product }: { preOnClose: () => void, product: Product }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const handleOpen = () => { 
-        onOpen(); 
+    const handleOpen = () => {
+        onOpen();
     };
 
 
     return (
         <>
-            <div className="flex flex-wrap gap-3">
-                <Tooltip  color="primary" content="Editar">
-                    <Button onClick={handleOpen} color="primary"> <EditIcon /> </Button>
+            <div className="flex flex-col">
 
-                </Tooltip>
+                <Button  onClick={handleOpen} color="primary"> <EditIcon /> </Button>
+
+
             </div>
             <Modal
                 size="full"
@@ -29,7 +29,7 @@ export const ModalEdit = ({preOnClose, product}:{preOnClose:()=>void, product:Pr
                         <>
                             <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
                             <ModalBody className="overflow-auto">
-                                <EditProduct item={product}/>
+                                <EditProduct item={product} />
                             </ModalBody>
                         </>
                     )}
