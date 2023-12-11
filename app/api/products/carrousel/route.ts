@@ -1,5 +1,5 @@
 import { db } from '@/firebase/config'
-import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore'
 import { type NextRequest, NextResponse } from 'next/server'
 
 export const GET = async (): Promise<NextResponse> => {
@@ -21,10 +21,17 @@ export const GET = async (): Promise<NextResponse> => {
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
 		const { product } = await req.json()
-		const productRef = doc(db, 'cardCarrousel', product)
-		await setDoc(productRef, {
+		const CarouselProductRef = doc(db, 'cardCarrousel', product)
+		const productRef = doc(db, 'products', product)
+
+		await setDoc(CarouselProductRef, {
 			product
 		})
+
+		await updateDoc(productRef, {
+			inCarousel: true
+		})
+
 		return NextResponse.json({ message: 'Product added' }, { status: 201 })
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 400 })
