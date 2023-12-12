@@ -1,15 +1,14 @@
 'use client'
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
+import {Skeleton, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
 import { ModalProductEdit } from "../ModalAction/ModalProducEdit";
 import { useSelector } from '@/redux/hooks'
 import { Product } from "@/types/Product/type";
-import { limit } from "firebase/firestore";
 
 const AdmProducts = (): React.JSX.Element => {
 	const { products } = useSelector((state: any) => state.products)
 	const { data } = useSelector((state: any) => state.carousel)
-	
+
 
 
 	const columns = [
@@ -20,8 +19,8 @@ const AdmProducts = (): React.JSX.Element => {
 	];
 	const renderCell = React.useCallback((product: any, data: Product[]) => {
 		const cells = [];
-		
-		
+
+
 		if (true) {
 			cells.push(() => (
 
@@ -40,7 +39,7 @@ const AdmProducts = (): React.JSX.Element => {
 		if (true) {
 			Array.isArray(product.category) ? cells.push(() => (
 				product.category.map((category: string) => <Chip color="success" variant="faded">{category}</Chip>)
-			)): cells.push(() => (
+			)) : cells.push(() => (
 				<Chip color="success" variant="faded">{product.category}</Chip>
 			))
 		}
@@ -90,7 +89,11 @@ const AdmProducts = (): React.JSX.Element => {
 					<TableBody>
 						<TableRow>
 							{columns.map((column) => (
-								<TableCell key={column.uid}>-</TableCell>
+								<TableCell key={column.uid}>
+									<Skeleton className='rounded'>
+										-
+									</Skeleton>
+								</TableCell>
 							))}
 						</TableRow>
 					</TableBody>
