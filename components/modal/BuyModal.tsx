@@ -1,8 +1,11 @@
 'use client'
 import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import Detail from '../detail/Detail'
-import Whatsapp from '../icons/Whatsapp'
 import { type Product } from '@/types/Product/type'
+import { useEffect, useState } from 'react'
+import { getPreferenceUrlSingle } from '@/utils/checkoutUtils'
+import { toast } from 'sonner'
+import { MercadoPagoIcon } from '../icons/MercadoPago'
 
 interface props {
 	product: Product
@@ -11,6 +14,20 @@ interface props {
 }
 
 const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX.Element => {
+	const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
+
+	useEffect(() => {
+		if (product) {
+			getPreferenceUrlSingle(product)
+				.then((url) => {
+					SetPreferenceUrl(url)
+				})
+				.catch((error) => {
+					console.error(error)
+					toast.error(error.message)
+				})
+		}
+	}, [product])
 	return (
 		<Modal
 			classNames={{
@@ -37,12 +54,12 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 							<Button
 								isExternal
 								showAnchorIcon
-								anchorIcon={<Whatsapp/>}
+								anchorIcon={<MercadoPagoIcon/>}
 								color='success'
 								as={Link}
-								href={'https://youtu.be/dQw4w9WgXcQ'}
-								className='text-white'
-							>Consultar disponibilidad</Button>
+								href={preferenceUrl}
+								className='text-white text-lg'
+							>Comprar</Button>
 							<Button
 								onClick={onClose}
 							>
