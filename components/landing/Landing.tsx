@@ -12,8 +12,6 @@ const Landing = (): React.JSX.Element => {
 	const dispatch = useDispatch()
 	const { data, isLoading } = useGetCarouselQuery(null)
 	useEffect(() => {
-		console.log(data);
-		
 		if (data) dispatch(setCarousel({data}))
 	}, [data])
 

@@ -4,20 +4,30 @@ import {Skeleton, Table, TableHeader, TableColumn, TableBody, TableRow, TableCel
 import { ModalProductEdit } from "../ModalAction/ModalProducEdit";
 import { useSelector } from '@/redux/hooks'
 import { Product } from "@/types/Product/type";
+import { useState , useEffect } from "react";
+import { useGetCarouselQuery } from "@/redux/service/carouselAPI";
 
 const AdmProducts = (): React.JSX.Element => {
 	const { products } = useSelector((state: any) => state.products)
-	const { data } = useSelector((state: any) => state.carousel)
-
-
-
+	//const { data } = useSelector((state: any) => state.carousel)
+	const { data , isLoading, refetch } = useGetCarouselQuery(null);
+	const [update, setUpdate] = useState<boolean>(false);
+	
+	useEffect(() => {
+		refetch();
+	}, [update]);
+	const handleUpdate = () => {
+		setUpdate(!update);
+	}
+	console.log(data);
+	
 	const columns = [
 		{ name: "PRODUCTOS", uid: "name" },
 		{ name: "CATEGORIA", uid: "rols" },
 		{ name: "ACCIONES", uid: "actions" },
 
 	];
-	const renderCell = React.useCallback((product: any, data: Product[]) => {
+	const renderCell = React.useCallback((product: any, data:Product[]) => {
 		const cells = [];
 
 
@@ -28,7 +38,7 @@ const AdmProducts = (): React.JSX.Element => {
 					avatarProps={{ radius: "lg", src: product.image }}
 					name={product.name}
 					description={data.map((data: Product) => (
-						data.name === product.name ? "Producto en Inicio" : ''
+						data?.itemId === product?.itemId ? "Producto en Inicio" : ''
 					))}
 
 				>
@@ -46,11 +56,11 @@ const AdmProducts = (): React.JSX.Element => {
 
 		if (true) {
 			const limit = data && data.length >= 10 ? true : false;
-			const exist = data && data.some((item) => item.name === product.name) ? true : false;
+			const exist = data && data.some((item) => item.itemId === product.itemId) ? true : false;
 			cells.push(() => (
 				< >
 					<div>
-						<ModalProductEdit product={product} limit={limit} exist={exist} />
+						<ModalProductEdit product={product} limit={limit} exist={exist} handleUpdate={handleUpdate} />
 					</div>
 
 				</>
@@ -72,7 +82,7 @@ const AdmProducts = (): React.JSX.Element => {
 						</TableColumn>
 					)}
 				</TableHeader>
-				{products ? (
+				{ data && !isLoading ? (
 					<TableBody items={products}>
 						{(item: Product) => {
 							const cells = renderCell(item, data);

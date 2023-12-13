@@ -20,13 +20,14 @@ export const GET = async (): Promise<NextResponse> => {
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
-		const { product } = await req.json()
-		const CarouselProductRef = doc(db, 'cardCarrousel', product)
-		const productRef = doc(db, 'products', product)
+		const product = await req.json()
+		
+		const CarouselProductRef = doc(db, 'cardCarrousel', product.itemId)
+		const productRef = doc(db, 'products', product.itemId)
 
-		await setDoc(CarouselProductRef, {
+		await setDoc(CarouselProductRef,
 			product
-		})
+		)
 
 		await updateDoc(productRef, {
 			inCarousel: true
@@ -41,6 +42,8 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 export const DELETE = async (req: NextRequest): Promise<NextResponse> => {
 	try {
 		const { itemId }: { itemId: string } = await req.json()
+		console.log(itemId);
+		
 
 		const productsRef = doc(db, 'cardCarrousel', itemId)
 
