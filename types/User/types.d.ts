@@ -51,3 +51,12 @@ export interface CartProduct {
 	description?: string
 	itemId: string
 }
+
+export interface UserResponse {
+	response: {
+		data: {
+			user: User
+			message: string
+		}
+	}
+}
