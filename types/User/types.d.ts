@@ -53,10 +53,6 @@ export interface CartProduct {
 }
 
 export interface UserResponse {
-	response: {
-		data: {
-			user: User
-			message: string
-		}
-	}
+	user: UserRecord
+	message: string
 }
