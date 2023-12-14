@@ -37,7 +37,7 @@ const Register = (): React.JSX.Element => {
 			toast.error('Debe subir una imagen')
 			return
 		}
-		const photoURL = await uploadFile(file, file.name)
+		const photoURLL = await uploadFile(file, file.name)
 			.then((url) => {
 				return url
 			})
@@ -45,13 +45,16 @@ const Register = (): React.JSX.Element => {
 				toast.error(error.message)
 			})
 
-		setForm({
-			...form,
-			photoUrl: photoURL || ''
-		})
+		const { name, email, password } = form
+		const newUser = {
+			name,
+			email,
+			password,
+			photoUrl: photoURLL
+		}
 
 		setLoading(true)
-		registerAndLogin(form, setForm)
+		await registerAndLogin(newUser, setForm)
 			.then((user) => {
 				setLoading(false)
 				setUserSession(user)

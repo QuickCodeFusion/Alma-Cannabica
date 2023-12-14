@@ -1,6 +1,7 @@
 'use client'
 import Cards from '../cards/Cards'
 import FiltersContainer from '../filters/FiltersContainer'
+import Pagination from '../pagination/Pagination'
 
 const Products = (): JSX.Element => {
 	return (
@@ -9,6 +10,8 @@ const Products = (): JSX.Element => {
 			<>
 				<Cards />
 			</>
+			<Pagination/>
+
 		</div>
 	)
 }
