@@ -7,7 +7,7 @@ import { useDeleteProductMutation } from "@/redux/service/productsAPI";
 import { Product } from "@/types/Product/type";
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from "@nextui-org/react";
 
-export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { product: Product, limit: boolean, exist: boolean, handleUpdate: () => void }): JSX.Element => {
+export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { product: Product, limit: boolean, exist: boolean, handleUpdate: (boolean: boolean) => void }): JSX.Element => {
 
 
     const [createArticule] = useCreateArticuleMutation();
@@ -18,6 +18,8 @@ export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { prod
     const handleCreateArticule = async (nuevoArticulo: Product) => {
         try {
             const response = await createArticule(nuevoArticulo);
+            if (response !== null || response !== undefined)handleUpdate(true);
+            else handleUpdate(false);
 
         } catch (error) {
             console.log(error)
@@ -26,7 +28,8 @@ export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { prod
     const handleDeleteArticule = async (id: Product) => {
         try {
             const response = await deleteArticule(id);
-
+            if (response !== null || response !== undefined)handleUpdate(true);
+            else handleUpdate(false);
         } catch (error) {
             console.log(error)
         }
@@ -34,7 +37,8 @@ export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { prod
     const handleDeleteProduct = async (id: string) => {
         try {
             const response = await deleteProduct(id);
-            console.log(response);
+            if (response !== null || response !== undefined)handleUpdate(true);
+            else handleUpdate(false);
             
         }catch (error) {
             console.log(error)
@@ -58,12 +62,12 @@ export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { prod
                                     {exist ? (
                                         <>
                                             <h4 className="text-green-600 font-semibold">Eliminar del carrusel</h4>
-                                            <Button color="warning" isDisabled={!exist} onClick={() => { handleDeleteArticule(product); handleUpdate() }} onPress={onClose}> <Remove /> </Button>
+                                            <Button color="warning" isDisabled={!exist} onClick={() => { handleDeleteArticule(product) }} onPress={onClose}> <Remove /> </Button>
                                         </>
                                     ) : (
                                         <>
                                             <h4 className="text-green-600 font-semibold">Agregar Carrusel</h4>
-                                            <Button color="success" isDisabled={exist || limit} onClick={() => { handleCreateArticule(product); handleUpdate() }} onPress={onClose}> <Grant /> </Button>
+                                            <Button color="success" isDisabled={exist || limit} onClick={() => { handleCreateArticule(product) }} onPress={onClose}> <Grant /> </Button>
                                         </>
                                     )}
                                 </div>
@@ -71,7 +75,7 @@ export const ModalProductEdit = ({ product, limit, exist, handleUpdate }: { prod
 
                                 <div className="flex flex-col gap-2 text-center">
                                     <h4 className="text-green-600 font-semibold">Eliminar Producto</h4>
-                                    <Button color="danger" onClick={() => { handleDeleteProduct(product.itemId); handleUpdate() }} onPress={onClose}> <Remove /> </Button>
+                                    <Button color="danger" onClick={() => { handleDeleteProduct(product.itemId) }} onPress={onClose}> <Remove /> </Button>
                                 </div>
                                 <div className="flex flex-col gap-2 text-center">
                                     <h4 className="text-green-600 font-semibold">Editar Producto</h4>

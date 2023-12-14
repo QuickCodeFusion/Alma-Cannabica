@@ -6,20 +6,33 @@ import { useSelector } from '@/redux/hooks'
 import { Product } from "@/types/Product/type";
 import { useState , useEffect } from "react";
 import { useGetCarouselQuery } from "@/redux/service/carouselAPI";
+import { useGetAllProductsQuery } from "@/redux/service/productsAPI";
 
 const AdmProducts = (): React.JSX.Element => {
-	const { products } = useSelector((state: any) => state.products)
+	const { data: products, refetch: refetchProducts } = useGetAllProductsQuery(null);
 	//const { data } = useSelector((state: any) => state.carousel)
-	const { data , isLoading, refetch } = useGetCarouselQuery(null);
+	const { data , isLoading, refetch: refetchCarousel } = useGetCarouselQuery(null);
 	const [update, setUpdate] = useState<boolean>(false);
-	
 	useEffect(() => {
-		refetch();
-	}, [update]);
-	const handleUpdate = () => {
-		setUpdate(!update);
-	}
-	console.log(data);
+		
+		if (update) {
+		refetchProducts();
+		setUpdate(false);
+		}
+	}, [update, refetchProducts]);
+	
+	const handleUpdate = async (boolean: boolean) => {
+		if (boolean) {
+		  try {
+			await refetchCarousel();
+			setUpdate(true);
+		  } catch (error) {
+			// Manejar errores si la solicitud de refresco del carrusel falla
+			console.error("Error al actualizar el carrusel:", error);
+		  }
+		}
+	  };
+	
 	
 	const columns = [
 		{ name: "PRODUCTOS", uid: "name" },
@@ -82,7 +95,7 @@ const AdmProducts = (): React.JSX.Element => {
 						</TableColumn>
 					)}
 				</TableHeader>
-				{ data && !isLoading ? (
+				{ data && products ? (
 					<TableBody items={products}>
 						{(item: Product) => {
 							const cells = renderCell(item, data);
