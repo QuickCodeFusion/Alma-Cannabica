@@ -3,12 +3,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const productsAPI = createApi({
 	reducerPath: 'productsAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '/api/products'
+		baseUrl: '/api/'
 	}),
 	endpoints: (builder) => ({
 		createProduct: builder.mutation({
 			query: (body) => ({
-				url: '/',
+				url: '/products',
 				method: 'POST',
 				body
 			})

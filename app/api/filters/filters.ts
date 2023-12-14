@@ -1,9 +1,21 @@
 import { db } from '@/firebase/config'
 import { type Product } from '@/types/Product/type'
-import { query, where, collection, getDocs, orderBy } from 'firebase/firestore'
+import { query, where, collection, getDocs, orderBy, limit, startAfter, doc, getDoc, endBefore, startAt } from 'firebase/firestore'
+import { backPaginator } from './backPaginator'
 
-export const filters = async (name: string, minPrice: string, maxPrice: string, category: string, order: string): Promise<Product[]> => {
-	let productRef = query(collection(db, 'products'))
+export const filters = async (name: string, minPrice: string, maxPrice: string, category: string, order: string, firstProductId: string, lastProductId: string): Promise<Product[]> => {
+	let productRef = query(collection(db, 'products'), orderBy('name', 'asc'), limit(6))
+
+	if (lastProductId !== '') {
+		const lastProductRef = await getDoc(doc(db, 'products', lastProductId))
+		productRef = query(productRef, startAfter(lastProductRef), limit(2))
+	}
+
+	if (firstProductId !== '') {
+		const firstProductRef = await getDoc(doc(db, 'products', firstProductId))
+		const firstProductRef2 = await backPaginator(firstProductId)
+		productRef = query(productRef, startAt(firstProductRef2), endBefore(firstProductRef), limit(2))
+	}
 
 	if (category !== '') {
 		productRef = query(productRef, where('category', '==', category))
