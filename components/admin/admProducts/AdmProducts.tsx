@@ -27,7 +27,7 @@ const AdmProducts = (): React.JSX.Element => {
 			await refetchCarousel();
 			setUpdate(true);
 		  } catch (error) {
-			// Manejar errores si la solicitud de refresco del carrusel falla
+			
 			console.error("Error al actualizar el carrusel:", error);
 		  }
 		}
