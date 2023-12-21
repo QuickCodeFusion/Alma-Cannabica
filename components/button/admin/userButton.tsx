@@ -1,5 +1,6 @@
-import { Button } from '@nextui-org/react'
+import { Button, Tooltip } from '@nextui-org/react'
 import { Disable, Enable, Remove, Grant } from './IconBtn'
+import Loading from '@/app/loading'
 
 const UserButton = ({
 	action,
@@ -14,28 +15,33 @@ const UserButton = ({
 	icon: string
 	loading: boolean
 }): React.JSX.Element => {
-	let iconComponent = null
+	let iconComponent: JSX.Element | null = null
+	let actionTip: string = ''
 
 	switch (icon) {
 		case 'enable':
 			iconComponent = <Enable />
+			actionTip = 'Habilitar Usuario'
 			break
 		case 'disable':
 			iconComponent = <Disable />
+			actionTip = 'Deshabilitar Usuario'
 			break
 		case 'remove':
 			iconComponent = <Remove />
+			actionTip = 'Quitar Admin'
 			break
 		case 'grant':
 			iconComponent = <Grant />
+			actionTip = 'Otorgar Admin'
 			break
 		default:
 			break
 	}
 	return (
-		<>
-			<Button isLoading={loading} size="sm" radius='full' className={``}  color={btnColor} onClick={action} >{iconComponent}</Button>
-		</>
+		<Tooltip color={btnColor} showArrow content={actionTip}>
+			<Button isLoading={loading} size="sm" radius='full' className={''} color={btnColor} onClick={action} >{loading ? <Loading /> : iconComponent}</Button>
+		</Tooltip>
 	)
 }
 

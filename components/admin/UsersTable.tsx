@@ -1,6 +1,6 @@
 import React from 'react'
 import { type UserRecord } from 'firebase-admin/auth'
-import { Skeleton, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from '@nextui-org/react'
+import { Skeleton, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip } from '@nextui-org/react'
 import UserButton from '../button/admin/userButton'
 import { ModalAction } from './ModalAction/ModalAction'
 
@@ -23,48 +23,45 @@ const UsersTable: React.FC<props> = ({ users, loading, handleBan, handleUnban, h
 	const renderCell = React.useCallback((user: any) => {
 		const cells = []
 
-		if (true) {
-			cells.push(() => (
+		const isAdmin = user.customClaims?.admin ?? false
 
-				<User
-					avatarProps={{ radius: 'lg', src: user.photoUrl }}
-					description={user.email}
-					name={user.name}
+		cells.push(() => (
 
-				>
-					{user.name}
-				</User>
-			))
-		}
-		if (true) {
-			cells.push(() => (
-				<Chip color="warning" variant="faded">{user.customClaims?.admin ? 'Admin' : 'User'}
-				</Chip>
-			))
-		}
+			<User
+				avatarProps={{ radius: 'lg', src: user.photoUrl }}
+				description={user.email}
+				name={user.name}
 
-		if (true) {
-			cells.push(() => (
-				< >
-					<div className="sm:relative sm:flex sm:items-center sm:gap-2 hidden">
-						{
-							user.disabled
-								? <UserButton icon='enable' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} loading={loading}/>
-								: <UserButton icon='disable' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} loading={loading}/>
+			>
+				{user.name}
+			</User>
+		))
+		cells.push(() => (
+			<Chip color={isAdmin ? 'warning' : 'primary'} variant="faded">{isAdmin ? 'Admin' : 'User'}
+			</Chip>
+		))
 
-						}
-						{
-							user.customClaims?.admin
-								? <UserButton icon='remove' txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} loading={loading}/>
-								: <UserButton icon='grant' txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} loading={loading}/>
+		cells.push(() => (
+			< >
+				<div className="sm:relative sm:flex sm:items-center sm:gap-2 hidden">
+					{
+						user.disabled
+							? <UserButton icon='enable' txtColor='green' btnColor='success' action={() => { handleUnban(user.uid) }} loading={loading}/>
 
-						}
-					</div>
-					<ModalAction user={user} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin} />
-				</>
+							: <UserButton icon='disable' txtColor='red' btnColor='danger' action={() => { handleBan(user.uid) }} loading={loading}/>
 
-			))
-		}
+					}
+					{
+						isAdmin
+							? <UserButton icon='remove' txtColor='yellow' btnColor='warning' action={() => { handleRemoveAdmin(user.uid) }} loading={loading}/>
+							: <UserButton icon='grant' txtColor='blue' btnColor='primary' action={() => { handleGiveAdmin(user.uid) }} loading={loading}/>
+
+					}
+				</div>
+				<ModalAction user={user} handleBan={handleBan} handleUnban={handleUnban} handleGiveAdmin={handleGiveAdmin} handleRemoveAdmin={handleRemoveAdmin} />
+			</>
+
+		))
 
 		return cells
 	}, [])
