@@ -1,28 +1,21 @@
-export interface NewProduct {
+interface BaseProduct {
 	name: string
 	description: string
 	price: number
 	image: string
 	itemId: string
-	category: string
+	category: string[] | string
+}
+
+export interface NewProduct extends BaseProduct {
 	nameToLowerCase?: string
 }
 
-export interface Product {
-	name: string
-	description: string
-	price: number
-	image: string
-	itemId: string
-	category: string
+export interface Product extends BaseProduct {
 	nameToLowerCase?: string
+	inCarousel?: boolean
 }
 
-export interface CardProduct {
-	name: string
-	description: string
-	price: number
-	image: string
-	itemId: string
-	category: string
-}
+export type CardProduct = BaseProduct
+
+export type CarouselProduct = BaseProduct

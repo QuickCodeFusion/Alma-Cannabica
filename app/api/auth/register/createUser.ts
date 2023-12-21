@@ -32,7 +32,8 @@ export const createUser = async (
 		email,
 		photoUrl: photoUrl ?? 'https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default-user-icon-3084929853.jpg?alt=media&token=d78ab167-3602-40dc-b81f-bb3680fa3324',
 		addresses: addresses ?? [],
-		token
+		token,
+		admin: false
 	}
 
 	await setDoc(userRef, userData)
