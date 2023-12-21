@@ -1,5 +1,6 @@
 import { db } from '@/firebase/config'
-import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { type CarouselProduct, type Product } from '@/types/Product/type'
+import { collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore'
 import { type NextRequest, NextResponse } from 'next/server'
 
 export const GET = async (): Promise<NextResponse> => {
@@ -20,14 +21,29 @@ export const GET = async (): Promise<NextResponse> => {
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
-		const { name, price, image } = await req.json()
-		const productsRef = collection(db, 'cardCarrousel')
-		await addDoc(productsRef, {
-			name,
-			price,
-			image
+		const product: Product = await req.json()
+
+		const CarouselProductRef = doc(db, 'cardCarrousel', product.itemId)
+		const productRef = doc(db, 'products', product.itemId)
+
+		const carouselProduct: CarouselProduct = {
+			category: product.category,
+			description: product.description,
+			image: product.image,
+			itemId: product.itemId,
+			name: product.name,
+			price: product.price
+		}
+
+		await setDoc(CarouselProductRef,
+			carouselProduct
+		)
+
+		await updateDoc(productRef, {
+			inCarousel: true
 		})
-		return NextResponse.json({ message: 'Product added' }, { status: 201 })
+
+		return NextResponse.json({ message: 'Product added', product: carouselProduct }, { status: 201 })
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 400 })
 	}
@@ -37,11 +53,17 @@ export const DELETE = async (req: NextRequest): Promise<NextResponse> => {
 	try {
 		const { itemId }: { itemId: string } = await req.json()
 
-		const productsRef = doc(db, 'cardCarrousel', itemId)
+		const CarouselProductRef = doc(db, 'cardCarrousel', itemId)
 
-		await deleteDoc(productsRef)
+		await deleteDoc(CarouselProductRef)
 
-		return NextResponse.json({ message: 'Product deleted ' + itemId }, { status: 200 })
+		const productRef = doc(db, 'products', itemId)
+
+		await updateDoc(productRef, {
+			inCarousel: false
+		})
+
+		return NextResponse.json({ message: `Product ${itemId} deleted` }, { status: 200 })
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 400 })
 	}

@@ -1,4 +1,4 @@
-import { type UsersList } from '@/types/User/types'
+import { type UserResponse, type UsersList } from '@/types/User/types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const adminAPI = createApi({
@@ -10,19 +10,22 @@ export const adminAPI = createApi({
 		getAllAuthUsers: builder.query<UsersList, null>({
 			query: () => ('/users')
 		}),
-		setAdmin: builder.mutation<Promise<void>, { id: string, admin: boolean }>({
+		setAdmin: builder.mutation<UserResponse, { id: string, admin: boolean }>({
 			query: (body) => ({
 				url: `/manage/${body.id}`,
 				method: 'POST',
 				body
-			})
+			}),
+			transformResponse: (response: UserResponse) => response
 		}),
-		disableUser: builder.mutation<Promise<void>, { id: string, disabled: boolean }>({
+		disableUser: builder.mutation<UserResponse, { id: string, disabled: boolean }>({
 			query: (body) => ({
 				url: `/disable/${body.id}`,
 				method: 'POST',
 				body
-			})
+			}),
+			transformResponse: (response: UserResponse) => response
+
 		})
 	})
 })

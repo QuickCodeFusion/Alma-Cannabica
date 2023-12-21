@@ -51,3 +51,8 @@ export interface CartProduct {
 	description?: string
 	itemId: string
 }
+
+export interface UserResponse {
+	user: UserRecord
+	message: string
+}
