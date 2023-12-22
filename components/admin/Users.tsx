@@ -13,64 +13,83 @@ const Users = (): React.JSX.Element => {
 	const [disableUser] = useDisableUserMutation()
 
 	const handleGiveAdmin = (userId: string): any => {
-		setLoading(true)
-		postAdmin({
-			id: userId,
-			admin: true
-		})
-			.then(() => {
-				toast.success('Se otorgo Admin')
-				setLoading(false)
+		toast.promise(
+			postAdmin({
+				id: userId,
+				admin: true
 			})
-			.catch(error => {
-				toast.error('Something went wrong: ' + error)
-				console.error(error)
-			})
+				.unwrap(),
+			{
+				loading: 'Cargando...',
+				success: ({ user }) => {
+					return `Se otorgó admin al usuario ${user.email}`
+				},
+				error: (error: any) => {
+					return 'Algo salió mal: ' + error
+				},
+				finally: () => { location.reload() }
+			}
+		)
 	}
 
 	const handleRemoveAdmin = (userId: string): any => {
-		setLoading(true)
-		postAdmin({
-			id: userId,
-			admin: false
-		})
-			.then(() => {
-				toast.success('Se quito Admin')
-				setLoading(false)
+		toast.promise(
+			postAdmin({
+				id: userId,
+				admin: false
 			})
-			.catch(error => {
-				toast.error('Something went wrong: ' + error)
-			})
+				.unwrap(),
+			{
+				loading: 'Cargando...',
+				success: ({ user }) => {
+					return `Se quitó admin al usuario ${user.email}`
+				},
+				error: (error: any) => {
+					return 'Algo salió mal: ' + error
+				},
+				finally: () => { location.reload() }
+			}
+		)
 	}
 
 	const handleBan = (userId: string): any => {
-		setLoading(true)
-		disableUser({
-			id: userId,
-			disabled: true
-		})
-			.then((response) => {
-				toast.success('Operación completada con éxito. El nuevo estado se verá reflejado la próxima vez que el usuario inicie sesión')
-				setLoading(false)
+		toast.promise(
+			disableUser({
+				id: userId,
+				disabled: true
 			})
-			.catch(error => {
-				toast.error('Something went wrong: ' + error)
-			})
+				.unwrap(),
+			{
+				loading: 'Cargando...',
+				success: ({ user }) => {
+					return `Se deshabilitó al usuario ${user.email}`
+				},
+				error: (error: any) => {
+					return 'Algo salió mal: ' + error
+				},
+				finally: () => { location.reload() }
+			}
+		)
 	}
 
 	const handleUnban = (userId: string): any => {
-		setLoading(true)
-		disableUser({
-			id: userId,
-			disabled: false
-		})
-			.then(() => {
-				toast.success('Operación completada con éxito. El nuevo estado se verá reflejado la próxima vez que el usuario inicie sesión')
-				setLoading(false)
+		toast.promise(
+			disableUser({
+				id: userId,
+				disabled: true
 			})
-			.catch(error => {
-				toast.error('Something went wrong: ' + error)
-			})
+				.unwrap(),
+			{
+				loading: 'Cargando...',
+				success: ({ user }) => {
+					return `Se habilitó nuevamente al usuario ${user.email}`
+				},
+				error: (error: any) => {
+					return 'Algo salió mal: ' + error
+				},
+				finally: () => { location.reload() }
+			}
+		)
 	}
 	return (
 		<div >

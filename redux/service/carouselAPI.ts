@@ -15,11 +15,29 @@ export const carouselAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "/api"
     }),
+    tagTypes: ["Carousel"],
     endpoints: (builder) => ({
+        createArticule: builder.mutation({
+            query: (body) => ({
+                url: "products/carrousel",
+                method: "POST",
+                body
+            }),
+            invalidatesTags: ["Carousel"]
+        }),
+        deleteArticule: builder.mutation({
+            query: (body) => ({
+                url: "products/carrousel",
+                method: "DELETE",
+                body
+            }),
+            invalidatesTags: ["Carousel"]
+        }),
         getCarousel: builder.query<Carousel[], null>({
             query: () => "products/carrousel",
+            providesTags: ["Carousel"]
         })
     })
 });
 
-export const { useGetCarouselQuery } = carouselAPI;
+export const { useGetCarouselQuery, useCreateArticuleMutation, useDeleteArticuleMutation } = carouselAPI;
