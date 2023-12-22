@@ -18,7 +18,7 @@ const Products = (): JSX.Element => {
 	}, [data])
 
 	return (
-		<div className='flex flex-col md:flex-row md:items-start md:justify-center md:gap-12 w-full'>
+		<div className='flex flex-col md:flex-row md:items-start md:justify-center md:gap-12 w-full '>
 			<FiltersContainer />
 			<>
 				{!isLoading && !isError && products.length === 0 && (

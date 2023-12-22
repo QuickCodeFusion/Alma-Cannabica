@@ -7,6 +7,8 @@ export interface queryState {
 		name: string
 		minPrice: string
 		maxPrice: string
+		firstProductId: string
+		lastProductId: string
 	}
 }
 
@@ -16,7 +18,9 @@ const initialState: queryState = {
 		order: '',
 		name: '',
 		minPrice: '',
-		maxPrice: ''
+		maxPrice: '',
+		firstProductId: '',
+		lastProductId: ''
 	}
 }
 
@@ -26,6 +30,7 @@ export const searchBarSlice = createSlice({
 	reducers: {
 		search: (state, { payload }) => {
 			state.query.name = payload
+			
 		},
 		setQuery: (state, { payload }) => {
 			state.query = {
