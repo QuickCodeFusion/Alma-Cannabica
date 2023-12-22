@@ -2,6 +2,7 @@
 import { useSelector } from '@/redux/hooks'
 import Cards from '../cards/Cards'
 import FiltersContainer from '../filters/FiltersContainer'
+import Pagination from '../pagination/Pagination'
 import { useGetFiltersQuery } from '@/redux/service/productsFilterAPI'
 import { useEffect, useState } from 'react'
 
@@ -27,6 +28,8 @@ const Products = (): JSX.Element => {
 				)}
 				<Cards products={products} isLoading={isLoading} isError={isError}/>
 			</>
+			<Pagination/>
+
 		</div>
 	)
 }

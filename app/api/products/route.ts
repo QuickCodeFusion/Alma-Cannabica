@@ -30,7 +30,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
 	try {
-		const productsQuery = query(collection(db, 'products'), orderBy('price'),)
+		const productsQuery = query(collection(db, 'products'), limit(6))
 
 		const productsSnapshot = await getDocs(productsQuery)
 
