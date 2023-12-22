@@ -3,17 +3,17 @@ import { Button, Card, useDisclosure } from '@nextui-org/react'
 import Filters from './Filter'
 import { useDispatch, useSelector } from '@/redux/hooks'
 import { type ChangeEvent, useEffect, useState } from 'react'
-import { useGetFiltersQuery } from '@/redux/service/productsFilterAPI'
-import { loadProducts } from '@/redux/feature/productsSlice'
+import { setQuery, type queryState } from '@/redux/feature/searchBarSlice'
 
 const FiltersContainer = (): React.JSX.Element => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const dispatch = useDispatch()
-	const name = useSelector((state: any) => state.searchBar.value)
+	const { name: searchBarInput } = useSelector((state: { searchBar: queryState }) => state.searchBar.query)
+
 	const [valueState, setValueState] = useState({
 		category: '',
 		order: '',
-		name,
+		name: '',
 		minPrice: '',
 		maxPrice: ''
 	})
@@ -22,10 +22,10 @@ const FiltersContainer = (): React.JSX.Element => {
 		setValueState((prevState) => {
 			return {
 				...prevState,
-				name
+				name: searchBarInput
 			}
 		})
-	}, [name])
+	}, [searchBarInput])
 
 	const onChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -36,24 +36,9 @@ const FiltersContainer = (): React.JSX.Element => {
 			[name]: value
 		}))
 	}
-	const {
-		data: products,
-		isLoading,
-		isError
-	} = useGetFiltersQuery({
-		name: valueState.name,
-		minPrice: valueState.minPrice,
-		maxPrice: valueState.maxPrice,
-		category: valueState.category,
-		order: valueState.order
-	})
 
 	const handleSubmit = (): void => {
-		if (isError) {
-			dispatch(loadProducts({ products: [], isLoading, isError }))
-		} else {
-			dispatch(loadProducts({ products, isLoading, isError }))
-		}
+		dispatch(setQuery(valueState))
 	}
 
 	return (
