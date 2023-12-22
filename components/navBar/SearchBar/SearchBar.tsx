@@ -2,25 +2,14 @@
 import Image from 'next/image'
 import { search } from '@/redux/feature/searchBarSlice'
 import { useDispatch } from '@/redux/hooks'
-import { loadProducts } from '@/redux/feature/productsSlice'
-import { useGetFiltersQuery } from '@/redux/service/productsFilterAPI'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button, Input } from '@nextui-org/react'
 
 const SearchBar = (): React.JSX.Element => {
-	const dispatch = useDispatch()
 	const [input, setInput] = useState('')
-	const [nameProduct, setNameProduct] = useState('')
-	const { data: products, isLoading, isError } = useGetFiltersQuery({ name: nameProduct, minPrice: '', maxPrice: '', category: '', order: '' })
-
-	useEffect(() => {
-		if (products) dispatch(loadProducts({ products, isLoading, isError }))
-	}, [products])
-
-	console.log(products)
+	const dispatch = useDispatch()
 
 	const handleSubmit = (): any => {
-		setNameProduct(input)
 		dispatch(search(input))
 	}
 

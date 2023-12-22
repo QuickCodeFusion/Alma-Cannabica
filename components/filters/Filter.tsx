@@ -39,7 +39,14 @@ const Filters: React.FC<props> = ({
 	return (
 
 		<div className='flex flex-col gap-4 text-center justify-center h-fit p-8 py-14'>
-			<FilterModal isOpen={isOpen} onClose={onClose} setValueState={setValueState} valueState={valueState} />
+			<FilterModal
+				isOpen={isOpen}
+				onClose={onClose}
+				setValueState={setValueState}
+				valueState={valueState}
+				onChange={onChange}
+				handleSubmit={handleSubmit}
+			/>
 
 			<FilterPrice valueState={valueState} onChange={onChange} />
 			<FilterSort valueState={valueState} onChange={onChange} />
