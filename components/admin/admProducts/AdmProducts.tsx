@@ -58,15 +58,12 @@ const AdmProducts = (): React.JSX.Element => {
 				</User>
 			))
 		}
-		if (true) {
-			Array.isArray(product.category)
-				? cells.push(() => (
-					product.category.map((category: string) => <Chip color="success" variant="faded">{category}</Chip>)
-				))
-				: cells.push(() => (
-					<Chip color="success" variant="faded">{product.category}</Chip>
-				))
-		}
+
+		cells.push(() => (
+			product.category instanceof Array
+				? product.category.map((category: string) => <Chip color="success" variant="faded">{category}</Chip>)
+				: <Chip color="success" variant="faded">{product.category}</Chip>
+		))
 
 		if (true) {
 			const limit = !!(data && data.length >= 10)
