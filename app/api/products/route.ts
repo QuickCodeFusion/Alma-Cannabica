@@ -8,16 +8,16 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
 		const { name, description, price, image, category } = await req.json()
 
-		if (!name || !description || !price || !image) {
+		if (!name || !price || !image) {
 			throw new Error('Missing data')
 		}
 		await addDoc(collection(db, 'products'), {
 			name,
 			nameToLowerCase: name.toLowerCase(),
-			description,
-			price,
+			description: description || 'Este producto no tiene descripción',
+			price: parseInt(price),
 			image,
-			category
+			category: Array.isArray(category) ? category : [category]
 		})
 
 		await createCategory(category)
