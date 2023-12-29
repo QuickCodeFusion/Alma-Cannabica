@@ -42,7 +42,7 @@ const AdmProducts = (): React.JSX.Element => {
 		{ name: 'ACCIONES', uid: 'actions' }
 
 	]
-	const renderCell = React.useCallback((product: any, data: Product[]) => {
+	const renderCell = React.useCallback((product: Product, data: Product[]) => {
 		const cells = []
 
 		if (true) {
@@ -51,36 +51,25 @@ const AdmProducts = (): React.JSX.Element => {
 				<User
 					avatarProps={{ radius: 'lg', src: product.image }}
 					name={product.name}
-					description={data.map((data: Product) => (
-						data?.itemId === product?.itemId ? 'Producto en Inicio' : ''
-					))}
+					description={product.inCarousel ? 'Producto en inicio' : ''}
 
 				>
 					{product.name}
 				</User>
 			))
 		}
-		if (true) {
-			Array.isArray(product.category)
-				? cells.push(() => (
-					product.category.map((category: string) => <Chip color="success" variant="faded">{category}</Chip>)
-				))
-				: cells.push(() => (
-					<Chip color="success" variant="faded">{product.category}</Chip>
-				))
-		}
+
+		cells.push(() => (
+			product.category instanceof Array
+				? product.category.map((category: string) => <Chip color="success" variant="faded">{category}</Chip>)
+				: <Chip color="success" variant="faded">{product.category}</Chip>
+		))
 
 		if (true) {
 			const limit = !!(data && data.length >= 10)
 			const exist = !!(data && data.some((item) => item.itemId === product.itemId))
 			cells.push(() => (
-				< >
-					<div>
-						<ModalProductEdit product={product} limit={limit} exist={exist} handleUpdate={handleUpdate} />
-					</div>
-
-				</>
-
+				<ModalProductEdit product={product} limit={limit} exist={exist} handleUpdate={handleUpdate} />
 			))
 		}
 
