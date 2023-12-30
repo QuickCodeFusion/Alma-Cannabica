@@ -1,12 +1,18 @@
 'use client'
-import { Button } from '@nextui-org/react'
+import { Button, type ButtonProps } from '@nextui-org/react'
 
-const SubmitButton = ({ title, loading, isDisabled }: { title: string, loading: boolean, isDisabled?: boolean }): React.JSX.Element => {
+interface Props extends ButtonProps {
+	title: string
+	loading?: boolean
+	isDisabled?: boolean
+}
+
+const SubmitButton: React.FC<Props> = ({ title, loading, isDisabled, ...props }): React.JSX.Element => {
 	return (
 		<>
 			{!loading
-				? <Button isDisabled={isDisabled ?? false} type="submit">{title}</Button>
-				: <Button isLoading isDisabled type="submit"></Button>}
+				? <Button {...props} isDisabled={isDisabled ?? false} type="submit">{title}</Button>
+				: <Button {...props} isLoading isDisabled type="submit"></Button>}
 		</>
 	)
 }
