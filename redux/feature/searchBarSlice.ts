@@ -37,8 +37,22 @@ export const searchBarSlice = createSlice({
 				...state.query,
 				...payload
 			}
+		},
+		nextPageQuery: (state, { payload }) => {
+			state.query = {
+				...state.query,
+				firstProductId: '',
+				lastProductId: payload
+			}
+		},
+		prevPageQuery: (state, { payload }) => {
+			state.query = {
+				...state.query,
+				lastProductId: '',
+				firstProductId: payload
+			}
 		}
 	}
 })
 
-export const { search, setQuery } = searchBarSlice.actions
+export const { search, setQuery, nextPageQuery, prevPageQuery } = searchBarSlice.actions
