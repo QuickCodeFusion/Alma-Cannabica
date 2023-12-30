@@ -1,10 +1,11 @@
+'use client'
 import RecoverPassword from '@/components/form/recoverPassword/RecoverPassword'
 
 const Forgotpassword = (): JSX.Element => {
 	return (
-		<div>
+		<main className='w-screen flex justify-center'>
 			<RecoverPassword />
-		</div>
+		</main>
 	)
 }
 
