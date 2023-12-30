@@ -22,27 +22,14 @@
 body {
   overflow-x: hidden;
 }
-
-.container {
-
-  max-width: 5rem;
-  padding: 4rem 1rem;
-  margin: 0 auto;
-}
-
-.heading {
-  padding: 1rem 0;
-  font-size: 3.5rem;
-  text-align: center;
-}
-
-.swiper-slide-shadow-left,
-.swiper-slide-shadow-right {
-  display: none;
-}
-
-@media (max-width: 500px) {
-  .swiper-slide {
-    display: none;
-  }
+:hover.LogoInstagram {
+  background: #d6249f;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
 }
