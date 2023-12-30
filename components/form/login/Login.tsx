@@ -5,7 +5,6 @@ import SubmitButton from '@/components/button/submitButton'
 import { toast } from 'sonner'
 import { useUserSession } from '@/app/userContext'
 import { useRouter } from 'next/navigation'
-import style from './login.module.css'
 import { Input, Link, Spacer } from '@nextui-org/react'
 import { validateEmail, validatePassword } from '@/utils/validations'
 
@@ -96,11 +95,9 @@ const Login = (): React.JSX.Element => {
 	}, [form.password])
 
 	return (
-		<form method="POST" onSubmit={handleSubmit} className={style.form}>
-			<div className="flex flex-col gap-7">
-				<div className="flex justify-center p-10">
-					<h1 className="sm:text-3xl text-xl ">Iniciar sesión</h1>
-				</div>
+		<form method="POST" onSubmit={handleSubmit} className='bg-white p-5 flex flex-col gap-5'>
+			<div className="flex flex-col justify-center items-center gap-7 text-center">
+				<h1 className="text-xl md:text-3xl">Iniciar sesión</h1>
 				<Input
 					value={form.email}
 					name="email"
@@ -114,7 +111,6 @@ const Login = (): React.JSX.Element => {
 					onChange={handleChange}
 					className="max-w-xs"
 				/>
-
 				<Input
 					type="password"
 					label="Contraseña"
@@ -131,23 +127,22 @@ const Login = (): React.JSX.Element => {
 					}
 					className="max-w-xs"
 				/>
-				<div className="flex justify-center">
-					<SubmitButton
-						loading={loading}
-						title="Login"
-						isDisabled={
-							isInvalid ||
+				<SubmitButton
+					className='self-center w-fit'
+					loading={loading}
+					title="Iniciar sesión"
+					isDisabled={
+						isInvalid ||
                         isInvalidPassword ||
                         form.password === '' ||
                         form.email === ''
-						}
-					></SubmitButton>
-				</div>
+					}
+				/>
 			</div>
-			<div className={style.forgot}>
+			<div className='flex flex-col justify-center items-center'>
 				<p>¿Olvidaste tu contraseña?  </p>
 				<Spacer x={2}></Spacer>
-				<p className='text-left'><Link href="/forgot-password">Recuperar contraseña</ Link></p>
+				<Link href="/forgot-password">Recuperar contraseña</ Link>
 			</div>
 		</form>
 

@@ -6,7 +6,6 @@ import { registerAndLogin } from '@/utils/authUtils'
 import { useUserSession } from '@/app/userContext'
 import { Image, Input, useDisclosure } from '@nextui-org/react'
 import { validateEmail, validatePassword } from '@/utils/validations'
-import style from './register.module.css'
 import UpdatePhoto from '../UpdatePhoto'
 import { uploadFile } from '@/utils/uploadFile'
 
@@ -96,68 +95,71 @@ const Register = (): React.JSX.Element => {
 
 	return (
 
-		<form method="POST" onSubmit={ (e) => { void handleSubmit(e, form.photoUrl) }} className={style.container}>
-			<div className={style.form}>
+		<form method="POST" onSubmit={ (e) => { void handleSubmit(e, form.photoUrl) }} className='bg-white p-5 flex flex-col gap-5'>
+			<div className='flex flex-col justify-center items-center gap-7 text-center'>
 
-				<div className='m-4'>
-					<div onClick={() => { onOpen() }} className='cursor-pointer hover:blur-[2px]'>
-						<Image src={form.photoUrl || defaultUser} alt="user" width={160} height={200} className='rounded-full'></Image>
+				<h1 className='text-xl md:text-3xl'>Crea tu cuenta</h1>
+				<div onClick={() => { onOpen() }} className='cursor-pointer hover:blur-[2px]'>
+					<Image src={form.photoUrl || defaultUser} alt="user" width={160} height={200} className='rounded-full'></Image>
 
-						<UpdatePhoto isOpen={isOpen} onOpenChange={onOpenChange} onClose={(file) => { onClose(); setForm({ ...form, photoUrl: file instanceof File ? URL.createObjectURL(file) : file }) } } setFile={setFile}/>
-
-					</div>
-				</div>
-				<div className='m-4'>
-					<Input
-						value={form.name}
-						name="name"
-						type="text"
-						label="Tu nombre"
-						variant="bordered"
-						labelPlacement="outside"
-						color={'success'}
-						onChange={handleChange}
-						className="max-w-xs"
-					/>
-
-				</div>
-				<div className='m-4'>
-
-					<Input
-						value={form.email}
-						name="email"
-						type="email"
-						label="Email"
-						variant="bordered"
-						isInvalid={isInvalid}
-						labelPlacement="outside"
-						color={isInvalid ? 'danger' : 'success'}
-						errorMessage={isInvalid && 'Please enter a valid email'}
-						onChange={handleChange}
-						className="max-w-xs"
-					/>
-				</div>
-
-				<div className='m-4'>
-					<Input
-						type="password"
-						label="Contraseña"
-						variant="bordered"
-						labelPlacement="outside"
-						value={form.password}
-						name="password"
-						onChange={handleChange}
-						isInvalid={isInvalidPassword}
-						color={!isInvalidPassword ? 'success' : 'danger'}
-						errorMessage={
-							isInvalidPassword &&
-							'La contraseña debe tener al menos 6 caracteres, como máximo 12, y contener al menos una letra mayúscula.'
+					<UpdatePhoto
+						isOpen={isOpen}
+						onOpenChange={onOpenChange}
+						onClose={(file) => {
+							onClose()
+							setForm({
+								...form,
+								photoUrl: file instanceof File ? URL.createObjectURL(file) : file
+							})
 						}
-						className="max-w-xs"
-					/>
-				</div>
+						}
+						setFile={setFile}/>
 
-				<SubmitButton loading={loading} title="Register" isDisabled={isInvalid || isInvalidPassword || form.name === '' || form.email === '' || form.password === ''}></SubmitButton>
+				</div>
+				<Input
+					value={form.name}
+					name="name"
+					type="text"
+					label="Tu nombre"
+					variant="bordered"
+					labelPlacement="outside"
+					color={'success'}
+					onChange={handleChange}
+					className="max-w-xs"
+				/>
+
+				<Input
+					value={form.email}
+					name="email"
+					type="email"
+					label="Email"
+					variant="bordered"
+					isInvalid={isInvalid}
+					labelPlacement="outside"
+					color={isInvalid ? 'danger' : 'success'}
+					errorMessage={isInvalid && 'Please enter a valid email'}
+					onChange={handleChange}
+					className="max-w-xs"
+				/>
+
+				<Input
+					type="password"
+					label="Contraseña"
+					variant="bordered"
+					labelPlacement="outside"
+					value={form.password}
+					name="password"
+					onChange={handleChange}
+					isInvalid={isInvalidPassword}
+					color={!isInvalidPassword ? 'success' : 'danger'}
+					errorMessage={
+						isInvalidPassword &&
+							'La contraseña debe tener al menos 6 caracteres, como máximo 12, y contener al menos una letra mayúscula.'
+					}
+					className="max-w-xs"
+				/>
+
+				<SubmitButton loading={loading} title="Crear Cuenta" isDisabled={isInvalid || isInvalidPassword || form.name === '' || form.email === '' || form.password === ''}></SubmitButton>
 			</div>
 		</form>
 	)
