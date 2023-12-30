@@ -30,6 +30,7 @@ export const searchBarSlice = createSlice({
 	reducers: {
 		search: (state, { payload }) => {
 			state.query.name = payload
+			
 		},
 		setQuery: (state, { payload }) => {
 			state.query = {
