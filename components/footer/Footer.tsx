@@ -21,7 +21,7 @@ const Footer = (): JSX.Element => {
 					<Link className='text-xs' href='mailto:almacannabicawork@gmail.com'>almacannabicawork@gmail.com</Link>
 				</div>
 			</div>
-			<div className='flex w-1/3 self-start md:w-1/12 justify-around items-center'>
+			<div className='flex w-1/3 self-start md:self-center md:w-1/12 justify-around'>
 				<div className='rounded-full h-fit p-1 bg-gray-300/70 hover:bg-fuchsia-600 hover:shadow-black LogoInstagram'>
 					<Tooltip offset={15} content='Instagram'>
 						<Link href="https://www.instagram.com/lauramarielacevedo?igsh=M2VmaHloZXdnbDNs" className='rounded-full'><LogoInstagram /></Link>
