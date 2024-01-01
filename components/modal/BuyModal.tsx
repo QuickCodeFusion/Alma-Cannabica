@@ -2,10 +2,8 @@
 import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import Detail from '../detail/Detail'
 import { type Product } from '@/types/Product/type'
-import { useEffect, useState } from 'react'
-import { getPreferenceUrlSingle } from '@/utils/checkoutUtils'
-import { toast } from 'sonner'
-import { MercadoPagoIcon } from '../icons/MercadoPago'
+import { ModalOption } from './ModalOption'
+
 
 interface props {
 	product: Product
@@ -14,20 +12,6 @@ interface props {
 }
 
 const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX.Element => {
-	const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
-
-	useEffect(() => {
-		if (product) {
-			getPreferenceUrlSingle(product)
-				.then((url) => {
-					SetPreferenceUrl(url)
-				})
-				.catch((error) => {
-					console.error(error)
-					toast.error(error.message)
-				})
-		}
-	}, [product])
 	return (
 		<Modal
 			classNames={{
@@ -51,15 +35,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 							{`¿Quieres comprar ${product.name}?`}
 						</ModalBody>
 						<ModalFooter>
-							<Button
-								isExternal
-								showAnchorIcon
-								anchorIcon={<MercadoPagoIcon/>}
-								color='success'
-								as={Link}
-								href={preferenceUrl}
-								className='text-white text-lg'
-							>Comprar</Button>
+							<ModalOption product={product}/>
 							<Button
 								onClick={onClose}
 							>

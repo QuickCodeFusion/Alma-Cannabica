@@ -1,0 +1,10 @@
+.inputcontainer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .visible {
+    max-height: 100px; /* Altura máxima del input */
+  }
+  
