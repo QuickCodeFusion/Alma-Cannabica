@@ -37,7 +37,7 @@ export const CheckBox = () => {
       >
         Gestionar Domicilio
       </Checkbox>
-      <div className={domi ? `${style.inputcontainer} ${style.visible}`: `${style.inputcontainer}`}>
+      <div className={`overflow-hidden duration-300 ease-in-out ${domi ? 'max-h-96' : 'max-h-0'}`}>
         <Input
           placeholder="Ingrese número de teléfono"
           value={phoneNumber}
