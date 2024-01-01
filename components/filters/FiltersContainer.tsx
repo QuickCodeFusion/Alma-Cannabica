@@ -46,8 +46,8 @@ const FiltersContainer = (): React.JSX.Element => {
 			<Button onClick={() => { onOpen() }} size="sm" radius='none' className='w-screen md:hidden' color="primary" variant="flat">
                 Filtros
 			</Button>
-			<Card className='hidden md:flex' classNames={{
-				base: 'md:my-10 h-fit'
+			<Card className='hidden md:flex md:mx-2' classNames={{
+				base: 'md:my-10 h-fit md:max-w-[327px]'
 			}}>
 				<Filters
 					isOpen={isOpen}
