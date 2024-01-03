@@ -38,32 +38,41 @@ export const PopoverComponent = (): React.JSX.Element => {
 	}, [products])
 	const content = (
 		<PopoverContent className="w-auto">
-			{(titleProps) => (
-				<div className="px-1 py-2 w-full">
-					<span className="flex justify-between items-center gap-4">
-						<h1 className="text-small font-bold text-foreground" {...titleProps}>
-                        Carrito de compras
-						</h1>
-						<Button
-							size="sm"
-							color='danger'
-							onClick={onOpen}
-						>
-						Vaciar
-						</Button>
-					</span>
-
-					<div className="flex flex-col gap-1 w-full max-h-[90vh] md:max-h-[82vh] p-0">
-						<Cart products={products}/>
+			{userSession
+				? 				(titleProps) => (
+					<div className="px-1 py-2 w-full">
+						<span className="flex justify-between items-center gap-4">
+							<h1 className="text-small font-bold text-foreground" {...titleProps}>
+							Carrito de compras
+							</h1>
+							<Button
+								size="sm"
+								color='danger'
+								onClick={onOpen}
+							>
+							Vaciar
+							</Button>
+						</span>
+						<div className="flex flex-col gap-1 w-full max-h-[90vh] md:max-h-[82vh] p-0">
+							<Cart products={products}/>
+						</div>
+						<ConfirmModal
+							isOpen={isOpen}
+							onOpenChange={onOpenChange}
+							removeCart={removeCart}
+							userId={userSession?.uid ?? 'guest'}
+						/>
 					</div>
-					<ConfirmModal
-						isOpen={isOpen}
-						onOpenChange={onOpenChange}
-						removeCart={removeCart}
-						userId={userSession?.uid ?? 'guest'}
-					/>
-				</div>
-			)}
+				)
+
+				: 				(titleProps) => (
+					<div className="px-1 py-2 ">
+						<h1 className="text-small font-bold text-foreground" {...titleProps}>
+						¡Inicia sesión para ver tu carrito de compras!
+						</h1>
+					</div>
+				)
+			}
 		</PopoverContent>
 	)
 

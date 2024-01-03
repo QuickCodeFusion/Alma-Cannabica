@@ -5,7 +5,7 @@ import { Card, CardBody, Tab, Tabs } from '@nextui-org/react'
 
 const LoginPage = (): React.JSX.Element => {
 	return (
-		<div className='h-screen md:h-2/3 w-full flex flex-col justify-between items-center p-4'>
+		<div className='h-screen md:h-full w-full flex flex-col justify-between items-center p-4'>
 			<Card className="w-full md:w-1/3">
 				<CardBody>
 					<Tabs className='justify-center' disableAnimation
