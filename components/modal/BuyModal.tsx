@@ -17,7 +17,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 	const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
 
 	useEffect(() => {
-		if (product) {
+		if (product && isOpen) {
 			getPreferenceUrlSingle(product)
 				.then((url) => {
 					SetPreferenceUrl(url)
@@ -27,7 +27,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 					toast.error(error.message)
 				})
 		}
-	}, [product])
+	}, [product, isOpen])
 	return (
 		<Modal
 			classNames={{
