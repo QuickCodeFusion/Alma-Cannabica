@@ -36,12 +36,12 @@ const Card = ({ product, classNames }: { product: CardProduct, classNames?: stri
 			>
 				<Image
 					classNames={{
-						img: 'object-contain md:h-full rounded-none md:rounded-lg self-center',
-						wrapper: 'w-1/4 bg-no-repeat h-[80%] shadow-sm md:w-full flex items-center justify-center md:h-40 md:pt-2 md:rounded-lg'
+						img: 'object-contain rounded-none md:rounded-lg self-center',
+						wrapper: 'w-1/4 bg-no-repeat h-[80%] shadow-sm flex items-center justify-center md:w-full md:h-1/2 md:px-2 md:rounded-lg'
 					}}
 					src={image}
-					width={100}
-					height={100}
+					width={300}
+					height={250}
 					alt={name}
 					as={NextImage}
 					fallbackSrc='https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default_product.png?alt=media&token=90b8c614-57ea-44df-b341-36e0f41ffd3f'
