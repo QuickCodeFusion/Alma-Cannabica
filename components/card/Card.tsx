@@ -27,7 +27,7 @@ const Card = ({ product, classNames }: { product: CardProduct, classNames?: stri
 				rounded-none border-y-1 border-y-black/30
 				shadow-inner
 				md:flex-col md:justify-between md:gap-0
-				md:w-3/4 md:h-[350px] md:max-w-[300px] md:min-w-[200px] md:min-h-[350px] md:max-h-[330px]
+				md:w-3/4 md:h-[350px] lg:w-[220px] md:max-w-[300px] md:min-w-[200px] md:min-h-[350px] md:max-h-[330px]
 				md:border md:border-gray-300/30
 				md:shadow-large
 				md:rounded-lg`}
