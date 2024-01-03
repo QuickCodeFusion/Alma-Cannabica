@@ -14,13 +14,13 @@ const Detail = ({ product }: { product: any }): React.JSX.Element => {
 		<Card >
 			<CardBody className='grid place-items-center gap-4'>
 				<Skeleton isLoaded={name}>
-					<h1>{name}</h1>
+					<h1 className='text-2xl'>{name}</h1>
 				</Skeleton>
 				<Image
 					src={photo}
 					alt={name}
-					width={200}
-					height={200}
+					width={400}
+					height={300}
 				/>
 				<Skeleton isLoaded={category[0]} className='rounded-md'>
 					<Categories

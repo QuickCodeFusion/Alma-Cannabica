@@ -15,20 +15,30 @@ const SearchBar = (): React.JSX.Element => {
 
 	return (
 		<>
-			<Input placeholder='Busca productos' radius='full' onValueChange={setInput} size='sm' classNames={{
-				input: [
-					'text-black',
-					'placeholder:text-black/50'
-				],
-				inputWrapper: [
-					'shadow-md',
-					'bg-gray-300',
-					'group-data-[focus=true]:bg-slate-200',
-					'!cursor-text',
-					'group-data-[hover=true]:bg-gray-400/60'
-				],
-				base: 'w-1/2 data-[focus=true]:w-full transition-all duration-500'
-			}}/>
+			<Input
+				placeholder='Busca productos'
+				radius='full'
+				onValueChange={setInput}
+				onKeyUp={(e) => {
+					if (e.key === 'Enter') {
+						handleSubmit()
+					}
+				}}
+				size='sm'
+				classNames={{
+					input: [
+						'text-black',
+						'placeholder:text-black/50'
+					],
+					inputWrapper: [
+						'shadow-md',
+						'bg-gray-300',
+						'group-data-[focus=true]:bg-slate-200',
+						'!cursor-text',
+						'group-data-[hover=true]:bg-gray-400/60'
+					],
+					base: 'w-1/2 data-[focus=true]:w-full transition-all duration-500'
+				}}/>
 			<Button
 				onClick={handleSubmit}
 				color='default'

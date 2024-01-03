@@ -1,21 +1,45 @@
 'use client'
+
+import { nextPageQuery, prevPageQuery } from '@/redux/feature/searchBarSlice'
 import { useDispatch } from '@/redux/hooks'
+import { Button } from '@nextui-org/react'
 
-const Pagination = (): React.JSX.Element => {
+interface props {
+	firstProductId: string
+	lastProductId: string
+}
+
+const Pagination: React.FC<props> = ({ firstProductId, lastProductId }): React.JSX.Element => {
 	const dispatch = useDispatch()
-
-	const changePage = (page) => {
-		if (page === 'derc') {
+	const handlePageChange = (action: string): void => {
+		if (action === 'prev') {
+			dispatch(prevPageQuery(firstProductId))
 		} else {
+			dispatch(nextPageQuery(lastProductId))
 		}
 	}
 	return (
-		<div>
-			<button onClick={() => {
-				changePage('izq')
-			}}> izq </button>
-			<button onClick={ () => { changePage('derc') }}> derc </button>
-		</div>
+		<>
+			<span className='hidden md:flex gap-4 my-2 justify-center'>
+				<Button
+					color='success'
+					onClick={() => { handlePageChange('prev') }}
+				>
+				Anterior
+				</Button>
+				<Button
+					color='success'
+					onClick={() => { handlePageChange('next') }}
+				>
+				Siguiente
+				</Button>
+			</span>
+			<Button
+				color='success'
+				className='md:hidden self-center my-2'
+				onClick={() => { handlePageChange('next') }}
+			>Ver más</Button>
+		</>
 	)
 }
 

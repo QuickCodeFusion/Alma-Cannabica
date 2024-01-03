@@ -15,7 +15,7 @@ export function Providers ({ children }: { children: React.ReactNode }): React.J
 	return (
 		<Provider store={store}>
 			<UserContextProvider>
-				<NextUIProvider>
+				<NextUIProvider className='w-screen h-screen'>
 					{children}
 				</NextUIProvider>
 			</UserContextProvider>
