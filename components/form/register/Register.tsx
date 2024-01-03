@@ -12,7 +12,7 @@ import { uploadFile } from '@/utils/uploadFile'
 const Register = (): React.JSX.Element => {
 	const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
 
-	const defaultUser = 'https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default-user-icon-3084929853.jpg?alt=media&token=d78ab167-3602-40dc-b81f-bb3680fa3324'
+	const defaultUserImage = 'https://firebasestorage.googleapis.com/v0/b/alma-cannabica-3f2f5.appspot.com/o/default-user-icon-3084929853.jpg?alt=media&token=d78ab167-3602-40dc-b81f-bb3680fa3324'
 	const { setUserSession } = useUserSession()
 	const [loading, setLoading] = useState(false)
 	const [file, setFile] = useState<File>()
@@ -29,27 +29,30 @@ const Register = (): React.JSX.Element => {
 		})
 		console.log(form.photoUrl)
 	}
+	console.log(form)
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, updateFile: File | string): Promise<void> => {
 		e.preventDefault()
-		if (file === undefined) {
-			toast.error('Debe subir una imagen')
-			return
+		let photoUrl = defaultUserImage
+		if (file) {
+			const newPhotoUrl = await uploadFile(file, file.name)
+				.then((url) => {
+					return url
+				})
+				.catch((error) => {
+					toast.error(error.message)
+				})
+			if (newPhotoUrl) {
+				photoUrl = newPhotoUrl
+			}
 		}
-		const photoURLL = await uploadFile(file, file.name)
-			.then((url) => {
-				return url
-			})
-			.catch((error) => {
-				toast.error(error.message)
-			})
 
 		const { name, email, password } = form
 		const newUser = {
 			name,
 			email,
 			password,
-			photoUrl: photoURLL
+			photoUrl
 		}
 
 		setLoading(true)
@@ -100,7 +103,7 @@ const Register = (): React.JSX.Element => {
 
 				<h1 className='text-xl md:text-3xl'>Crea tu cuenta</h1>
 				<div onClick={() => { onOpen() }} className='cursor-pointer hover:blur-[2px]'>
-					<Image src={form.photoUrl || defaultUser} alt="user" width={160} height={200} className='rounded-full'></Image>
+					<Image src={form.photoUrl || defaultUserImage} alt="user" width={160} height={200} className='rounded-full'></Image>
 
 					<UpdatePhoto
 						isOpen={isOpen}
