@@ -10,8 +10,11 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
 		const order: string = req.nextUrl.searchParams.get('order') ?? ''
 		const firstProductId: string = req.nextUrl.searchParams.get('firstProductId') ?? ''
 		const lastProductId: string = req.nextUrl.searchParams.get('lastProductId') ?? ''
+		const pageSize: string = req.nextUrl.searchParams.get('pageSize') ?? ''
 
-		const data = await filters(name, minPrice, maxPrice, category, order, firstProductId, lastProductId)
+		const pageSizeNumber = parseInt(pageSize) || 2
+
+		const data = await filters(name, minPrice, maxPrice, category, order, firstProductId, lastProductId, pageSizeNumber)
 
 		return NextResponse.json(data, { status: 200 })
 	} catch (error: any) {

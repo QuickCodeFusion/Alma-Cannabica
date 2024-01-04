@@ -12,10 +12,21 @@ const Products = (): JSX.Element => {
 
 	const [products, setProducts] = useState<Product[]>([])
 
+	const [totalPages, setTotalPages] = useState<number>(1)
+
 	const { data, isLoading, isError } = useGetFiltersQuery(query)
 
 	useEffect(() => {
-		data && setProducts(data)
+		if (data) {
+			if (window.innerWidth > 768) {
+				setProducts(data.products)
+				setTotalPages(data.totalPages)
+			} else {
+				setProducts((prevState) => {
+					return [...prevState, ...data.products]
+				})
+			}
+		}
 	}, [data])
 
 	return (
@@ -28,7 +39,7 @@ const Products = (): JSX.Element => {
 					</div>
 				)}
 				<Cards products={products} isLoading={isLoading} isError={isError}/>
-				<Pagination firstProductId={products[0]?.itemId} lastProductId={products[products.length - 1]?.itemId}/>
+				<Pagination firstProductId={products[0]?.itemId} lastProductId={products[products.length - 1]?.itemId} totalPages={totalPages}/>
 			</div>
 
 		</div>
