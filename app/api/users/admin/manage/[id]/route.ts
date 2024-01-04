@@ -9,7 +9,7 @@ export const POST = async (
 ): Promise<NextResponse> => {
 	try {
 		const { id } = params
-		const { admin } = await req.json()
+		const { admin }: { admin: boolean } = await req.json()
 		await auth.setCustomUserClaims(id, { admin })
 
 		const userRef = doc(db, 'users', id)
