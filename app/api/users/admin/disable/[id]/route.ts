@@ -9,7 +9,7 @@ export const POST = async (
 ): Promise<NextResponse> => {
 	try {
 		const { id } = params
-		const { disabled } = await req.json()
+		const { disabled }: { disabled: boolean } = await req.json()
 		const updatedUser = await auth.updateUser(id, { disabled })
 
 		const userRef = doc(db, 'users', id)
