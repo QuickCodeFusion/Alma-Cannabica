@@ -76,7 +76,7 @@ const Users = (): React.JSX.Element => {
 		toast.promise(
 			disableUser({
 				id: userId,
-				disabled: true
+				disabled: false
 			})
 				.unwrap(),
 			{
@@ -85,7 +85,7 @@ const Users = (): React.JSX.Element => {
 					return `Se habilitó nuevamente al usuario ${user.email}`
 				},
 				error: (error: any) => {
-					return 'Algo salió mal: ' + error
+					return 'Algo salió mal: ' + error.message
 				},
 				finally: () => { location.reload() }
 			}
