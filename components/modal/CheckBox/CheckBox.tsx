@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox, Input, Button } from "@nextui-org/react";
 
-export const CheckBox = () => {
+export const CheckBox = ({handleActive}:{handleActive: () => void}) => {
   const [tienda, setTienda] = useState(false);
   const [domi, setDomi] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -11,12 +11,15 @@ export const CheckBox = () => {
     setTienda(true);
     setDomi(false);
     setShowButton(false);
+    handleActive();
+    
   };
 
   const handleDomiChange = () => {
     setTienda(false);
     setDomi(true);
     setShowButton(true);
+    handleActive();
   };
 
   const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +28,7 @@ export const CheckBox = () => {
 
   const handleConfirmNumber = () => {
     setShowButton(false);
-    // Aquí puedes realizar alguna acción con el número de teléfono ingresado
-    console.log("Número confirmado:", phoneNumber);
+    handleActive();
   };
 
   return (

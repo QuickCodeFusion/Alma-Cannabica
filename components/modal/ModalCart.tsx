@@ -14,7 +14,11 @@ interface props {
 export const ModalCart: React.FC<props>  = ({ products }):React.JSX.Element => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
+    const [active, setActive] = useState(true)
 
+    const handleActive = () => {
+        setActive(!active)
+    }
     useEffect(() => {
 		if (products) {
 			getPreferenceUrl(products)
@@ -41,7 +45,7 @@ export const ModalCart: React.FC<props>  = ({ products }):React.JSX.Element => {
                         <>
                             <ModalHeader className="flex flex-col gap-1">Preferencias</ModalHeader>
                             <ModalBody>
-                                <CheckBox></CheckBox>
+                                <CheckBox handleActive={handleActive}/>
                             </ModalBody>
                             <ModalFooter>
                                 <Button

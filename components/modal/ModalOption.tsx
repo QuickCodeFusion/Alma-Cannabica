@@ -12,6 +12,11 @@ export const ModalOption = ({ product, onPreClose }: { product: Product,
     onPreClose: () => void  }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
+    const [active, setActive] = useState(true)
+
+    const handleActive = () => {
+        setActive(!active)
+    }
 
     useEffect(() => {
         if (product) {
@@ -41,10 +46,11 @@ export const ModalOption = ({ product, onPreClose }: { product: Product,
                         <>
                             <ModalHeader className="flex flex-col gap-1">Preferencias</ModalHeader>
                             <ModalBody>
-                                <CheckBox></CheckBox>
+                                <CheckBox handleActive={handleActive}/>
                             </ModalBody>
                             <ModalFooter>
                                 <Button
+                                    isDisabled={active}
                                     isExternal
                                     showAnchorIcon
                                     anchorIcon={<MercadoPagoIcon />}
