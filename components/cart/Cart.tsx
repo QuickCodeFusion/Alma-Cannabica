@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { useUserSession } from '@/app/userContext'
 import { toast } from 'sonner'
 import BuyCartButton from '../button/buyCartButton'
+import { ModalCart } from '../modal/ModalCart'
 
 const Cart = (
 	{
@@ -104,7 +105,9 @@ const Cart = (
 				<h1 className='text-center font-bold text-medium'>
 				Subtotal: ${total.toLocaleString()}
 				</h1>
-				<BuyCartButton products={products}/>
+
+				{/* <BuyCartButton products={products}/> */}
+				<ModalCart products={products}/>
 			</span>
 
 		</div>

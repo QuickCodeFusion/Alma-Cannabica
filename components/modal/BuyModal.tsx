@@ -3,6 +3,7 @@ import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader 
 import Detail from '../detail/Detail'
 import { type Product } from '@/types/Product/type'
 import { ModalOption } from './ModalOption'
+import { useState } from 'react'
 
 
 interface props {
@@ -12,6 +13,10 @@ interface props {
 }
 
 const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX.Element => {
+	const [visible, setVisible] = useState(true)
+	const CloseModal=()=>{
+		setVisible(!visible)
+	}
 	return (
 		<Modal
 			classNames={{
@@ -25,7 +30,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 			onOpenChange={onOpenChange}
 			size='5xl'
 		>
-			<ModalContent>
+			<ModalContent className={visible ? '' : 'hidden'}>
 				{(onClose) => (
 					<>
 						<ModalHeader className="flex flex-col gap-1">
@@ -35,7 +40,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 							{`¿Quieres comprar ${product.name}?`}
 						</ModalBody>
 						<ModalFooter>
-							<ModalOption product={product}/>
+							<ModalOption product={product} onPreClose={CloseModal}/>
 							<Button
 								onClick={onClose}
 							>
