@@ -33,6 +33,7 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/strict-boolean-expressions': 'off',
 		'@typescript-eslint/indent': ['error', 'tab'],
-		'no-tabs': 'off'
+		'no-tabs': 'off',
+		'react/prop-types': 'off'
 	}
 }

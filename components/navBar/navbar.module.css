@@ -1,15 +1,113 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
+.NavbarNext{
     padding: 10px;
     width: 100vw;
-    height: 5vh;
-    background-color: rgb(122, 123, 120);
+    
+    background-color: rgb(255, 255, 255);
+    position: relative;
 }
+.subNavbar{
+    width: 100%;
+    color: black;
+}
+.containerNavBar{
+    position: absolute;
+    left: -33%;
+    width: 165%;
+    display: flex;
+}
+/* .buttonsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100vw;
+    
+} */
 .menu{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.buttons{
+    display: flex;
+    align-self: end;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 20%;
+}
+
+.button{
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.searchBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+}
+.menuNavBar{
+    top: 65px;
+    background-color: rgba(240, 248, 255, 0.575);
+    color: black;
+    width: 50%;
+}
+.notSelected{
+    color: black;
+}
+.notSelectedItem{
+    color: black;
+    font-size: 1.7rem;
+}
+.selected{
+    color: rgb(107, 221, 107);
+
+}
+.selectedItem{
+    font-size: 1.7rem;
+    color: rgb(107, 221, 107);
+}
+@media screen and (max-width: 1685px) {
+    .containerNavBar{
+        width: 150%;
+        left: -25%;
+    }
+}
+@media screen and (max-width: 1538px) {
+    .containerNavBar{
+        width: 135%;
+        left: -18%;
+    }
+}
+@media screen and (max-width: 1384px) {
+    .containerNavBar{
+        width: 120%;
+        left: -10%;
+    }
+}
+@media screen and (max-width: 1220px) {
+    .containerNavBar{
+        width: 110%;
+        left: -5%;
+    }
+}
+@media screen and (max-width: 1220px) {
+    .containerNavBar{
+        width: 100%;
+        left: 0;
+    }
+}
+@media screen and (max-width: 700px) {
+    .searchBar{
+        left: 45%;
+    }
+    
 }

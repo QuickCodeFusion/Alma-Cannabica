@@ -1,22 +1,62 @@
-"use client";
+'use client'
+import { Card, Button } from '@nextui-org/react'
+import { useGetCarouselQuery } from '@/redux/service/carouselAPI'
+import { setCarousel } from '@/redux/feature/carouselSlice'
+import { useEffect } from 'react'
+import { useDispatch } from '@/redux/hooks'
+import Link from 'next/link'
+import React from 'react'
+import LandingCarousel from './LandingCarousel'
 
-const Landing = () => {
+const Landing = (): React.JSX.Element => {
+	const dispatch = useDispatch()
+	const { data, isLoading } = useGetCarouselQuery(null)
+	useEffect(() => {
+		if (data) dispatch(setCarousel({data}))
+	}, [data])
+
+	const frases = [
+		`La marihuana medicinal se puede utilizar para: Aliviar el dolor. \n
+		Esto incluye distintos tipos de dolor crónico, incluso dolor por lesiones nerviosas.\n
+		Controlar las náuseas y los vómitos. 
+		`
+	]
+	const randomIndex = Math.floor(Math.random() * frases.length)
+	const randomFrase = frases[randomIndex]
+
 	return (
-		<div>
-			<h1>Landing</h1>
-			<div>
-				<p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-			</div>
+		<div className='flex justify-center items-center my-4 md:my-12 w-screen'>
+			<Card className='w-full md:w-2/3 p-6 md:p-10 text-green-600 font-medium text-2xl text-center shadow-2xl border drop-shadow-2xl gap-8'>
+				<div className='flex flex-col items-center gap-4'>
+					<h1 className='text-5xl font-semibold my-6'>¿Sabias que...?</h1>
+					<p className='text-center'>
+						{randomFrase.split('\n').map((line, lineIndex) => (
+							<React.Fragment key={lineIndex}>
+								{line}
+							</React.Fragment>
+						))}
+					</p>
+					<Button
+						color="success"
+						radius="sm"
+						variant="bordered"
+						size="lg"
+						as={Link}
+						href='/products'
+						className='
+						w-1/4
+						font-semibold
+						bg-green-400 bg-opacity-75 hover:bg-green-500 hover:bg-opacity-80
+						text-black/90
+						duration-300'
+					>
+						Ver tienda
+					</Button>
+				</div>
+				<LandingCarousel products={data ?? []} isLoading={isLoading}/>
+			</Card>
 		</div>
-	);
-};
+	)
+}
 
-export default Landing;
+export default Landing
