@@ -46,7 +46,7 @@ export const ModalOption = ({ product, onPreClose }: { product: Product,
                         <>
                             <ModalHeader className="flex flex-col gap-1">Preferencias</ModalHeader>
                             <ModalBody>
-                                <CheckBox handleActive={handleActive}/>
+                                <CheckBox handleActive={handleActive} active={active}/>
                             </ModalBody>
                             <ModalFooter>
                                 <Button

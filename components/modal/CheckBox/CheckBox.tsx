@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import { Checkbox, Input, Button } from "@nextui-org/react";
+import { time } from "console";
 
-export const CheckBox = ({handleActive}:{handleActive: () => void}) => {
+export const CheckBox = ({handleActive, active}:{handleActive: () => void, active: boolean }) => {
   const [tienda, setTienda] = useState(false);
   const [domi, setDomi] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [showButton, setShowButton] = useState(false);
 
   const handleTiendaChange = () => {
     setTienda(true);
     setDomi(false);
     setShowButton(false);
-    handleActive();
-    
+    if(!tienda && active) handleActive();
   };
 
   const handleDomiChange = () => {
     setTienda(false);
     setDomi(true);
     setShowButton(true);
-    handleActive();
+    if(!domi && !active)handleActive();
   };
 
-  const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(e.target.value);
-  };
+ 
 
   const handleConfirmNumber = () => {
     setShowButton(false);
-    handleActive();
+    if(!tienda )handleActive();
   };
 
   return (
@@ -48,19 +45,14 @@ export const CheckBox = ({handleActive}:{handleActive: () => void}) => {
         Gestionar Domicilio
       </Checkbox>
       <div className={`overflow-hidden transition-max-height duration-300 ease-in-out ${domi ? 'max-h-96' : 'max-h-0'}`}>
-        <Input
-          placeholder="Ingrese número de teléfono"
-          value={phoneNumber}
-          onChange={handlePhoneInputChange}
-          className="mt-2"
-        />
+        <p className="text-red-600">Para Gestionar tu pedido a Domicilio, por favor contactanos a travez del whatsapp +54 9 11 2793-8262, el valor del Domicilio es aparte de valor pagado por el producto. haz click en Confirmar para continuar </p>
         {showButton && (
           <Button
             onClick={handleConfirmNumber}
             color="success"
-            className="mt-2"
+            className="mt-2 text-white"
           >
-            Confirmar número
+            Confirmar
           </Button>
         )}
       </div>
