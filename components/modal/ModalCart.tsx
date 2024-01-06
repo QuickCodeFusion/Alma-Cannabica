@@ -45,7 +45,7 @@ export const ModalCart: React.FC<props>  = ({ products }):React.JSX.Element => {
                         <>
                             <ModalHeader className="flex flex-col gap-1">Preferencias</ModalHeader>
                             <ModalBody>
-                                <CheckBox handleActive={handleActive}/>
+                                <CheckBox handleActive={handleActive} active={active}/>
                             </ModalBody>
                             <ModalFooter>
                                 <Button
