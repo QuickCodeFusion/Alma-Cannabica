@@ -1,9 +1,12 @@
 'use client'
-import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import Link from 'next/link'
 import Detail from '../detail/Detail'
 import { type Product } from '@/types/Product/type'
-import { ModalOption } from './ModalOption'
+import { setComfirBuy } from '@/redux/feature/comfirBuySlice'
+import { useDispatch } from '@/redux/hooks'
 import { useState } from 'react'
+
 
 
 interface props {
@@ -13,10 +16,11 @@ interface props {
 }
 
 const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX.Element => {
+	const dispatch = useDispatch()
 	const [visible, setVisible] = useState(true)
-	const CloseModal=()=>{
-		setVisible(!visible)
-	}
+	const handleconfirmBuy = (data:Product) => {
+		dispatch(setComfirBuy({data}));
+	};
 	return (
 		<Modal
 			classNames={{
@@ -40,7 +44,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 							{`¿Quieres comprar ${product.name}?`}
 						</ModalBody>
 						<ModalFooter>
-							<ModalOption product={product} onPreClose={CloseModal}/>
+							<Button as={Link} href={'/order-confirmation'} color="success" onPress={onClose} onClick={() => handleconfirmBuy(product)}>Comprar</Button>
 							<Button
 								onClick={onClose}
 							>

@@ -8,8 +8,9 @@ import { CartProduct } from "@/types/User/types";
 import { MercadoPagoIcon } from "../icons/MercadoPago";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Link } from "@nextui-org/react";
 
-export const ModalOption = ({ product, onPreClose }: { product: Product,
-    onPreClose: () => void  }) => {
+export const ModalOption = ({ product }: {
+    product: Product
+}) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
     const [active, setActive] = useState(true)
@@ -32,42 +33,28 @@ export const ModalOption = ({ product, onPreClose }: { product: Product,
     }, [product])
     return (
         <div className="flex flex-col gap-2">
-            <Button className='text-white text-lg' color="success" onPress={onOpen} onClick={onPreClose} >Comprar</Button>
 
-            <Modal
-                isOpen={isOpen}
-                placement='center'
-                onOpenChange={onOpenChange}
-                isDismissable = { false }
-                hideCloseButton={ true }
-            >
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">Preferencias</ModalHeader>
-                            <ModalBody>
-                                <CheckBox handleActive={handleActive} active={active}/>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button
-                                    isDisabled={active}
-                                    isExternal
-                                    showAnchorIcon
-                                    anchorIcon={<MercadoPagoIcon />}
-                                    color='success'
-                                    as={Link}
-                                    href={preferenceUrl}
-                                    className='text-white text-lg'
-                                    onPress={onClose}
-                                >Comprar</Button>
-                                <Button color="danger" onPress={onClose} onClick={onPreClose}>
-                                    Cancelar
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+            <>
+                <p className="flex flex-col gap-1">Preferencias</p>
+                <div>
+                    <CheckBox handleActive={handleActive} active={active} />
+                </div>
+                <div>
+                    <Button
+                        isDisabled={active}
+                        isExternal
+                        showAnchorIcon
+                        anchorIcon={<MercadoPagoIcon />}
+                        color='success'
+                        as={Link}
+                        href={preferenceUrl}
+                        className='text-white text-lg'
+                    >Comprar</Button>
+                    <Button color="danger">
+                        Cancelar
+                    </Button>
+                </div>
+            </>
         </div>
     );
 }
