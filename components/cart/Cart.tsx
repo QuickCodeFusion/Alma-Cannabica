@@ -8,8 +8,9 @@ import { useUpdateCartMutation, useGetCartQuery, useClearCartMutation } from '@/
 import { useEffect, useState } from 'react'
 import { useUserSession } from '@/app/userContext'
 import { toast } from 'sonner'
-import BuyCartButton from '../button/buyCartButton'
-
+import { Button } from '@nextui-org/react'
+import Link from 'next/link'
+import { setComfirBuy } from '@/redux/feature/comfirBuySlice'
 const Cart = (
 	{
 		products
@@ -26,6 +27,10 @@ const Cart = (
 
 	const total = products instanceof Array ? products.reduce((acc: number, product: CartProduct) => acc + product.quantity * parseInt(product.price), 0) : 0
 	const { data, isLoading: cartLoading, isError } = useGetCartQuery(userSession?.uid ?? '')
+
+	const handleconfirmBuy = (data: CartProduct[]) => {
+		dispatch(setComfirBuy({ data }))
+	}
 
 	useEffect(() => {
 		data?.length && dispatch(loadCart({ products: data, cartLoading, isError }))
@@ -104,7 +109,9 @@ const Cart = (
 				<h1 className='text-center font-bold text-medium'>
 				Subtotal: ${total.toLocaleString()}
 				</h1>
-				<BuyCartButton products={products}/>
+
+				{/* <BuyCartButton products={products}/> */}
+				<Button as={Link} href={'/order-confirmation'} color="success" className='text-white' disabled={products.length === 0} onClick={() => handleconfirmBuy(products)}  >Comprar</Button>
 			</span>
 
 		</div>

@@ -1,11 +1,13 @@
 'use client'
-import { Button, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import Link from 'next/link'
 import Detail from '../detail/Detail'
 import { type Product } from '@/types/Product/type'
-import { useEffect, useState } from 'react'
-import { getPreferenceUrlSingle } from '@/utils/checkoutUtils'
-import { toast } from 'sonner'
-import { MercadoPagoIcon } from '../icons/MercadoPago'
+import { setComfirBuy } from '@/redux/feature/comfirBuySlice'
+import { useDispatch } from '@/redux/hooks'
+import { useState } from 'react'
+
+
 
 interface props {
 	product: Product
@@ -14,20 +16,11 @@ interface props {
 }
 
 const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX.Element => {
-	const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
-
-	useEffect(() => {
-		if (product) {
-			getPreferenceUrlSingle(product)
-				.then((url) => {
-					SetPreferenceUrl(url)
-				})
-				.catch((error) => {
-					console.error(error)
-					toast.error(error.message)
-				})
-		}
-	}, [product])
+	const dispatch = useDispatch()
+	const [visible, setVisible] = useState(true)
+	const handleconfirmBuy = (data:Product) => {
+		dispatch(setComfirBuy({data}));
+	};
 	return (
 		<Modal
 			classNames={{
@@ -41,7 +34,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 			onOpenChange={onOpenChange}
 			size='5xl'
 		>
-			<ModalContent>
+			<ModalContent className={visible ? '' : 'hidden'}>
 				{(onClose) => (
 					<>
 						<ModalHeader className="flex flex-col gap-1">
@@ -51,15 +44,7 @@ const BuyModal: React.FC<props> = ({ product, isOpen, onOpenChange }): React.JSX
 							{`¿Quieres comprar ${product.name}?`}
 						</ModalBody>
 						<ModalFooter>
-							<Button
-								isExternal
-								showAnchorIcon
-								anchorIcon={<MercadoPagoIcon/>}
-								color='success'
-								as={Link}
-								href={preferenceUrl}
-								className='text-white text-lg'
-							>Comprar</Button>
+							<Button as={Link} href={'/order-confirmation'} color="success" onPress={onClose} onClick={() => handleconfirmBuy(product)}>Comprar</Button>
 							<Button
 								onClick={onClose}
 							>
