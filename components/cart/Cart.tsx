@@ -11,9 +11,6 @@ import { toast } from 'sonner'
 import { Button } from '@nextui-org/react'
 import Link from 'next/link'
 import { setComfirBuy } from '@/redux/feature/comfirBuySlice'
-import BuyCartButton from '../button/buyCartButton'
-import { ModalCart } from '../modal/ModalCart'
-
 const Cart = (
 	{
 		products

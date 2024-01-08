@@ -12,7 +12,6 @@ interface props {
     products: CartProduct[]
 }
 export const ModalCart: React.FC<props> = ({ products }): React.JSX.Element => {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [preferenceUrl, SetPreferenceUrl] = useState<string>('')
     const [active, setActive] = useState(true)
 
@@ -43,6 +42,7 @@ export const ModalCart: React.FC<props> = ({ products }): React.JSX.Element => {
                 </div>
                 <div>
                     <Button
+                        isDisabled={active}
                         isExternal
                         showAnchorIcon
                         anchorIcon={<MercadoPagoIcon />}
