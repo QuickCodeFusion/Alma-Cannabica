@@ -29,7 +29,7 @@ export const CheckBox = ({handleActive, active}:{handleActive: () => void, activ
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 justify-center items-center">
       <Checkbox
         color="success"
         isSelected={tienda}
@@ -44,13 +44,13 @@ export const CheckBox = ({handleActive, active}:{handleActive: () => void, activ
       >
         Gestionar Domicilio
       </Checkbox>
-      <div className={`overflow-hidden transition-max-height duration-300 ease-in-out ${domi ? 'max-h-96' : 'max-h-0'}`}>
+      <div className={`grid overflow-hidden transition-max-height duration-1000 ease-in-out ${domi ? 'max-h-96' : 'max-h-0'} w-96 min-w-40 p-1`}>
         <p className="text-red-600">Para Gestionar tu pedido a Domicilio, por favor contactanos a travez del whatsapp +54 9 11 2793-8262, el valor del Domicilio es aparte de valor pagado por el producto. haz click en Confirmar para continuar </p>
         {showButton && (
           <Button
             onClick={handleConfirmNumber}
             color="success"
-            className="mt-2 text-white"
+            className="mt-2 text-white "
           >
             Confirmar
           </Button>

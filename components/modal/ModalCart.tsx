@@ -31,7 +31,7 @@ export const ModalCart: React.FC<props> = ({ products }): React.JSX.Element => {
         }
     }, [products])
     return (
-        <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-2 items-center  ">
 
 
 
@@ -40,7 +40,7 @@ export const ModalCart: React.FC<props> = ({ products }): React.JSX.Element => {
                 <div>
                     <CheckBox handleActive={handleActive} active={active} />
                 </div>
-                <div>
+                <div className="flex gap-7">
                     <Button
                         isDisabled={active}
                         isExternal
@@ -51,7 +51,7 @@ export const ModalCart: React.FC<props> = ({ products }): React.JSX.Element => {
                         href={preferenceUrl}
                         className='text-white text-lg'
                     >Comprar</Button>
-                    <Button color="danger" >
+                    <Button color="danger" as={Link} href="/products">
                         Cancelar
                     </Button>
                 </div>
